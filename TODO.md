@@ -15,11 +15,13 @@
 -   facebook meta tags (weddings / documentaries) - maybe different siteMetadata?
 -   update title on navigation
 -   all <head/> tags
+-   SEO (sitemap)
 
 # Bugs
 
 -   `react-helmet` doesn't work in SSR
 -   Use `gatsby-image` along site contentful rich text for about page, see this [issue](https://github.com/contentful/rich-text/issues/70) in git
+-   Maybe use https://www.gatsbyjs.com/plugins/@contentful/gatsby-transformer-contentful-richtext/ and put `display: inline` for `img` instead of `@contentful/rich-text-react-renderer`
 
 # Product
 
@@ -31,6 +33,7 @@
     -   links: home / documentaries / publications / about / contant
     -   mobile hamburger
     -   mobile menu
+    -   highlight selected page
 -   Logo component
 -   Loader component
 -   Modal component
