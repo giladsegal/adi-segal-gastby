@@ -7,11 +7,7 @@ export type LayoutProps = {
 }
 
 export default function Layout({ children }: LayoutProps) {
-  const {
-    site: {
-      siteMetadata: { title, facebookMetadata },
-    },
-  } = useMetadata()
+  const { title, facebookMetadata } = useMetadata()
 
   return (
     <React.Fragment>
