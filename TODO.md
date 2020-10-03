@@ -2,7 +2,7 @@
 
 -   Redirect to root from unknown routes (404.tsx in src/pages)
 -   Links with animations
--   Upload all data to contentful
+-   Upload all data to contentful using a script (https://www.contentful.com/developers/docs/references/content-management-api/#/reference/assets/asset)
 -   Two web sites configuration and deploy
 -   AWS automatic deploy
 -   trigger AWS deploy from contentful publish
@@ -63,6 +63,7 @@
     -   responsiveness (ratio?)
 -   About page
     -   description (rich text?), picture, Exhibitions (?)
+    -   different about for documentaries / weddings
 -   Contact page
     -   email, mobile, location, picture, facebook sdk
 -   Home (Default category)

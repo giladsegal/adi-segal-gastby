@@ -43,15 +43,15 @@ export default function Layout({ children }: LayoutProps) {
                         <li>
                             <Link to="/">HOME</Link>
                         </li>
-                        <li>
+                        {/* <li>
                             <Link to="/documentaries">DOCUMENTARIES</Link>
-                        </li>
+                        </li> */}
                         <li>
                             <Link to="/weddings">WEDDINGS</Link>
                         </li>
-                        <li>
+                        {/* <li>
                             <Link to="/publications">PUBLICATIONS</Link>
-                        </li>
+                        </li> */}
                         <li>
                             <Link to="/about">ABOUT</Link>
                         </li>

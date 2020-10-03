@@ -1,13 +1,23 @@
-import { FixedObject } from "gatsby-image"
+import { FixedObject, FluidObject } from "gatsby-image"
+
+export type Topic = {
+    id: string
+    name: string
+    slug: string
+    thumb: FluidImage
+}
+
+export type TopicPhoto = {
+    id: string
+    photo: FluidImage
+}
 
 export type ContactDetails = {
     addressLine1: string
     addressLine2: string
     email: string
     mobileNumber: string
-    photo: {
-        fixed: FixedObject
-    }
+    photo: FixedImage
 }
 
 export type Site = {
@@ -27,4 +37,12 @@ export type SiteMetadata = {
         }
         description: string
     }
+}
+
+export type FluidImage = {
+    fluid: FluidObject
+}
+
+export type FixedImage = {
+    fixed: FixedObject
 }
