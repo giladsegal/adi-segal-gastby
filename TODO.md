@@ -59,7 +59,7 @@
     -   mobile static description
 -   Thumbnails page
     -   display all images
-    -   links
+    -   links with query params
     -   responsiveness (ratio?)
 -   About page
     -   description (rich text?), picture, Exhibitions (?)
