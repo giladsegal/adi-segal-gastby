@@ -1,10 +1,16 @@
 import { GatsbyNode, CreatePagesArgs } from "gatsby"
 import { resolve } from "path"
-import { TopicsQuery } from "./src/queries/useTopics"
-import { Topic, TopicPhoto } from "./src/types"
 import _ from "lodash"
 
 const topicType = "weddings"
+
+type TopicsQuery = {
+    topics: {
+        nodes: Array<{
+            slug: string
+        }>
+    }
+}
 
 const getTopics = async (graphql: CreatePagesArgs["graphql"]) => {
     const slugPrefix = "weddings"
@@ -15,14 +21,7 @@ const getTopics = async (graphql: CreatePagesArgs["graphql"]) => {
                     filter: { type: { eq: $topicType } }
                 ) {
                     nodes {
-                        thumb {
-                            fluid {
-                                src
-                            }
-                        }
                         slug
-                        name
-                        id
                     }
                 }
             }
@@ -46,7 +45,9 @@ export const createPages: GatsbyNode["createPages"] = async ({
     topics.forEach(topic => {
         createPage({
             path: `${slugPrefix}/${topic.slug}`,
-            context: topic,
+            context: {
+                slug: topic.slug,
+            },
             component: resolve(__dirname, "./src/templates/gallery.tsx"),
         })
 

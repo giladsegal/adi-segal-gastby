@@ -9,7 +9,10 @@ export type TopicsQuery = {
 
 export const topicsQuery = graphql`
     query topicsQuery {
-        topics: allContentfulTopic(sort: { fields: order }) {
+        topics: allContentfulTopic(
+            sort: { fields: order }
+            filter: { type: { eq: "weddings" } }
+        ) {
             nodes {
                 id
                 name

@@ -21,7 +21,7 @@ export default function Thumbnails(props: ThumbnailsProps) {
 }
 
 export const query = graphql`
-    query getTopicPhotosQuery($slug: String) {
+    query getTopicPhotosQueryForThumbnails($slug: String) {
         topicPhotos: allContentfulTopicPhoto(
             filter: { topic: { slug: { eq: $slug } } }
             sort: { fields: order }
