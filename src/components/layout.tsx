@@ -1,7 +1,9 @@
 import React from "react"
 import { Helmet } from "react-helmet"
 import { useMetadata } from "../static-queries/useMetadata"
-import { Link } from "gatsby"
+import Header from "./header"
+import "normalize.css"
+import "./layout.module.scss"
 
 export type LayoutProps = {
     children?: React.ReactNode
@@ -37,30 +39,14 @@ export default function Layout({ children }: LayoutProps) {
                     },
                 ]}
             />
-            <header>
-                <nav>
-                    <ul>
-                        <li>
-                            <Link to="/">HOME</Link>
-                        </li>
-                        {/* <li>
-                            <Link to="/documentaries">DOCUMENTARIES</Link>
-                        </li> */}
-                        <li>
-                            <Link to="/weddings">WEDDINGS</Link>
-                        </li>
-                        {/* <li>
-                            <Link to="/publications">PUBLICATIONS</Link>
-                        </li> */}
-                        <li>
-                            <Link to="/about">ABOUT</Link>
-                        </li>
-                        <li>
-                            <Link to="/contact">CONTACT</Link>
-                        </li>
-                    </ul>
-                </nav>
-            </header>
+            <Header>
+                <Header.Link to="/">HOME</Header.Link>
+                {/*<Header.Link to="/documentaries">DOCUMENTARIES</Header.Link>*/}
+                <Header.Link to="/weddings">WEDDINGS</Header.Link>
+                {/*<Header.Link to="/publications">PUBLICATIONS</Header.Link>*/}
+                <Header.Link to="/about">ABOUT</Header.Link>
+                <Header.Link to="/contact">CONTACT</Header.Link>
+            </Header>
             <main>{children}</main>
         </React.Fragment>
     )
