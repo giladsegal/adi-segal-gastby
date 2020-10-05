@@ -1,6 +1,6 @@
 import React from "react"
 import Layout from "../components/layout"
-import { useContactDetails } from "../queries/useContactDetails"
+import { useContactDetails } from "../static-queries/useContactDetails"
 import Img from "gatsby-image"
 
 export default function Contact() {
