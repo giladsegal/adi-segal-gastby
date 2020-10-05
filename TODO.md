@@ -68,7 +68,8 @@
     -   description (rich text?), picture, Exhibitions (?)
     -   different about for documentaries / weddings
 -   Contact page
-    -   email, mobile, location, picture, facebook sdk
+    -   email, mobile, location, picture
+    -   facebook sdk
 -   Home (Default category)
     -   should receive data from server about type
     -   random order

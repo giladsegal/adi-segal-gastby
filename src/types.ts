@@ -17,7 +17,7 @@ export type ContactDetails = {
     addressLine2: string
     email: string
     mobileNumber: string
-    photo: FixedImage
+    photo: FluidImage
 }
 
 export type Site = {

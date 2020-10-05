@@ -1,0 +1,26 @@
+.centered-column-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.details {
+    display: inline-grid;
+    grid-template-columns: 4fr 6fr;
+    font-size: 18px;
+    line-height: 3;
+    margin: 0;
+
+    dd {
+        margin: 0;
+    }
+}
+
+.full-width {
+    width: 100%;
+}
+
+.copyrights {
+    line-height: 3;
+    font-size: 15px;
+}

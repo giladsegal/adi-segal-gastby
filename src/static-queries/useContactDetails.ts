@@ -13,8 +13,8 @@ const contactDetailsQuery = graphql`
             email
             mobileNumber
             photo {
-                fixed(width: 355, height: 533) {
-                    ...GatsbyContentfulFixed_withWebp
+                fluid(maxWidth: 355) {
+                    ...GatsbyContentfulFluid_withWebp
                 }
             }
         }
