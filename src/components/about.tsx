@@ -1,5 +1,5 @@
 import React from "react"
-import Layout from "./Layout"
+import Layout from "./layout"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { INLINES, BLOCKS } from "@contentful/rich-text-types"
 import Img, { FluidObject, FixedObject } from "gatsby-image"

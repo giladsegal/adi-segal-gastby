@@ -1,6 +1,6 @@
 import React from "react"
 import { Helmet } from "react-helmet"
-import { useMetadata } from "../../queries/useMetadata"
+import { useMetadata } from "../queries/useMetadata"
 import { Link } from "gatsby"
 
 export type LayoutProps = {
