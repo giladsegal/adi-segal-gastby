@@ -35,6 +35,7 @@
     -   links: home / documentaries / publications / about / contant
     -   mobile hamburger
     -   mobile menu
+    -   close menu upon navigation
     -   highlight selected page
 -   Logo component
 -   Loader component
