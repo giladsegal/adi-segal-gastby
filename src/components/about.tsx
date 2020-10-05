@@ -2,12 +2,12 @@ import React from "react"
 import Layout from "./layout"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { INLINES, BLOCKS } from "@contentful/rich-text-types"
-import Img, { FluidObject, FixedObject } from "gatsby-image"
+import Img, { FluidObject } from "gatsby-image"
 import { graphql, PageProps } from "gatsby"
 import { SiteMetadata } from "../types"
+import styles from "./about.module.scss"
 
 export default function About(props: AboutProps) {
-    console.log(props)
     const {
         allContentfulAboutDetails: {
             nodes: [
@@ -16,41 +16,37 @@ export default function About(props: AboutProps) {
                 },
             ],
         },
-        allContentfulAboutDetailsPhoto: { photoNodes: images },
+        contentfulAboutDetailsPhoto: {
+            photo: {
+                file: {
+                    details: {
+                        image: { height, width },
+                    },
+                },
+                fluid,
+            },
+        },
     } = props.data
 
     return (
         <Layout>
+            <Img
+                fluid={fluid}
+                className={styles.image}
+                style={{ "--width": `${width}px`, "--height": `${height}px` }}
+            />
             {documentToReactComponents(JSON.parse(resume), {
                 renderNode: {
-                    [BLOCKS.PARAGRAPH]: (node, children) => {
-                        const hasInlineImage = node.content.some(
-                            c => c.nodeType === "embedded-entry-inline"
-                        )
-                        return (
-                            <p>
-                                {hasInlineImage ? (
-                                    <div style={{ display: "flex" }}>
-                                        {children}
-                                    </div>
-                                ) : (
-                                    children
-                                )}
-                            </p>
-                        )
+                    [BLOCKS.PARAGRAPH]: (_, children) => {
+                        return <p className={styles.paragraph}>{children}</p>
                     },
-                    [INLINES.EMBEDDED_ENTRY]: node => {
-                        const id =
-                            node.data.target.fields.photo["en-US"].sys
-                                .contentful_id
-
-                        const photo = images.find(
-                            img => img.photo.contentful_id === id
-                        )?.photo
-
-                        return photo ? (
-                            <Img fixed={photo.fixed} /*fluid={photo.fluid}*/ />
-                        ) : null
+                    [INLINES.HYPERLINK]: (node, children) => {
+                        console.log(node.data.uri)
+                        return (
+                            <a href={node.data.uri} className={styles.link}>
+                                {children}
+                            </a>
+                        )
                     },
                 },
             })}
@@ -66,14 +62,18 @@ export type AboutData = {
             }
         }>
     }
-    allContentfulAboutDetailsPhoto: {
-        photoNodes: Array<{
-            photo: {
-                contentful_id: string
-                fluid: FluidObject
-                fixed: FixedObject
+    contentfulAboutDetailsPhoto: {
+        photo: {
+            file: {
+                details: {
+                    image: {
+                        height: number
+                        width: number
+                    }
+                }
             }
-        }>
+            fluid: FluidObject
+        }
     }
 }
 
@@ -84,7 +84,7 @@ export type AboutContext = {
 export type AboutProps = PageProps<AboutData, AboutContext>
 
 export const query = graphql`
-    query aboutWeddingsDetailsQuery($siteType: String) {
+    query aboutDetailsQuery($siteType: String) {
         allContentfulAboutDetails(filter: { type: { eq: $siteType } }) {
             nodes {
                 childContentfulAboutDetailsResumeRichTextNode {
@@ -92,16 +92,18 @@ export const query = graphql`
                 }
             }
         }
-        allContentfulAboutDetailsPhoto {
-            photoNodes: nodes {
-                photo {
-                    contentful_id
-                    fluid {
-                        ...GatsbyContentfulFluid_withWebp
+        contentfulAboutDetailsPhoto {
+            photo {
+                file {
+                    details {
+                        image {
+                            height
+                            width
+                        }
                     }
-                    fixed(width: 135, height: 135) {
-                        ...GatsbyContentfulFixed_withWebp
-                    }
+                }
+                fluid {
+                    ...GatsbyContentfulFluid_withWebp
                 }
             }
         }

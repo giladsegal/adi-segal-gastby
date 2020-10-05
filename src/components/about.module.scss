@@ -1,0 +1,17 @@
+.image {
+    float: left;
+    margin-right: 1rem;
+    height: var(--height);
+    width: var(--width);
+}
+
+.paragraph {
+    font-size: 17px;
+    margin: 0 0 1.4rem;
+    text-align: justify;
+}
+
+.link {
+    color: #337ab7;
+    text-decoration: none;
+}
