@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet"
 import { useMetadata } from "../static-queries/useMetadata"
 import Header from "./header"
 import "normalize.css"
-import "./layout.module.scss"
+import styles from "./layout.module.scss"
 
 export type LayoutProps = {
     children?: React.ReactNode
@@ -47,7 +47,7 @@ export default function Layout({ children }: LayoutProps) {
                 <Header.Link to="/about">ABOUT</Header.Link>
                 <Header.Link to="/contact">CONTACT</Header.Link>
             </Header>
-            <main>{children}</main>
+            <main className={styles.mainContent}>{children}</main>
         </React.Fragment>
     )
 }

@@ -1,15 +1,36 @@
 .root {
+    display: flex;
     position: sticky;
     top: 0;
     height: 3rem;
     background-color: #f7f9fa;
-    box-shadow: 0 2px 3px rgba(0, 0, 0, .15);
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
     text-align: center;
     color: #000;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 }
 
 .links-list {
     margin: 0;
     padding: 0;
     list-style: none;
+}
+
+.link {
+    cursor: pointer;
+    text-decoration: none;
+    outline: none;
+    color: #6f6f6f;
+}
+
+.menu-button {
+    padding: 0 1rem;
+    position: absolute;
+    left: 0;
 }
