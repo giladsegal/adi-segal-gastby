@@ -69,5 +69,6 @@
 -   Contact page
     -   email, mobile, location, picture, facebook sdk
 -   Home (Default category)
+    -   should receive data from server about type
     -   random order
     -   support first category
