@@ -8,7 +8,7 @@
 -   trigger AWS deploy from contentful publish
 -   favico
 -   create font file for header
--   serve global fonts (header + general)
+-   serve global fonts (header + general), public folder?
 -   automatic lint
 -   icons
 -   global styles?
@@ -16,6 +16,8 @@
 -   update title on navigation
 -   all <head/> tags
 -   SEO (sitemap)
+-   put facebook share photos in public folder
+-   make sure adi's account in contentful, can only add/edit specific content types
 
 # Bugs
 

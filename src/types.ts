@@ -25,6 +25,7 @@ export type Site = {
 }
 
 export type SiteMetadata = {
+    type: "weddings" | "documentaries"
     title: string
     facebookMetadata: {
         url: string

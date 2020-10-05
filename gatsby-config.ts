@@ -1,7 +1,25 @@
 import { SiteMetadata } from "./src/types"
 
-export const siteMetadata: SiteMetadata = {
+const weddingsSiteMetadata: SiteMetadata = {
     title: "Adi Segal Photography",
+    type: "weddings",
+    facebookMetadata: {
+        url: "http://weddings.adi-segal.com/",
+        type: "website",
+        title: "Wedding photography - Adi Segal",
+        image: {
+            uri:
+                "https://www.adi-segal.com/assets/images/facebook-share-weddings.jpg",
+            width: "2097",
+            height: "1278",
+        },
+        description: "Wedding photography from a different point of view",
+    },
+}
+
+const documentariesSiteMetadata: SiteMetadata = {
+    title: "Adi Segal Photography",
+    type: "documentaries",
     facebookMetadata: {
         url: "http://www.adi-segal.com/",
         type: "website",
@@ -14,6 +32,11 @@ export const siteMetadata: SiteMetadata = {
         description: "Visual story telling and Documentary photography",
     },
 }
+
+export const siteMetadata: SiteMetadata =
+    process.env.WEBSITE_TYPE === "weddings"
+        ? weddingsSiteMetadata
+        : documentariesSiteMetadata
 
 export const plugins = [
     `gatsby-plugin-sass`,

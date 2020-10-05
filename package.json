@@ -5,11 +5,11 @@
   "version": "0.1.0",
   "license": "0BSD",
   "scripts": {
-    "build": "gatsby build",
-    "develop": "gatsby develop",
+    "build": "WEBSITE_TYPE=weddings gatsby build",
+    "develop": "WEBSITE_TYPE=weddings gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
-    "start": "npm run develop",
-    "serve": "gatsby serve",
+    "start": "WEBSITE_TYPE=weddings npm run develop",
+    "serve": "WEBSITE_TYPE=weddings gatsby serve",
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   },

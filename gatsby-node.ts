@@ -42,6 +42,14 @@ export const createPages: GatsbyNode["createPages"] = async ({
     const { createPage } = actions
     const { slugPrefix, topics } = await getTopics(graphql)
 
+    createPage({
+        path: "about",
+        component: resolve(__dirname, `./src/components/about.tsx`),
+        context: {
+            type: topicType,
+        },
+    })
+
     topics.forEach(topic => {
         createPage({
             path: `${slugPrefix}/${topic.slug}`,

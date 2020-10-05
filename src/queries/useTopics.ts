@@ -8,7 +8,7 @@ export type TopicsQuery = {
 }
 
 export const topicsQuery = graphql`
-    query topicsQuery {
+    query weddingsTopicsQuery {
         topics: allContentfulTopic(
             sort: { fields: order }
             filter: { type: { eq: "weddings" } }
