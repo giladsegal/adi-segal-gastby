@@ -1,8 +1,6 @@
 import { GatsbyNode, CreatePagesArgs } from "gatsby"
 import { resolve } from "path"
-import _ from "lodash"
-
-const topicType = "weddings"
+import { SiteMetadata } from "./src/types"
 
 type TopicsQuery = {
     topics: {
@@ -12,13 +10,34 @@ type TopicsQuery = {
     }
 }
 
-const getTopics = async (graphql: CreatePagesArgs["graphql"]) => {
-    const slugPrefix = "weddings"
+const getMetadata = async (graphql: CreatePagesArgs["graphql"]) => {
+    const result = await graphql<{
+        site: { siteMetadata: Pick<SiteMetadata, "type" | "topicsSlug"> }
+    }>(
+        `
+            query getMetadata {
+                site {
+                    siteMetadata {
+                        type
+                        topicsSlug
+                    }
+                }
+            }
+        `
+    )
+
+    return result.data!.site.siteMetadata
+}
+
+const getTopics = async (
+    graphql: CreatePagesArgs["graphql"],
+    siteType: string
+) => {
     const result = await graphql<TopicsQuery>(
         `
-            query getTopicsQuery($topicType: String) {
+            query getTopicsQuery($siteType: String) {
                 topics: allContentfulTopic(
-                    filter: { type: { eq: $topicType } }
+                    filter: { type: { eq: $siteType } }
                 ) {
                     nodes {
                         slug
@@ -26,33 +45,30 @@ const getTopics = async (graphql: CreatePagesArgs["graphql"]) => {
                 }
             }
         `,
-        { topicType }
+        { siteType }
     )
 
-    return {
-        slugPrefix,
-        topics: result.data!.topics.nodes,
-    }
+    return result.data!.topics.nodes
 }
 
 export const createPages: GatsbyNode["createPages"] = async ({
-    actions,
+    actions: { createPage },
     graphql,
 }) => {
-    const { createPage } = actions
-    const { slugPrefix, topics } = await getTopics(graphql)
+    const metadata = await getMetadata(graphql)
+    const topics = await getTopics(graphql, metadata.type)
 
     createPage({
         path: "about",
         component: resolve(__dirname, `./src/components/about.tsx`),
         context: {
-            type: topicType,
+            siteType: metadata.type,
         },
     })
 
     topics.forEach(topic => {
         createPage({
-            path: `${slugPrefix}/${topic.slug}`,
+            path: `${metadata.topicsSlug}/${topic.slug}`,
             context: {
                 slug: topic.slug,
             },
@@ -60,7 +76,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
         })
 
         createPage({
-            path: `${slugPrefix}/${topic.slug}/thumbs`,
+            path: `${metadata.topicsSlug}/${topic.slug}/thumbs`,
             context: {
                 slug: topic.slug,
             },

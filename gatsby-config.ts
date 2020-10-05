@@ -3,6 +3,7 @@ import { SiteMetadata } from "./src/types"
 const weddingsSiteMetadata: SiteMetadata = {
     title: "Adi Segal Photography",
     type: "weddings",
+    topicsSlug: "weddings",
     facebookMetadata: {
         url: "http://weddings.adi-segal.com/",
         type: "website",
@@ -20,6 +21,7 @@ const weddingsSiteMetadata: SiteMetadata = {
 const documentariesSiteMetadata: SiteMetadata = {
     title: "Adi Segal Photography",
     type: "documentaries",
+    topicsSlug: "documentaries",
     facebookMetadata: {
         url: "http://www.adi-segal.com/",
         type: "website",

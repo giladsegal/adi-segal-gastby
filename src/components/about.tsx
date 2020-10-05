@@ -78,14 +78,14 @@ export type AboutData = {
 }
 
 export type AboutContext = {
-    type: SiteMetadata["type"]
+    siteType: SiteMetadata["type"]
 }
 
 export type AboutProps = PageProps<AboutData, AboutContext>
 
 export const query = graphql`
-    query aboutWeddingsDetailsQuery($type: String) {
-        allContentfulAboutDetails(filter: { type: { eq: $type } }) {
+    query aboutWeddingsDetailsQuery($siteType: String) {
+        allContentfulAboutDetails(filter: { type: { eq: $siteType } }) {
             nodes {
                 childContentfulAboutDetailsResumeRichTextNode {
                     resume

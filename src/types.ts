@@ -25,7 +25,8 @@ export type Site = {
 }
 
 export type SiteMetadata = {
-    type: "weddings" | "documentaries"
+    type: SiteType
+    topicsSlug: SiteTopicsSlug
     title: string
     facebookMetadata: {
         url: string
@@ -39,6 +40,10 @@ export type SiteMetadata = {
         description: string
     }
 }
+
+export type SiteType = "weddings" | "documentaries"
+
+export type SiteTopicsSlug = "weddings" | "documentaries"
 
 export type FluidImage = {
     fluid: FluidObject
