@@ -2,10 +2,10 @@ import React from "react"
 import { PageProps, graphql, Link } from "gatsby"
 import Layout from "../components/layout"
 import { Topic } from "../types"
+import Img from "gatsby-image"
+import styles from "./topics.module.scss"
 
 export default function Topics(props: TopicsProps) {
-    console.log(props)
-    debugger
     const {
         data: {
             topics: { nodes },
@@ -14,13 +14,16 @@ export default function Topics(props: TopicsProps) {
 
     return (
         <Layout>
-            {nodes.map(t => {
-                return (
-                    <Link to={t.slug} key={t.id}>
-                        {t.name}
-                    </Link>
-                )
-            })}
+            <div className={styles.root}>
+                {nodes.map(t => {
+                    return (
+                        <Link to={t.slug} key={t.id} className={styles.topic}>
+                            <Img fluid={t.thumb.fluid} />
+                            <div className={styles.topicText}>{t.name}</div>
+                        </Link>
+                    )
+                })}
+            </div>
         </Layout>
     )
 }
@@ -49,7 +52,7 @@ export const query = graphql`
                 slug
                 thumb {
                     fluid {
-                        src
+                        ...GatsbyContentfulFluid_withWebp
                     }
                 }
             }

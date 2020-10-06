@@ -1,0 +1,22 @@
+.root {
+    display: grid;
+    grid-gap: .5rem;
+}
+
+.topic {
+    position: relative;
+    text-decoration: none;
+}
+
+.topic-text {
+    padding: 2px 0;
+    background: rgba(0, 0, 0, .55);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    color: #fff;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
