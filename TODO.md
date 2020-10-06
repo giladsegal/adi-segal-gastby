@@ -9,13 +9,16 @@
 -   favico
 -   create font file for header
 -   serve global fonts (header + general), public folder?
+-   prefetch fonts
 -   automatic lint
 -   icons
 -   global styles?
 -   facebook meta tags (weddings / documentaries) - maybe different siteMetadata?
+-   facebok assets in public folder
 -   update title on navigation
 -   all <head/> tags
--   SEO (sitemap)
+-   SEO (gatsby-plugin-sitemap)
+-   SEO component
 -   put facebook share photos in public folder
 -   make sure adi's account in contentful, can only add/edit specific content types
 
@@ -24,6 +27,7 @@
 -   `react-helmet` doesn't work in SSR
 -   Use `gatsby-image` along site contentful rich text for about page, see this [issue](https://github.com/contentful/rich-text/issues/70) in git
 -   Maybe use https://www.gatsbyjs.com/plugins/@contentful/gatsby-transformer-contentful-richtext/ and put `display: inline` for `img` instead of `@contentful/rich-text-react-renderer`
+-   load facebook SDK only for contact page?
 
 # Product
 
@@ -70,6 +74,7 @@
 -   Contact page
     -   email, mobile, location, picture
     -   facebook sdk
+    -   make sure facebook is loaded on navigation
 -   Home (Default category)
     -   should receive data from server about type
     -   random order

@@ -15,6 +15,7 @@ export default function Layout({ children }: LayoutProps) {
     return (
         <React.Fragment>
             <Helmet
+                htmlAttributes={{ lang: "en" }}
                 title={""}
                 titleTemplate={`${title} · %s`}
                 meta={[
