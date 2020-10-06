@@ -4,6 +4,8 @@ import { useContactDetails } from "../static-queries/useContactDetails"
 import Img from "gatsby-image"
 import styles from "./contact.module.scss"
 import useFacebookLike from "../hooks/useFacebookLike"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faFacebookSquare } from "@fortawesome/free-brands-svg-icons"
 
 export default function Contact() {
     const details = useContactDetails()
@@ -26,14 +28,25 @@ export default function Contact() {
                     </dt>
                 </dl>
                 <div className={styles.fbWrapper} ref={ref}>
-                    <div
-                        className="fb-like"
-                        data-href="https://www.facebook.com/AdisegalPhotographer"
-                        data-layout="button_count"
-                        data-action="like"
-                        data-size="large"
-                        data-share="true"
-                    />
+                    <div className={styles.fbLikeWrapper}>
+                        <div
+                            className="fb-like"
+                            data-href="https://www.facebook.com/AdisegalPhotographer"
+                            data-layout="button_count"
+                            data-action="like"
+                            data-size="large"
+                            data-share="true"
+                        />
+                    </div>
+                    <a
+                        href="https://www.facebook.com/AdisegalPhotographer/"
+                        target="_blank"
+                    >
+                        <FontAwesomeIcon
+                            icon={faFacebookSquare}
+                            className={styles.fbLink}
+                        />
+                    </a>
                 </div>
                 <Img fluid={details.photo.fluid} className={styles.fullWidth} />
                 <footer className={styles.copyrights}>

@@ -17,8 +17,27 @@
 }
 
 .fb-wrapper {
+    display: flex;
     padding-bottom: 10px;
-    height: 38px;
+}
+
+.fb-like-wrapper {
+    // facebook buttons loads after a delay which cause content to reflow
+    // setting the box dimensions in advances prevent this behavior
+    width: 157px;
+    height: 28px;
+}
+
+.fb-link {
+    margin-left: 3px;
+    width: 30px !important; /* override font-awesome specific sizes */
+    height: 31px;
+    margin-top: -2px;
+    color: #4267b2;
+
+    &:hover {
+        color: #365899;
+    }
 }
 
 .full-width {
