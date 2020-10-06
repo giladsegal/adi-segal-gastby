@@ -68,6 +68,7 @@
     -   display all images
     -   links with query params
     -   responsiveness (ratio?)
+    -   last row - not 4 pics
 -   About page
     -   description (rich text?), picture, Exhibitions (?)
     -   different about for documentaries / weddings
