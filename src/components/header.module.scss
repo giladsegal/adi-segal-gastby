@@ -1,6 +1,7 @@
 .root {
     display: flex;
     position: sticky;
+    z-index: 10;
     top: 0;
     height: 3rem;
     color: #6f6f6f;

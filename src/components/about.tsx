@@ -1,11 +1,12 @@
 import React from "react"
 import Layout from "./layout"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
-import { INLINES, BLOCKS } from "@contentful/rich-text-types"
+import { INLINES, BLOCKS, MARKS } from "@contentful/rich-text-types"
 import Img, { FluidObject } from "gatsby-image"
 import { graphql, PageProps } from "gatsby"
 import { SiteMetadata } from "../types"
 import styles from "./about.module.scss"
+import classNames from "classnames"
 
 export default function About(props: AboutProps) {
     const {
@@ -28,28 +29,71 @@ export default function About(props: AboutProps) {
         },
     } = props.data
 
+    const isWeddingsPage = props.pageContext.siteType === "weddings"
+
     return (
         <Layout>
-            <Img
-                fluid={fluid}
-                className={styles.image}
-                style={{ "--width": `${width}px`, "--height": `${height}px` }}
-            />
-            {documentToReactComponents(JSON.parse(resume), {
-                renderNode: {
-                    [BLOCKS.PARAGRAPH]: (_, children) => {
-                        return <p className={styles.paragraph}>{children}</p>
-                    },
-                    [INLINES.HYPERLINK]: (node, children) => {
-                        console.log(node.data.uri)
-                        return (
-                            <a href={node.data.uri} className={styles.link}>
-                                {children}
-                            </a>
-                        )
-                    },
-                },
-            })}
+            <div
+                className={classNames(styles.root, {
+                    [styles.weddingsLayout]: isWeddingsPage,
+                })}
+            >
+                <Img
+                    fluid={fluid}
+                    className={styles.image}
+                    style={{
+                        "--width": `${width}px`,
+                        "--height": `${height}px`,
+                    }}
+                />
+                <div>
+                    {documentToReactComponents(JSON.parse(resume), {
+                        renderMark: {
+                            [MARKS.BOLD]: text => {
+                                return (
+                                    <strong className={styles.strong}>
+                                        {text}
+                                    </strong>
+                                )
+                            },
+                            [MARKS.ITALIC]: text => {
+                                return (
+                                    <cite className={styles.cite}>{text}</cite>
+                                )
+                            },
+                        },
+                        renderNode: {
+                            [BLOCKS.PARAGRAPH]: (_, children) => {
+                                return (
+                                    <p className={styles.paragraph}>
+                                        {children}
+                                    </p>
+                                )
+                            },
+                            [BLOCKS.HEADING_3]: (_, children) => {
+                                return <h3 className={styles.h3}>{children}</h3>
+                            },
+                            [BLOCKS.OL_LIST]: (_, children) => {
+                                return <ol className={styles.ol}>{children}</ol>
+                            },
+                            [BLOCKS.UL_LIST]: (_, children) => {
+                                return <ul className={styles.ul}>{children}</ul>
+                            },
+                            [INLINES.HYPERLINK]: (node, children) => {
+                                console.log(node.data.uri)
+                                return (
+                                    <a
+                                        href={node.data.uri}
+                                        className={styles.link}
+                                    >
+                                        {children}
+                                    </a>
+                                )
+                            },
+                        },
+                    })}
+                </div>
+            </div>
         </Layout>
     )
 }

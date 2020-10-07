@@ -1,3 +1,20 @@
+@import '../styles/mixins';
+
+.root {
+    font-size: 17px;
+
+    @include media-above-sm {
+        padding: 0 4.5rem;
+    }
+}
+
+.weddings-layout {
+    @include media-above-xs {
+        display: grid;
+        grid-template-columns: auto auto;
+    }
+}
+
 .image {
     float: left;
     margin-right: 1rem;
@@ -6,12 +23,53 @@
 }
 
 .paragraph {
-    font-size: 17px;
-    margin: 0 0 1.4rem;
+    font-size: 1em;
+    margin: 0 0 1.8rem;
     text-align: justify;
+
+    &:empty {
+        display: none;
+    }
+
+    &:last-of-type {
+        margin-bottom: 0;
+    }
+}
+
+.cite {
+    font-style: italic;
+}
+
+.strong {
+    font-weight: 700;
 }
 
 .link {
     color: #337ab7;
     text-decoration: none;
+}
+
+.h3 {
+    margin: 0 0 10px;
+    font-size: 24px;
+    line-height: 1.1;
+    font-weight: 500;
+}
+
+.ol,
+.ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+
+    li+li {
+        margin-top: .5rem;
+    }
+
+    p {
+        // override text-align: justify for top level paragraphs
+        text-align: left;
+        margin-bottom: 1.1rem;
+    }
 }
