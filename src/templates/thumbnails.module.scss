@@ -1,9 +1,3 @@
-.root {
-    // display: grid;
-    // grid-template-columns: repeat(4, auto);
-    // grid-gap: .5rem;
-}
-
 .row {
     display: grid;
     grid-template-columns: repeat(4, auto);
@@ -12,4 +6,9 @@
     &+& {
         margin-top: .5rem;
     }
+}
+
+.photo {
+    // prevent pixel rounding issues for aspect ratio
+    height: 100%;
 }

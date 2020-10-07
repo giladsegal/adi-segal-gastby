@@ -1,6 +1,5 @@
 # Infra
 
--   Redirect to root from unknown routes (404.tsx in src/pages)
 -   Links with animations
 -   Upload all data to contentful using a script (https://www.contentful.com/developers/docs/references/content-management-api/#/reference/assets/asset)
 -   Two web sites configuration and deploy
@@ -11,9 +10,6 @@
 -   serve global fonts (header + general), public folder?
 -   prefetch fonts
 -   automatic lint
--   icons
--   global styles?
--   facebook meta tags (weddings / documentaries) - maybe different siteMetadata?
 -   facebok assets in public folder
 -   update title on navigation
 -   all <head/> tags
@@ -73,6 +69,7 @@
     -   description (rich text?), picture, Exhibitions (?)
     -   different about for documentaries / weddings
 -   Contact page
+    -   add links to fields
     -   email, mobile, location, picture
     -   facebook sdk
     -   make sure facebook is loaded on navigation

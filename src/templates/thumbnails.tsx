@@ -18,29 +18,34 @@ export type ThumbnailsData = {
 
 export type ThumbnailsProps = PageProps<ThumbnailsData, ThumbnailsContext>
 
-/*
-TODO:
-
-* pass height 100% to gatsby-image-wrapper
-* memozation for comuptations
-* rows without 4 pics
-
-*/
-
-const rowToRatios = ([firstTopic, ...restTopics]: Array<TopicPhoto>) => {
+const rowToRatios = (row: Array<TopicPhoto>, length: number) => {
+    const [{ photo: firstPhoto }, ...restPhotoNodes] = row
     const { N: firstPhotoWidthRatio, D: firstPhotoHeightRatio } = toFraction(
-        firstTopic.photo.fluid.aspectRatio,
-        0.01
+        firstPhoto.fluid.aspectRatio
     )
 
-    const restRatios = restTopics
-        .map(topic => toFraction(topic.photo.fluid.aspectRatio, 0.01))
+    const restRatios = restPhotoNodes
+        .map(({ photo }) => {
+            return toFraction(Number(photo.fluid.aspectRatio.toFixed(2)))
+        })
         .map(({ N: photoWidthRatio, D: photoHeightRatio }) => {
             return (firstPhotoHeightRatio / photoHeightRatio) * photoWidthRatio
         })
         .map(ratio => Number(ratio.toFixed(2)))
 
-    return [firstPhotoWidthRatio, ...restRatios]
+    return fillMissingRatios([firstPhotoWidthRatio, ...restRatios], length)
+}
+
+// last row might not contain maximum amount of photos so
+// placeholder ratios are added based over existing photos e.g.
+// [3] --> [3, 3, 3, 3]
+// [3, 2] --> [3, 2, 3, 2]
+// [3, 2, 3] --> [3, 2, 3, 3]
+// [3, 3, 3, 3] --> [3, 3, 3, 3]
+const fillMissingRatios = (ratios: number[], size: number) => {
+    return Array(size)
+        .fill(undefined)
+        .map((_, i) => ratios[i % ratios.length])
 }
 
 export default function Thumbnails(props: ThumbnailsProps) {
@@ -48,13 +53,14 @@ export default function Thumbnails(props: ThumbnailsProps) {
         topicPhotos: { nodes },
     } = props.data
 
-    const rows = splitToSubgroups(nodes, 4)
+    const rowLength = 4
+    const rows = splitToSubgroups(nodes, rowLength)
 
     return (
         <Layout>
-            <div className={styles.root}>
+            <div>
                 {rows.map((row, rowIdx) => {
-                    const columnSizes = rowToRatios(row)
+                    const columnSizes = rowToRatios(row, rowLength)
                         .map(ratio => `${ratio}fr`)
                         .join(" ")
 
@@ -70,7 +76,10 @@ export default function Thumbnails(props: ThumbnailsProps) {
                                         to={`../?p=${rowIdx * colIdx + 1}`}
                                         key={id}
                                     >
-                                        <Img fluid={photo.fluid} />
+                                        <Img
+                                            fluid={photo.fluid}
+                                            className={styles.photo}
+                                        />
                                     </Link>
                                 )
                             })}
