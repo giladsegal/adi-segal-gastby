@@ -40,6 +40,7 @@ export default function About(props: AboutProps) {
             >
                 <Img
                     fluid={fluid}
+                    alt="Adi Segal"
                     className={styles.image}
                     style={{
                         "--width": `${width}px`,
@@ -80,11 +81,29 @@ export default function About(props: AboutProps) {
                                 return <ul className={styles.ul}>{children}</ul>
                             },
                             [INLINES.HYPERLINK]: (node, children) => {
-                                console.log(node.data.uri)
+                                const linkUrl: string = node.data.uri
+
+                                const whitelistUrls = [
+                                    "https://weddings.adi-segal.com",
+                                    "https://adi-segal.com",
+                                    "https://www.adi-segal.com",
+                                ]
+
+                                const nofollow =
+                                    whitelistUrls.some(
+                                        url => url === linkUrl
+                                    ) ||
+                                    whitelistUrls.some(url =>
+                                        linkUrl.startsWith(url + "/")
+                                    )
+                                        ? ""
+                                        : "nofollow"
+
                                 return (
                                     <a
-                                        href={node.data.uri}
+                                        href={linkUrl}
                                         className={styles.link}
+                                        rel={`noopener noreferrer ${nofollow}`.trimEnd()}
                                     >
                                         {children}
                                     </a>

@@ -1,16 +1,44 @@
 import React from "react"
 import { Helmet } from "react-helmet"
-import { useMetadata } from "../static-queries/useMetadata"
 import Header from "./header"
 import "normalize.css"
 import styles from "./layout.module.scss"
+import { useStaticQuery, graphql } from "gatsby"
+import { Site } from "../types"
 
 export type LayoutProps = {
     children?: React.ReactNode
 }
 
+export type SiteQuery = {
+    site: Site
+}
+
+const metadataQuery = graphql`
+    query metadataQuery {
+        site {
+            siteMetadata {
+                title
+                facebookMetadata {
+                    url
+                    type
+                    title
+                    description
+                    image {
+                        uri
+                        width
+                        height
+                    }
+                }
+            }
+        }
+    }
+`
+
 export default function Layout({ children }: LayoutProps) {
-    const { title, facebookMetadata } = useMetadata()
+    const { title, facebookMetadata } = useStaticQuery<SiteQuery>(
+        metadataQuery
+    ).site.siteMetadata
 
     return (
         <React.Fragment>

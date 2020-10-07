@@ -15,9 +15,7 @@ export type GalleryData = {
 
 export type GalleryProps = PageProps<GalleryData, GalleryContext>
 
-export default function Gallery(props: GalleryProps) {
-    console.log(props)
-
+export default function Gallery(_props: GalleryProps) {
     return (
         <Layout>
             <Link to="./thumbs">Thumbs</Link>

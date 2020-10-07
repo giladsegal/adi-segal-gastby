@@ -1,14 +1,21 @@
 import React from "react"
 import Layout from "../components/layout"
-import { useContactDetails } from "../static-queries/useContactDetails"
 import Img from "gatsby-image"
 import styles from "./contact.module.scss"
 import useFacebookLike from "../hooks/useFacebookLike"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faFacebookSquare } from "@fortawesome/free-brands-svg-icons"
+import { graphql, PageProps } from "gatsby"
+import { ContactDetails } from "../types"
 
-export default function Contact() {
-    const details = useContactDetails()
+export type ContactData = {
+    contact: ContactDetails
+}
+
+export type ContactProps = PageProps<ContactData>
+
+export default function Contact(props: ContactProps) {
+    const { contact } = props.data
 
     const ref = useFacebookLike()
 
@@ -17,14 +24,20 @@ export default function Contact() {
             <div className={styles.centeredColumnLayout}>
                 <dl className={styles.details}>
                     <dd>contact:</dd>
-                    <dt>{details.email}</dt>
+                    <dt>
+                        <a href={`mailto:${contact.email}`}>{contact.email}</a>
+                    </dt>
                     <dd>mobile:</dd>
-                    <dt>{details.mobileNumber}</dt>
+                    <dt>
+                        <a href={`tel:${contact.mobileNumber}`}>
+                            {contact.mobileNumber}
+                        </a>
+                    </dt>
                     <dd>location:</dd>
                     <dt>
-                        {details.addressLine1}
+                        {contact.addressLine1}
                         <br />
-                        {details.addressLine2}
+                        {contact.addressLine2}
                     </dt>
                 </dl>
                 <div className={styles.fbWrapper} ref={ref}>
@@ -41,6 +54,8 @@ export default function Contact() {
                     <a
                         href="https://www.facebook.com/AdisegalPhotographer/"
                         target="_blank"
+                        aria-label="Adi Segal photography facbeook group"
+                        rel="noopener noreferrer"
                     >
                         <FontAwesomeIcon
                             icon={faFacebookSquare}
@@ -48,7 +63,11 @@ export default function Contact() {
                         />
                     </a>
                 </div>
-                <Img fluid={details.photo.fluid} className={styles.fullWidth} />
+                <Img
+                    fluid={contact.photo.fluid}
+                    className={styles.fullWidth}
+                    alt="Contact me"
+                />
                 <footer className={styles.copyrights}>
                     All rights reserved © {new Date().getFullYear()} Adi Segal
                 </footer>
@@ -56,3 +75,19 @@ export default function Contact() {
         </Layout>
     )
 }
+
+export const query = graphql`
+    query contactDetailsQuery {
+        contact: contentfulContactDetails {
+            addressLine1
+            addressLine2
+            email
+            mobileNumber
+            photo {
+                fluid(maxWidth: 355) {
+                    ...GatsbyContentfulFluid_withWebp
+                }
+            }
+        }
+    }
+`
