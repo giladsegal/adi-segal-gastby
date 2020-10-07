@@ -55,7 +55,9 @@ export default function Thumbnails(props: ThumbnailsProps) {
 
     const rowLength = 4
     const rows = splitToSubgroups(nodes, rowLength)
-
+    const preventRightClick: React.MouseEventHandler<HTMLAnchorElement> = e => {
+        e.preventDefault()
+    }
     return (
         <Layout>
             <div>
@@ -75,6 +77,7 @@ export default function Thumbnails(props: ThumbnailsProps) {
                                     <Link
                                         to={`../?p=${rowIdx * colIdx + 1}`}
                                         key={id}
+                                        onContextMenu={preventRightClick}
                                     >
                                         <Img
                                             fluid={photo.fluid}

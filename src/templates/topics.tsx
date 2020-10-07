@@ -12,13 +12,25 @@ export default function Topics(props: TopicsProps) {
         },
     } = props
 
+    const preventRightClick: React.MouseEventHandler<HTMLAnchorElement> = e => {
+        e.preventDefault()
+    }
+
     return (
         <Layout>
             <div className={styles.root}>
                 {nodes.map(t => {
                     return (
-                        <Link to={t.slug} key={t.id} className={styles.topic}>
-                            <Img fluid={t.thumb.fluid} />
+                        <Link
+                            to={t.slug}
+                            key={t.id}
+                            className={styles.topic}
+                            onContextMenu={preventRightClick}
+                        >
+                            <Img
+                                fluid={t.thumb.fluid}
+                                className={styles.photo}
+                            />
                             <div className={styles.topicText}>{t.name}</div>
                         </Link>
                     )

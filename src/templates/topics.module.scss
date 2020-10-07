@@ -19,4 +19,13 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 2px;
+
+    @include media-above-xs {
+        // text is only displayed on hover - no need to select
+        user-select: none;
+    }
+}
+
+.photo {
+    user-select: none;
 }

@@ -11,4 +11,5 @@
 .photo {
     // prevent pixel rounding issues for aspect ratio
     height: 100%;
+    user-select: none;
 }
