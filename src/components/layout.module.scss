@@ -15,7 +15,6 @@ body {
 body {
     color: #2c2b2b;
     background: #fff;
-    position: relative;
     line-height: 1.42857143;
 }
 
@@ -27,4 +26,6 @@ body {
 
 .main-content {
     padding: 1rem;
+    max-width: calc(800px + 1rem);
+    margin: 0 auto;
 }

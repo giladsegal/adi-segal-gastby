@@ -1,16 +1,29 @@
+@import "../styles/mixins";
+
 .root {
     display: grid;
-    grid-gap: .5rem;
+    grid-gap: 0.5rem;
+
+    @include media-above-xs {
+        grid-template-columns: 1fr 1fr;
+    }
 }
 
 .topic {
     position: relative;
     text-decoration: none;
+
+    @include media-above-md {
+        &:hover .topic-text {
+            background: rgba(30, 30, 30, .3);
+            opacity: 1;
+        }
+    }
 }
 
 .topic-text {
     padding: 2px 0;
-    background: rgba(0, 0, 0, .55);
+    background: rgba(0, 0, 0, 0.55);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -20,7 +33,27 @@
     text-transform: uppercase;
     letter-spacing: 2px;
 
-    @include media-above-xs {
+    @include media-above-sm {
+        font-size: 1.25rem;
+    }
+
+    @include media-above-md {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        padding: 0 0.5rem;
+        font-size: 1.5rem;
+
+        opacity: 0;
+        background: rgba(0, 0, 0, 0);
+        transition: background-color 150ms ease-in,
+            opacity 150ms ease-in;
+
         // text is only displayed on hover - no need to select
         user-select: none;
     }
