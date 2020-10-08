@@ -60,7 +60,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
 
     createPage({
         path: "about",
-        component: resolve(__dirname, "./src/components/about.tsx"),
+        component: resolve(__dirname, "./src/templates/about.tsx"),
         context: {
             siteType: metadata.type,
         },

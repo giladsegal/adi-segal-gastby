@@ -47,6 +47,10 @@ export default function Layout({ children }: LayoutProps) {
                 title={""}
                 titleTemplate={`${title} · %s`}
                 meta={[
+                    {
+                        name: "description",
+                        content: facebookMetadata.description,
+                    },
                     { property: "og:url", content: siteUrl },
                     { property: "og:type", content: facebookMetadata.type },
                     { property: "og:title", content: facebookMetadata.title },

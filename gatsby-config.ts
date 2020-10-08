@@ -1,6 +1,6 @@
 import { SiteMetadata } from "./src/types"
 
-const weddingsSiteUrl = "https://weddings.adi-segal.com/"
+const weddingsSiteUrl = "https://weddings.adi-segal.com"
 const weddingsSiteMetadata: SiteMetadata = {
     title: "Adi Segal Photography",
     type: "weddings",
@@ -10,7 +10,7 @@ const weddingsSiteMetadata: SiteMetadata = {
         type: "website",
         title: "Wedding photography - Adi Segal",
         image: {
-            uri: `${weddingsSiteUrl}images/facebook-share-weddings.jpg`,
+            uri: `${weddingsSiteUrl}/images/facebook-share-weddings.jpg`,
             width: "2097",
             height: "1278",
         },
@@ -18,7 +18,7 @@ const weddingsSiteMetadata: SiteMetadata = {
     },
 }
 
-const documentariesSiteUrl = "https://www.adi-segal.com/"
+const documentariesSiteUrl = "https://www.adi-segal.com"
 const documentariesSiteMetadata: SiteMetadata = {
     title: "Adi Segal Photography",
     type: "documentaries",
@@ -28,7 +28,7 @@ const documentariesSiteMetadata: SiteMetadata = {
         type: "website",
         title: "Documentary photography - Adi Segal Photography",
         image: {
-            uri: `${documentariesSiteUrl}images/facebook-share.jpg`,
+            uri: `${documentariesSiteUrl}/images/facebook-share.jpg`,
             width: "1419",
             height: "946",
         },
@@ -74,4 +74,5 @@ export const plugins = [
             icon: `src/images/icon.png`,
         },
     },
+    `gatsby-plugin-sitemap`,
 ]

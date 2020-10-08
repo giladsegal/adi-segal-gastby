@@ -13,6 +13,7 @@
     -- ask Adi for a picture for sharing weddings subdomain
     -- make sure share is working as expected: https://developers.facebook.com/tools/debug/?q=adi-segal.com
     -- make sure share is working as expected: https://developers.facebook.com/tools/debug/?q=weddings.adi-segal.com
+    -- missing appId
 -   Upload all data to contentful using a script (https://www.contentful.com/developers/docs/references/content-management-api/#/reference/assets/asset)
 -   AWS automatic deploy (weddings + documentaries)
 -   trigger AWS deploy from contentful publish
@@ -20,9 +21,7 @@
 
 # Bugs
 
--   `react-helmet` doesn't work in SSR
 -   load facebook SDK only for contact page?
--   a11y
 
 # Product
 
@@ -76,3 +75,4 @@
     -   should receive data from server about type
     -   random order
     -   support first category
+-   a11y
