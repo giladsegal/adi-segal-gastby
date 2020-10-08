@@ -29,3 +29,58 @@ body {
     max-width: calc(800px + 1rem);
     margin: 0 auto;
 }
+
+/* PT Sans regular */
+@font-face {
+    font-family: 'PT Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: local('PT Sans'), local('PTSans-Regular'),
+        url("../fonts/PTSans-Regular-latin.woff2") format('woff2'),
+        url("../fonts/PTSans-Regular-latin.woff") format('woff');
+}
+
+/* PT Sans bold */
+@font-face {
+    font-family: 'PT Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: local('PT Sans Bold'), local('PTSans-Bold'),
+        url("../fonts/PTSans-Bold-latin.woff2") format('woff2'),
+        url("../fonts/PTSans-Bold-latin.woff") format('woff2');
+}
+
+/* PT Sans italic */
+@font-face {
+    font-family: 'PT Sans';
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: local('PT Sans Italic'), local('PTSans-Italic'),
+        url("../fonts/PTSans-Italic-latin.woff2") format('woff2'),
+        url("../fonts/PTSans-Italic-latin.woff") format('woff');
+}
+
+/* PT Sans bold italic */
+@font-face {
+    font-family: 'PT Sans';
+    font-style: italic;
+    font-weight: 700;
+    font-display: swap;
+    src: local('PT Sans Bold Italic'), local('PTSans-BoldItalic'),
+        url("../fonts/PTSans-BoldItalic-latin.woff2") format('woff2'),
+        url("../fonts/PTSans-BoldItalic-latin.woff") format('woff');
+}
+
+/* Stein Antik regular */
+@font-face {
+    font-family: 'SteinAntik';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: local('Stein Antik'), local('SteinAntik'),
+        url("../fonts/SteinAntik-Regular-latin.woff2") format('woff2'),
+        url("../fonts/SteinAntik-Regular-latin.woff") format('woff');
+}
