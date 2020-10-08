@@ -1,9 +1,7 @@
 # Infra
 
 -   Links with animations (`transition-links` branch OR https://medium.com/free-code-camp/how-to-animate-page-transitions-in-gatsby-js-b36e3ae14c29)
--   automatic lint
 -   update title on navigation\*
--   SEO (gatsby-plugin-sitemap)
 -   SEO component
 
 # Before going live
