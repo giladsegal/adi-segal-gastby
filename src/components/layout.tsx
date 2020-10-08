@@ -19,8 +19,8 @@ const metadataQuery = graphql`
         site {
             siteMetadata {
                 title
+                siteUrl
                 facebookMetadata {
-                    url
                     type
                     title
                     description
@@ -36,7 +36,7 @@ const metadataQuery = graphql`
 `
 
 export default function Layout({ children }: LayoutProps) {
-    const { title, facebookMetadata } = useStaticQuery<SiteQuery>(
+    const { title, facebookMetadata, siteUrl } = useStaticQuery<SiteQuery>(
         metadataQuery
     ).site.siteMetadata
 
@@ -47,7 +47,7 @@ export default function Layout({ children }: LayoutProps) {
                 title={""}
                 titleTemplate={`${title} · %s`}
                 meta={[
-                    { property: "og:url", content: facebookMetadata.url },
+                    { property: "og:url", content: siteUrl },
                     { property: "og:type", content: facebookMetadata.type },
                     { property: "og:title", content: facebookMetadata.title },
                     {

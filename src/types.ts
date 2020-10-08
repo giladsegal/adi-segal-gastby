@@ -28,8 +28,8 @@ export type SiteMetadata = {
     type: SiteType
     topicsSlug: SiteTopicsSlug
     title: string
+    siteUrl: string
     facebookMetadata: {
-        url: string
         type: string
         title: string
         image: {

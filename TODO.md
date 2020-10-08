@@ -1,9 +1,7 @@
 # Infra
 
 -   Links with animations (`transition-links` branch OR https://medium.com/free-code-camp/how-to-animate-page-transitions-in-gatsby-js-b36e3ae14c29)
--   Two web sites configuration and deploy
 -   automatic lint
--   facebok assets in public folder\*
 -   update title on navigation\*
 -   SEO (gatsby-plugin-sitemap)
 -   SEO component
@@ -11,9 +9,12 @@
 # Before going live
 
 -   scrap fonts as part of the build using `npm run preload:fonts`
--   update facebook public assets to adi-segal.com from netlify domain
+-   facebook:
+    -- ask Adi for a picture for sharing weddings subdomain
+    -- make sure share is working as expected: https://developers.facebook.com/tools/debug/?q=adi-segal.com
+    -- make sure share is working as expected: https://developers.facebook.com/tools/debug/?q=weddings.adi-segal.com
 -   Upload all data to contentful using a script (https://www.contentful.com/developers/docs/references/content-management-api/#/reference/assets/asset)
--   AWS automatic deploy
+-   AWS automatic deploy (weddings + documentaries)
 -   trigger AWS deploy from contentful publish
 -   make sure adi's account in contentful, can only add/edit specific content types
 
@@ -30,7 +31,7 @@
     -   render main node
     -   render children
 -   Header component\*
-    -   links: home / documentaries / publications / about / contant
+    -   links: home / documentaries / publications / about / contact
     -   mobile hamburger
     -   mobile menu
     -   close menu upon navigation

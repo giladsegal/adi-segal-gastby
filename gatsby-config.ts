@@ -1,16 +1,16 @@
 import { SiteMetadata } from "./src/types"
 
+const weddingsSiteUrl = "https://weddings.adi-segal.com/"
 const weddingsSiteMetadata: SiteMetadata = {
     title: "Adi Segal Photography",
     type: "weddings",
     topicsSlug: "weddings",
+    siteUrl: weddingsSiteUrl,
     facebookMetadata: {
-        url: "http://weddings.adi-segal.com/",
         type: "website",
         title: "Wedding photography - Adi Segal",
         image: {
-            uri:
-                "https://www.adi-segal.com/assets/images/facebook-share-weddings.jpg",
+            uri: `${weddingsSiteUrl}images/facebook-share-weddings.jpg`,
             width: "2097",
             height: "1278",
         },
@@ -18,16 +18,17 @@ const weddingsSiteMetadata: SiteMetadata = {
     },
 }
 
+const documentariesSiteUrl = "https://www.adi-segal.com/"
 const documentariesSiteMetadata: SiteMetadata = {
     title: "Adi Segal Photography",
     type: "documentaries",
     topicsSlug: "documentaries",
+    siteUrl: documentariesSiteUrl,
     facebookMetadata: {
-        url: "http://www.adi-segal.com/",
         type: "website",
         title: "Documentary photography - Adi Segal Photography",
         image: {
-            uri: "http://www.adi-segal.com/assets/images/facebook-share.jpg",
+            uri: `${documentariesSiteUrl}images/facebook-share.jpg`,
             width: "1419",
             height: "946",
         },
