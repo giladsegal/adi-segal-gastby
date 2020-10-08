@@ -1,21 +1,20 @@
 # Infra
 
--   Links with animations
--   Upload all data to contentful using a script (https://www.contentful.com/developers/docs/references/content-management-api/#/reference/assets/asset)
+-   Links with animations (`transition-links` branch OR https://medium.com/free-code-camp/how-to-animate-page-transitions-in-gatsby-js-b36e3ae14c29)
 -   Two web sites configuration and deploy
--   AWS automatic deploy
--   trigger AWS deploy from contentful publish
--   favico
--   create font file for header
--   serve global fonts (header + general), public folder?
--   prefetch fonts
 -   automatic lint
--   facebok assets in public folder
--   update title on navigation
--   all <head/> tags
+-   facebok assets in public folder\*
+-   update title on navigation\*
 -   SEO (gatsby-plugin-sitemap)
 -   SEO component
--   put facebook share photos in public folder
+
+# Before going live
+
+-   scrap fonts as part of the build using `npm run preload:fonts`
+-   update facebook public assets to adi-segal.com from netlify domain
+-   Upload all data to contentful using a script (https://www.contentful.com/developers/docs/references/content-management-api/#/reference/assets/asset)
+-   AWS automatic deploy
+-   trigger AWS deploy from contentful publish
 -   make sure adi's account in contentful, can only add/edit specific content types
 
 # Bugs
@@ -30,13 +29,13 @@
     -   render header component
     -   render main node
     -   render children
--   Header component
+-   Header component\*
     -   links: home / documentaries / publications / about / contant
     -   mobile hamburger
     -   mobile menu
     -   close menu upon navigation
     -   highlight selected page
--   Logo component
+-   Logo component\*
 -   Loader component
 -   Modal component
     -   click outside for desktop
@@ -67,7 +66,7 @@
 -   About page
     -   description (rich text?), picture, Exhibitions (?)
     -   different about for documentaries / weddings
--   Contact page
+-   Contact page\*
     -   add links to fields
     -   email, mobile, location, picture
     -   facebook sdk

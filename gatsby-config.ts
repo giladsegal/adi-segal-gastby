@@ -61,4 +61,16 @@ export const plugins = [
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-preload-fonts`,
+    {
+        resolve: `gatsby-plugin-manifest`,
+        options: {
+            name: `Adi Segal Photography`,
+            short_name: `AdiSegal`,
+            start_url: `/`,
+            background_color: `#ffffff`,
+            theme_color: `#ffffff`,
+            display: `standalone`,
+            icon: `src/images/icon.png`,
+        },
+    },
 ]
