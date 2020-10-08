@@ -1,6 +1,6 @@
 import React from "react"
 import styles from "./header.module.scss"
-import { Link } from "gatsby"
+import Link from "gatsby-plugin-transition-link/AniLink"
 import MenuButton from "./menu-button"
 
 export type HeaderProps = {
@@ -46,7 +46,7 @@ const Header = ({ children }: HeaderProps) => {
 
 Header.Link = ({ to, children }: HeaderLinkProps) => {
     return (
-        <Link to={to} className={styles.link}>
+        <Link paintDrip color="blue" to={to} className={styles.link}>
             {children}
         </Link>
     )

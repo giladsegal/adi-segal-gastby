@@ -1,11 +1,11 @@
 import React from "react"
 import Layout from "../components/layout"
-import { PageProps, graphql, Link } from "gatsby"
+import { PageProps, graphql } from "gatsby"
 import { TopicPhoto } from "../types"
 import styles from "./thumbnails.module.scss"
 import Img from "gatsby-image"
 import { toFraction, splitToSubgroups } from "../utils"
-
+import Link from "gatsby-plugin-transition-link/AniLink"
 export type ThumbnailsContext = {
     slug: string
 }
@@ -76,6 +76,7 @@ export default function Thumbnails(props: ThumbnailsProps) {
                                 return (
                                     <Link
                                         to={`../?p=${rowIdx * colIdx + 1}`}
+                                        fade
                                         key={id}
                                         onContextMenu={preventRightClick}
                                     >

@@ -1,9 +1,10 @@
 import React from "react"
-import { PageProps, graphql, Link } from "gatsby"
+import { PageProps, graphql } from "gatsby"
 import Layout from "../components/layout"
 import { Topic } from "../types"
 import Img from "gatsby-image"
 import styles from "./topics.module.scss"
+import Link from "gatsby-plugin-transition-link/AniLink"
 
 export default function Topics(props: TopicsProps) {
     const {
@@ -24,6 +25,7 @@ export default function Topics(props: TopicsProps) {
                         <Link
                             to={t.slug}
                             key={t.id}
+                            fade
                             className={styles.topic}
                             onContextMenu={preventRightClick}
                         >

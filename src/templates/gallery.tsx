@@ -1,6 +1,7 @@
 import React from "react"
 import Layout from "../components/layout"
-import { Link, PageProps, graphql } from "gatsby"
+import { PageProps, graphql } from "gatsby"
+import Link from "gatsby-plugin-transition-link/AniLink"
 import { Topic } from "../types"
 
 export type GalleryContext = {
@@ -18,7 +19,9 @@ export type GalleryProps = PageProps<GalleryData, GalleryContext>
 export default function Gallery(_props: GalleryProps) {
     return (
         <Layout>
-            <Link to="./thumbs">Thumbs</Link>
+            {/* <Link fade to="./thumbs"> */}
+            Thumbs
+            {/* </Link> */}
         </Layout>
     )
 }
