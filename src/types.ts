@@ -26,10 +26,12 @@ export type Site = {
 
 export type SiteMetadata = {
     type: SiteType
+    siteUrl: string
     topicsSlug: SiteTopicsSlug
     title: string
-    siteUrl: string
-    facebookMetadata: {
+    description: string
+    keywords: string[]
+    facebook: {
         type: string
         title: string
         image: {
@@ -37,7 +39,6 @@ export type SiteMetadata = {
             width: string
             height: string
         }
-        description: string
     }
 }
 

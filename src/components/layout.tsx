@@ -1,77 +1,16 @@
 import React from "react"
-import { Helmet } from "react-helmet"
 import Header from "./header"
 import "normalize.css"
 import styles from "./layout.module.scss"
-import { useStaticQuery, graphql } from "gatsby"
-import { Site } from "../types"
-
+import SEO from "./seo"
 export type LayoutProps = {
     children?: React.ReactNode
 }
 
-export type SiteQuery = {
-    site: Site
-}
-
-const metadataQuery = graphql`
-    query metadataQuery {
-        site {
-            siteMetadata {
-                title
-                siteUrl
-                facebookMetadata {
-                    type
-                    title
-                    description
-                    image {
-                        uri
-                        width
-                        height
-                    }
-                }
-            }
-        }
-    }
-`
-
 export default function Layout({ children }: LayoutProps) {
-    const { title, facebookMetadata, siteUrl } = useStaticQuery<SiteQuery>(
-        metadataQuery
-    ).site.siteMetadata
-
     return (
         <React.Fragment>
-            <Helmet
-                htmlAttributes={{ lang: "en" }}
-                title={""}
-                titleTemplate={`${title} · %s`}
-                meta={[
-                    {
-                        name: "description",
-                        content: facebookMetadata.description,
-                    },
-                    { property: "og:url", content: siteUrl },
-                    { property: "og:type", content: facebookMetadata.type },
-                    { property: "og:title", content: facebookMetadata.title },
-                    {
-                        property: "og:image",
-                        content: facebookMetadata.image.uri,
-                    },
-                    {
-                        property: "og:image::width",
-                        content: facebookMetadata.image.width,
-                    },
-                    {
-                        property: "og:image:height",
-                        content: facebookMetadata.image.height,
-                    },
-                    {
-                        property: "og:description",
-                        content: facebookMetadata.description,
-                    },
-                ]}
-            />
+            <SEO title="Home" />
             <Header>
                 <Header.Link to="/">HOME</Header.Link>
                 {/*<Header.Link to="/documentaries">DOCUMENTARIES</Header.Link>*/}

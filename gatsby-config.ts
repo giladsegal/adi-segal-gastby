@@ -6,7 +6,9 @@ const weddingsSiteMetadata: SiteMetadata = {
     type: "weddings",
     topicsSlug: "weddings",
     siteUrl: weddingsSiteUrl,
-    facebookMetadata: {
+    description: "Wedding photography from a different point of view",
+    keywords: ["weddings", "photography"],
+    facebook: {
         type: "website",
         title: "Wedding photography - Adi Segal",
         image: {
@@ -14,7 +16,6 @@ const weddingsSiteMetadata: SiteMetadata = {
             width: "2097",
             height: "1278",
         },
-        description: "Wedding photography from a different point of view",
     },
 }
 
@@ -24,7 +25,9 @@ const documentariesSiteMetadata: SiteMetadata = {
     type: "documentaries",
     topicsSlug: "documentaries",
     siteUrl: documentariesSiteUrl,
-    facebookMetadata: {
+    description: "Visual story telling and Documentary photography",
+    keywords: ["documentaries", "photography"],
+    facebook: {
         type: "website",
         title: "Documentary photography - Adi Segal Photography",
         image: {
@@ -32,7 +35,6 @@ const documentariesSiteMetadata: SiteMetadata = {
             width: "1419",
             height: "946",
         },
-        description: "Visual story telling and Documentary photography",
     },
 }
 
