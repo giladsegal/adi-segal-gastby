@@ -1,10 +1,12 @@
 import React from "react"
 import Layout from "../components/layout"
 import { PageProps, graphql, Link } from "gatsby"
-import { TopicPhoto } from "../types"
+import { TopicPhoto, Topic } from "../types"
 import styles from "./thumbnails.module.scss"
 import Img from "gatsby-image"
 import { toFraction, splitToSubgroups } from "../utils"
+import SEO from "../components/seo"
+import { capitalize } from "../utils"
 
 export type ThumbnailsContext = {
     slug: string
@@ -13,6 +15,9 @@ export type ThumbnailsContext = {
 export type ThumbnailsData = {
     topicPhotos: {
         nodes: Array<TopicPhoto>
+    }
+    topic: {
+        nodes: [Pick<Topic, "name">]
     }
 }
 
@@ -51,6 +56,9 @@ const fillMissingRatios = (ratios: number[], size: number) => {
 export default function Thumbnails(props: ThumbnailsProps) {
     const {
         topicPhotos: { nodes },
+        topic: {
+            nodes: [{ name: topicName }],
+        },
     } = props.data
 
     const rowLength = 4
@@ -60,6 +68,7 @@ export default function Thumbnails(props: ThumbnailsProps) {
     }
     return (
         <Layout>
+            <SEO title={`${capitalize(topicName)}, photos overview`} />
             <div>
                 {rows.map((row, rowIdx) => {
                     const columnSizes = rowToRatios(row, rowLength)
@@ -107,6 +116,11 @@ export const query = graphql`
                     }
                 }
                 id
+            }
+        }
+        topic: allContentfulTopic(filter: { slug: { eq: $slug } }) {
+            nodes {
+                name
             }
         }
     }

@@ -1,9 +1,7 @@
 # Infra
 
 -   Links with animations (`transition-links` branch OR https://medium.com/free-code-camp/how-to-animate-page-transitions-in-gatsby-js-b36e3ae14c29)
--   update title on navigation\*
 -   investigate `gatsby-default-starter` layout.scss
--   gatsby-plugin-s3 for aws deploy command
 -   add eslint with react rules
 
 # Before going live
@@ -15,7 +13,7 @@
     -- make sure share is working as expected: https://developers.facebook.com/tools/debug/?q=https://weddings.adi-segal.com
     -- missing appId
 -   Upload all data to contentful using a script (https://www.contentful.com/developers/docs/references/content-management-api/#/reference/assets/asset)
--   AWS deploy command (weddings + documentaries)
+-   AWS deploy command using `gatsby-plugin-s3` (weddings + documentaries)
 -   make sure adi's account in contentful, can only add/edit specific content types
 -   e2e tests before deployment
 

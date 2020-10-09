@@ -12,6 +12,8 @@ export const splitToSubgroups = <T extends Array<any>>(
         .map<T>((_, i) => arr.slice(i * size, i * size + size) as T)
 }
 
+export const capitalize = (str: string) => str[0].toUpperCase() + str.slice(1)
+
 const memoize = <T extends (arg: any) => any>(fn: T): T => {
     const cache: Record<Parameters<T>[0], ReturnType<T>> = {} as any
 

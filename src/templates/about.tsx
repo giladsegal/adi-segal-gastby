@@ -7,6 +7,7 @@ import { graphql, PageProps } from "gatsby"
 import { SiteMetadata } from "../types"
 import styles from "./about.module.scss"
 import classNames from "classnames"
+import SEO from "../components/seo"
 
 export default function About(props: AboutProps) {
     const {
@@ -33,6 +34,7 @@ export default function About(props: AboutProps) {
 
     return (
         <Layout>
+            <SEO title="About" />
             <div
                 className={classNames(styles.root, {
                     [styles.weddingsLayout]: isWeddingsPage,

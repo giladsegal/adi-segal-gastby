@@ -4,13 +4,15 @@ import Layout from "../components/layout"
 import { Topic } from "../types"
 import Img from "gatsby-image"
 import styles from "./topics.module.scss"
+import SEO from "../components/seo"
+import { capitalize } from "../utils"
 
 export default function Topics(props: TopicsProps) {
     const {
-        data: {
-            topics: { nodes },
-        },
-    } = props
+        topics: { nodes },
+    } = props.data
+
+    const { siteType } = props.pageContext
 
     const preventRightClick: React.MouseEventHandler<HTMLAnchorElement> = e => {
         e.preventDefault()
@@ -18,6 +20,7 @@ export default function Topics(props: TopicsProps) {
 
     return (
         <Layout>
+            <SEO title={capitalize(siteType)} />
             <div className={styles.root}>
                 {nodes.map(t => {
                     return (

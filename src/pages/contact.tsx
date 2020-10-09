@@ -8,6 +8,7 @@ import { faFacebookSquare } from "@fortawesome/free-brands-svg-icons"
 import { graphql, PageProps } from "gatsby"
 import { ContactDetails } from "../types"
 import { Helmet } from "react-helmet"
+import SEO from "../components/seo"
 
 export type ContactData = {
     contact: ContactDetails
@@ -22,6 +23,7 @@ export default function Contact(props: ContactProps) {
 
     return (
         <Layout>
+            <SEO title="contact" />
             <Helmet
                 script={[
                     {
