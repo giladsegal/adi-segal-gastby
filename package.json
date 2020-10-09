@@ -6,6 +6,7 @@
   "license": "0BSD",
   "scripts": {
     "build": "WEBSITE_TYPE=weddings gatsby build",
+    "build:deploy-preview": "GATSBY_DEPLOY_PREVIEW=true npm run build",
     "develop": "WEBSITE_TYPE=weddings gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "start": "WEBSITE_TYPE=weddings npm run develop",

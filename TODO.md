@@ -3,10 +3,17 @@
 -   Links with animations (`transition-links` branch OR https://medium.com/free-code-camp/how-to-animate-page-transitions-in-gatsby-js-b36e3ae14c29)
 -   update title on navigation\*
 -   SEO component
+    -- robots.txt
+    -- https://www.gatsbyjs.com/tutorial/seo-and-social-sharing-cards-tutorial/#link-relcanonical
+    -- canonical link?
+-   investigate `gatsby-default-starter` layout.scss
+-   gatsby-plugin-s3 for aws deploy command
+-   gatsby-plugin-canonical-urls
+-   e2e tests before deployment
 
 # Before going live
 
--   scrap fonts as part of the build using `npm run preload:fonts`
+-   scrap fonts as part of the deploy using `npm run preload:fonts`
 -   facebook:
     -- ask Adi for a picture for sharing weddings subdomain
     -- make sure share is working as expected: https://developers.facebook.com/tools/debug/?q=adi-segal.com
