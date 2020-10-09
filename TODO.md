@@ -2,7 +2,7 @@
 
 -   Links with animations (`transition-links` branch OR https://medium.com/free-code-camp/how-to-animate-page-transitions-in-gatsby-js-b36e3ae14c29)
 -   investigate `gatsby-default-starter` layout.scss
--   add eslint with react rules
+-   add eslint with react rules - https://nickymeuleman.netlify.app/blog/automagically-lint
 
 # Before going live
 
