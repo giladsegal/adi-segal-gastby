@@ -3,19 +3,19 @@ $screen-sm: 768;
 $screen-md: 1109;
 
 @mixin media-above-xs {
-    @media (min-width: $screen-xs * 1px) {
-        @content;
-    }
+  @media (min-width: $screen-xs * 1px) {
+    @content;
+  }
 }
 
 @mixin media-above-sm {
-    @media (min-width: $screen-sm * 1px) {
-        @content;
-    }
+  @media (min-width: $screen-sm * 1px) {
+    @content;
+  }
 }
 
 @mixin media-above-md {
-    @media (min-width: $screen-md * 1px) {
-        @content;
-    }
+  @media (min-width: $screen-md * 1px) {
+    @content;
+  }
 }

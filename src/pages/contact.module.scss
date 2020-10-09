@@ -1,56 +1,56 @@
 .centered-column-layout {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .details {
-    display: inline-grid;
-    grid-template-columns: 4fr 6fr;
-    font-size: 18px;
-    line-height: 3;
+  display: inline-grid;
+  grid-template-columns: 4fr 6fr;
+  font-size: 18px;
+  line-height: 3;
+  margin: 0;
+
+  dd {
     margin: 0;
+  }
 
-    dd {
-        margin: 0;
-    }
-
-    a {
-        color: inherit;
-        text-decoration: none;
-    }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 }
 
 .fb-wrapper {
-    display: flex;
-    padding-bottom: 10px;
+  display: flex;
+  padding-bottom: 10px;
 }
 
 .fb-like-wrapper {
-    // facebook buttons loads after a delay which cause content to reflow
-    // setting the box dimensions in advances prevent this behavior
-    width: 157px;
-    height: 28px;
+  // facebook buttons loads after a delay which cause content to reflow
+  // setting the box dimensions in advances prevent this behavior
+  width: 157px;
+  height: 28px;
 }
 
 .fb-link {
-    margin-left: 3px;
-    /* override font-awesome specific sizes */
-    width: 30px !important;
-    height: 31px;
-    margin-top: -2px;
-    color: #4267b2;
+  margin-left: 3px;
+  /* override font-awesome specific sizes */
+  width: 30px !important;
+  height: 31px;
+  margin-top: -2px;
+  color: #4267b2;
 
-    &:hover {
-        color: #365899;
-    }
+  &:hover {
+    color: #365899;
+  }
 }
 
 .full-width {
-    width: 100%;
+  width: 100%;
 }
 
 .copyrights {
-    line-height: 3;
-    font-size: 15px;
+  line-height: 3;
+  font-size: 15px;
 }

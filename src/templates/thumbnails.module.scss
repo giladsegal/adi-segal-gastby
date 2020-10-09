@@ -1,15 +1,15 @@
 .row {
-    display: grid;
-    grid-template-columns: repeat(4, auto);
-    grid-gap: .5rem;
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  grid-gap: 0.5rem;
 
-    &+& {
-        margin-top: .5rem;
-    }
+  & + & {
+    margin-top: 0.5rem;
+  }
 }
 
 .photo {
-    // prevent pixel rounding issues for aspect ratio
-    height: 100%;
-    user-select: none;
+  // prevent pixel rounding issues for aspect ratio
+  height: 100%;
+  user-select: none;
 }
