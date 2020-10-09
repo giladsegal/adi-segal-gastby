@@ -75,4 +75,5 @@ export const plugins = [
         },
     },
     `gatsby-plugin-sitemap`,
+    `gatsby-plugin-robots-txt`,
 ]
