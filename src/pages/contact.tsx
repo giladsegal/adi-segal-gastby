@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faFacebookSquare } from "@fortawesome/free-brands-svg-icons"
 import { graphql, PageProps } from "gatsby"
 import { ContactDetails } from "../types"
+import { Helmet } from "react-helmet"
 
 export type ContactData = {
     contact: ContactDetails
@@ -21,6 +22,17 @@ export default function Contact(props: ContactProps) {
 
     return (
         <Layout>
+            <Helmet
+                script={[
+                    {
+                        async: true,
+                        defer: true,
+                        crossorigin: "anonymous",
+                        src: "https://connect.facebook.net/en_US/sdk.js",
+                        nonce: "0NMFsjUW",
+                    },
+                ]}
+            />
             <div className={styles.centeredColumnLayout}>
                 <dl className={styles.details}>
                     <dd>contact:</dd>

@@ -2,12 +2,9 @@
 
 -   Links with animations (`transition-links` branch OR https://medium.com/free-code-camp/how-to-animate-page-transitions-in-gatsby-js-b36e3ae14c29)
 -   update title on navigation\*
--   SEO component
-    -- https://www.gatsbyjs.com/tutorial/seo-and-social-sharing-cards-tutorial/#link-relcanonical
-    -- canonical link?
+-   SEO component - https://www.gatsbyjs.com/tutorial/seo-and-social-sharing-cards-tutorial/
 -   investigate `gatsby-default-starter` layout.scss
 -   gatsby-plugin-s3 for aws deploy command
--   gatsby-plugin-canonical-urls
 
 # Before going live
 
@@ -19,13 +16,10 @@
     -- missing appId
 -   Upload all data to contentful using a script (https://www.contentful.com/developers/docs/references/content-management-api/#/reference/assets/asset)
 -   AWS automatic deploy (weddings + documentaries)
--   trigger AWS deploy from contentful publish
 -   make sure adi's account in contentful, can only add/edit specific content types
 -   e2e tests before deployment
 
 # Bugs
-
--   load facebook SDK only for contact page?
 
 # Product
 

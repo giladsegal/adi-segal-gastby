@@ -10,19 +10,10 @@ export const onRenderBody = ({
             <meta
                 name="robots"
                 content="noindex, nofollow, noimageindex, noarchive"
+                key="meta-robots"
             />,
         ])
     }
 
-    setPreBodyComponents([
-        <div id="fb-root" key="fb-root"></div>,
-        <script
-            key="facebook-connect-sdk"
-            async
-            defer
-            crossOrigin="anonymous"
-            src="https://connect.facebook.net/en_US/sdk.js"
-            nonce="0NMFsjUW"
-        ></script>,
-    ])
+    setPreBodyComponents([<div id="fb-root" key="fb-root"></div>])
 }
