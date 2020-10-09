@@ -76,4 +76,11 @@ export const plugins = [
     },
     `gatsby-plugin-sitemap`,
     `gatsby-plugin-robots-txt`,
+    {
+        resolve: `gatsby-plugin-canonical-urls`,
+        options: {
+            siteUrl: siteMetadata.siteUrl,
+            stripQueryString: true,
+        },
+    },
 ]
