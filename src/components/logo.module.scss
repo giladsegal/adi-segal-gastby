@@ -3,13 +3,14 @@
 .root {
   color: #000;
   font-family: SteinAntik;
-  font-weight: 700;
+  font-weight: 400;
   font-size: 1rem;
   line-height: 1.1;
 
   @include media-above-sm {
     display: flex;
     flex-direction: column;
+    font-weight: 700;
   }
 }
 
@@ -36,9 +37,17 @@
 }
 
 .second-row {
+  span {
+    margin-left: -0.14285em;
+  }
+
   @include media-above-sm {
     font-size: 12px;
     display: flex;
     justify-content: space-between;
+
+    span {
+      margin-left: 0;
+    }
   }
 }
