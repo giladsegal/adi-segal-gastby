@@ -26,7 +26,6 @@
   - mobile menu
   - close menu upon navigation
   - highlight selected page
-- Loader component\*
 - Modal component\*
   - click outside for desktop
   - mobile full page layout
@@ -74,3 +73,4 @@
   - email, mobile, location, picture
   - facebook sdk
   - make sure facebook is loaded on navigation
+- Loader component
