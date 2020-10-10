@@ -23,12 +23,13 @@
 
 # Product
 
-- Modal component\*
+- desktop layout
+- Modal component
   - click outside for desktop
   - mobile full page layout
   - close button
   - pause slideshow
-- Gallery component\*
+- Gallery component
   - play/pause
   - next prev arrows
   - debouncing
@@ -40,7 +41,7 @@
   - cache busting?
   - display loader when loading images
   - pause gallery when mobile menu is opened
-- Home (Default category)\*
+- Home (Default category)
   - should receive data from server about type
   - random order
   - support first category

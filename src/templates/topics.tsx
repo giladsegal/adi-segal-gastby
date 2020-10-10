@@ -56,7 +56,7 @@ export const query = graphql`
   query topicsQuery($siteType: String) {
     topics: allContentfulTopic(
       sort: { fields: order }
-      filter: { type: { eq: $siteType } }
+      filter: { type: { eq: $siteType }, slug: { ne: "publications" } }
     ) {
       nodes {
         id
