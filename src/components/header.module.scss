@@ -41,6 +41,7 @@
     display: flex;
     justify-content: space-around;
     width: 100%;
+    padding: 0 25px;
   }
 }
 
@@ -58,7 +59,7 @@
 
 .logo {
   @include media-above-sm {
-    margin-bottom: 1.285rem;
+    margin-bottom: 1.642rem;
   }
 }
 

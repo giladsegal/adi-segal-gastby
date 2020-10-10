@@ -51,7 +51,7 @@ Header.displayName = 'Header';
 
 function HeaderLink({ to, children }: HeaderLinkProps) {
   return (
-    <Link to={to} className={styles.link}>
+    <Link to={to} className={styles.link} activeClassName={styles.linkActive}>
       {children}
     </Link>
   );
