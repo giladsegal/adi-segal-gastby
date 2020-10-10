@@ -12,4 +12,9 @@
   // prevent pixel rounding issues for aspect ratio
   height: 100%;
   user-select: none;
+  transition: filter 80ms ease-in;
+
+  &:hover {
+    filter: brightness(0.7);
+  }
 }

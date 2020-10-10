@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './header.module.scss';
 import { Link } from 'gatsby';
 import MenuButton from './menu-button';
+import Logo from './logo';
 
 export type HeaderProps = {
   children: React.ReactNode;
@@ -28,7 +29,7 @@ const Header = ({ children }: HeaderProps) => {
           className={styles.menuButton}
         />
         <Link to="/" className={styles.link}>
-          ADI SEGAL PHOTOGRAPHY
+          <Logo />
         </Link>
         <ul className={styles.linksList} style={{ display: 'none' }}>
           {React.Children.map(children, child => {

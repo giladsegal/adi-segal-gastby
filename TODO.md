@@ -31,13 +31,13 @@
   - close menu upon navigation
   - highlight selected page
 - Logo component\*
-- Loader component
-- Modal component
+- Loader component\*
+- Modal component\*
   - click outside for desktop
   - mobile full page layout
   - close button
   - pause slideshow
-- Gallery component
+- Gallery component\*
   - play/pause
   - next prev arrows
   - debouncing
@@ -66,7 +66,7 @@
   - email, mobile, location, picture
   - facebook sdk
   - make sure facebook is loaded on navigation
-- Home (Default category)
+- Home (Default category)\*
   - should receive data from server about type
   - random order
   - support first category

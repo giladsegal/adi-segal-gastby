@@ -1,0 +1,44 @@
+@import '../styles/mixins';
+
+.root {
+  color: #000;
+  font-family: SteinAntik;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.1;
+
+  @include media-above-sm {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.first-row {
+  letter-spacing: 1px;
+
+  & :first-child {
+    padding-right: 10px;
+  }
+
+  & :last-child {
+    padding-right: 7px;
+  }
+
+  @include media-above-sm {
+    font-size: 25px;
+    letter-spacing: 0;
+    margin-bottom: 4px;
+
+    & :last-child {
+      padding-right: 0;
+    }
+  }
+}
+
+.second-row {
+  @include media-above-sm {
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+  }
+}
