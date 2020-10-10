@@ -59,7 +59,7 @@ export default function SEO({ title }: SEOProps) {
 }
 
 const metadataQuery = graphql`
-  query metadataQuery {
+  query seoQuery {
     site {
       siteMetadata {
         title

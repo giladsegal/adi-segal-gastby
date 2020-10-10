@@ -30,7 +30,7 @@
   - mobile menu
   - close menu upon navigation
   - highlight selected page
-- Logo component\*
+- Logo component
 - Loader component\*
 - Modal component\*
   - click outside for desktop
@@ -61,7 +61,7 @@
 - About page
   - description (rich text?), picture, Exhibitions (?)
   - different about for documentaries / weddings
-- Contact page\*
+- Contact page
   - add links to fields
   - email, mobile, location, picture
   - facebook sdk
