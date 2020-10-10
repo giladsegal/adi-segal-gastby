@@ -42,6 +42,7 @@
   - swipe using hammerJS
   - cache busting?
   - display loader when loading images
+  - pause gallery when mobile menu is opened
 - Home (Default category)\*
   - should receive data from server about type
   - random order

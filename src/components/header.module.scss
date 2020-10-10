@@ -1,11 +1,13 @@
 @import '../styles/mixins';
 
+$header-height: 3rem;
+
 .root {
   display: flex;
   position: sticky;
   z-index: 10;
   top: 0;
-  height: 3rem;
+  height: $header-height;
   color: #6f6f6f;
   background-color: #f7f9fa;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
@@ -33,15 +35,28 @@
 
 .links-list {
   display: none;
+  position: fixed;
+  top: calc(#{$header-height} + 3px);
+  left: 0;
+  width: 60%;
+  height: calc(100% - #{$header-height} - 3px);
   margin: 0;
   padding: 0;
   list-style: none;
+  box-shadow: 5px 0px 10px rgba(0, 0, 0, 0.25);
+  background-color: #f9fafb;
+  border-top-right-radius: 5px;
 
   @include media-above-sm {
     display: flex;
     justify-content: space-around;
+    position: static;
     width: 750px;
+    height: auto;
     margin: 0 auto;
+    box-shadow: none;
+    background-color: transparent;
+    border-radius: 0;
   }
 }
 
@@ -52,8 +67,21 @@
   color: #6f6f6f;
   letter-spacing: 2px;
 
+  text-align: left;
+  padding: 1em 2em;
+
   &-active {
     color: #000;
+  }
+
+  &-menu {
+    font-size: 13px;
+    display: block;
+    width: 100%;
+  }
+
+  @include media-above-sm {
+    padding: 0;
   }
 }
 
