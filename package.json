@@ -35,7 +35,8 @@
     "node-sass": "^4.14.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-helmet": "^6.1.0"
+    "react-helmet": "^6.1.0",
+    "react-transition-group": "^4.4.1"
   },
   "devDependencies": {
     "@contentful/rich-text-types": "^14.1.1",
@@ -44,6 +45,7 @@
     "@types/react": "^16.9.50",
     "@types/react-dom": "^16.9.8",
     "@types/react-helmet": "^6.1.0",
+    "@types/react-transition-group": "^4.4.0",
     "@typescript-eslint/eslint-plugin": "^4.4.0",
     "@typescript-eslint/parser": "^4.4.0",
     "eslint": "^7.10.0",

@@ -34,23 +34,29 @@ $header-height: 3rem;
 }
 
 .links-list {
-  display: none;
   position: fixed;
   top: calc(#{$header-height} + 3px);
   left: 0;
   width: 60%;
   height: calc(100% - #{$header-height} - 3px);
+
   margin: 0;
   padding: 0;
+
   list-style: none;
   box-shadow: 5px 0px 10px rgba(0, 0, 0, 0.25);
   background-color: #f9fafb;
   border-top-right-radius: 5px;
 
+  transform: translateX(-100%);
+  transition-property: transform;
+
   @include media-above-sm {
     display: flex;
     justify-content: space-around;
     position: static;
+    // override mobile transition
+    transform: none !important;
     width: 750px;
     height: auto;
     margin: 0 auto;

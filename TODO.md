@@ -18,14 +18,11 @@
 
 # Bugs
 
+- mobile menu doesn't have close animation on navigation
+- refactor menu mobile to use CSSTransition
+
 # Product
 
-- Header component\*
-  - links: home / documentaries / publications / about / contact
-  - mobile hamburger
-  - mobile menu
-  - close menu upon navigation
-  - highlight selected page
 - Modal component\*
   - click outside for desktop
   - mobile full page layout
@@ -75,3 +72,9 @@
   - facebook sdk
   - make sure facebook is loaded on navigation
 - Loader component
+- Header component\*
+  - links: home / documentaries / publications / about / contact
+  - mobile hamburger
+  - mobile menu
+  - close menu upon navigation
+  - highlight selected page

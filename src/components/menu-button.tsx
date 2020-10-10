@@ -3,11 +3,11 @@ import classNames from 'classnames';
 import styles from './menu-button.module.scss';
 
 export type MenuButtonProps = {
-  isActive: boolean;
+  isPressed: boolean;
 } & Omit<React.HTMLAttributes<HTMLButtonElement>, 'value' | 'children'>;
 
 export default function MenuButton(props: MenuButtonProps) {
-  const { isActive, className, ...rest } = props;
+  const { isPressed, className, ...rest } = props;
   return (
     <button
       className={classNames(
@@ -15,7 +15,7 @@ export default function MenuButton(props: MenuButtonProps) {
         styles.hamburgerSqueeze,
         className,
         {
-          [styles.isActive]: isActive,
+          [styles.isPressed]: isPressed,
         }
       )}
       {...rest}
