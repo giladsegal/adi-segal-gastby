@@ -1,3 +1,5 @@
+@import '../styles/mixins';
+
 html,
 body {
   box-sizing: border-box;
@@ -24,10 +26,24 @@ body {
   box-sizing: inherit;
 }
 
+// TODO: a single div for centering layout + padding
+
+.header {
+  @include media-above-sm {
+    padding: 2rem 1rem 0;
+    max-width: calc(800px + 1rem);
+    margin: 0 auto;
+  }
+}
+
 .main-content {
   padding: 1rem;
   max-width: calc(800px + 1rem);
   margin: 0 auto;
+
+  @include media-above-sm {
+    padding-top: 1.2857rem;
+  }
 }
 
 /* PT Sans regular */

@@ -1,3 +1,5 @@
+@import '../styles/mixins';
+
 .root {
   display: flex;
   position: sticky;
@@ -9,6 +11,13 @@
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
   text-align: center;
   color: #000;
+
+  @include media-above-sm {
+    position: static;
+    height: auto;
+    box-shadow: none;
+    background: inherit;
+  }
 }
 
 .nav {
@@ -16,12 +25,23 @@
   align-items: center;
   justify-content: center;
   width: 100%;
+
+  @include media-above-sm {
+    flex-direction: column;
+  }
 }
 
 .links-list {
+  display: none;
   margin: 0;
   padding: 0;
   list-style: none;
+
+  @include media-above-sm {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+  }
 }
 
 .link {
@@ -29,10 +49,25 @@
   text-decoration: none;
   outline: none;
   color: #6f6f6f;
+  letter-spacing: 2px;
+
+  &-active {
+    color: #000;
+  }
+}
+
+.logo {
+  @include media-above-sm {
+    margin-bottom: 1.285rem;
+  }
 }
 
 .menu-button {
   padding: 0 1rem;
   position: absolute;
   left: 0;
+
+  @include media-above-sm {
+    display: none;
+  }
 }

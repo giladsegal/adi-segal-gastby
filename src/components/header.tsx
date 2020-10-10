@@ -3,8 +3,10 @@ import styles from './header.module.scss';
 import { Link } from 'gatsby';
 import MenuButton from './menu-button';
 import Logo from './logo';
+import classNames from 'classnames';
 
 export type HeaderProps = {
+  className?: string;
   children: React.ReactNode;
 };
 
@@ -13,7 +15,7 @@ export type HeaderLinkProps = {
   children: React.ReactNode;
 };
 
-const Header = ({ children }: HeaderProps) => {
+const Header = ({ children, className }: HeaderProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   const toggleOpen = () => {
@@ -21,17 +23,17 @@ const Header = ({ children }: HeaderProps) => {
   };
 
   return (
-    <header className={styles.root}>
+    <header className={classNames(styles.root, className)}>
       <nav className={styles.nav}>
         <MenuButton
           onClick={toggleOpen}
           isActive={isOpen}
           className={styles.menuButton}
         />
-        <Link to="/" className={styles.link}>
+        <Link to="/" className={classNames(styles.link, styles.logo)}>
           <Logo />
         </Link>
-        <ul className={styles.linksList} style={{ display: 'none' }}>
+        <ul className={styles.linksList}>
           {React.Children.map(children, child => {
             if (!React.isValidElement<HeaderLinkProps>(child)) {
               return null;

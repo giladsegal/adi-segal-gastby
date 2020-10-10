@@ -3,7 +3,9 @@ import Header from './header';
 import 'normalize.css';
 import styles from './layout.module.scss';
 import SEO from './seo';
+
 export type LayoutProps = {
+  className?: string;
   children?: React.ReactNode;
 };
 
@@ -11,7 +13,7 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <React.Fragment>
       <SEO title="Home" />
-      <Header>
+      <Header className={styles.header}>
         <Header.Link to="/">HOME</Header.Link>
         {/* <Header.Link to="/documentaries">DOCUMENTARIES</Header.Link> */}
         <Header.Link to="/weddings">WEDDINGS</Header.Link>
