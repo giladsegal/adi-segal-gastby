@@ -28,6 +28,10 @@ pyftsubset "$SRC_DIR/PTSans-BoldItalic.ttf" --output-file="$DIST_DIR/PTSans-Bold
 pyftsubset "$SRC_DIR/PTSans-BoldItalic.ttf" --output-file="$DIST_DIR/PTSans-BoldItalic-latin.woff" --flavor=woff --layout-features=$LAYOUT_FEATURES $OPTIONS --unicodes=$UNICODE_CHARACTERS
 
 
-# SteinAntik
+# SteinAntik, Regular
 pyftsubset "$SRC_DIR/SteinAntik-Regular.ttf" --output-file="$DIST_DIR/SteinAntik-Regular-latin.woff2" --flavor=woff2 --layout-features=$LAYOUT_FEATURES $OPTIONS --text="ADI SEGAL PHOTOGRAPHY"
 pyftsubset "$SRC_DIR/SteinAntik-Regular.ttf" --output-file="$DIST_DIR/SteinAntik-Regular-latin.woff" --flavor=woff --layout-features=$LAYOUT_FEATURES $OPTIONS --text="ADI SEGAL PHOTOGRAPHY"
+
+# SteinAntik, Bold
+pyftsubset "$SRC_DIR/SteinAntik-Bold.ttf" --output-file="$DIST_DIR/SteinAntik-Bold-latin.woff2" --flavor=woff2 --layout-features=$LAYOUT_FEATURES $OPTIONS --text="ADI SEGAL PHOTOGRAPHY"
+pyftsubset "$SRC_DIR/SteinAntik-Bold.ttf" --output-file="$DIST_DIR/SteinAntik-Bold-latin.woff" --flavor=woff --layout-features=$LAYOUT_FEATURES $OPTIONS --text="ADI SEGAL PHOTOGRAPHY"

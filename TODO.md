@@ -20,17 +20,12 @@
 
 # Product
 
-- Layout component
-  - render header component
-  - render main node
-  - render children
 - Header component\*
   - links: home / documentaries / publications / about / contact
   - mobile hamburger
   - mobile menu
   - close menu upon navigation
   - highlight selected page
-- Logo component
 - Loader component\*
 - Modal component\*
   - click outside for desktop
@@ -48,6 +43,19 @@
   - swipe using hammerJS
   - cache busting?
   - display loader when loading images
+- Home (Default category)\*
+  - should receive data from server about type
+  - random order
+  - support first category
+- a11y
+
+# DONE:
+
+- Layout component
+  - render header component
+  - render main node
+  - render children
+- Logo component
 - Topics page
   - display images
   - description on hover
@@ -66,8 +74,3 @@
   - email, mobile, location, picture
   - facebook sdk
   - make sure facebook is loaded on navigation
-- Home (Default category)\*
-  - should receive data from server about type
-  - random order
-  - support first category
-- a11y

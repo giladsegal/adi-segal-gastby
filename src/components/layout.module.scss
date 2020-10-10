@@ -104,3 +104,14 @@ body {
     url('../fonts/SteinAntik-Regular-latin.woff2') format('woff2'),
     url('../fonts/SteinAntik-Regular-latin.woff') format('woff');
 }
+
+/* Stein Antik bold */
+@font-face {
+  font-family: 'SteinAntik';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Stein Antik Bold'), local('SteinAntikBold'),
+    url('../fonts/SteinAntik-Bold-latin.woff2') format('woff2'),
+    url('../fonts/SteinAntik-Bold-latin.woff') format('woff');
+}
