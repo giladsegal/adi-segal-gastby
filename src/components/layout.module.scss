@@ -44,6 +44,12 @@ body {
   }
 }
 
+.gutter {
+  @include media-above-sm {
+    padding: 0 4.3571rem;
+  }
+}
+
 /* PT Sans regular */
 @font-face {
   font-family: 'PT Sans';

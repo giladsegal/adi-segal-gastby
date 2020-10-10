@@ -33,7 +33,7 @@ export default function About(props: AboutProps) {
   const isWeddingsPage = props.pageContext.siteType === 'weddings';
 
   return (
-    <Layout>
+    <Layout withGutter>
       <SEO title="About" />
       <div
         className={classNames(styles.root, {

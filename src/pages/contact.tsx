@@ -9,6 +9,7 @@ import { graphql, PageProps } from 'gatsby';
 import { ContactDetails } from '../types';
 import { Helmet } from 'react-helmet';
 import SEO from '../components/seo';
+import classNames from 'classnames';
 
 export type ContactData = {
   contact: ContactDetails;
@@ -22,7 +23,7 @@ export default function Contact(props: ContactProps) {
   const ref = useFacebookLike();
 
   return (
-    <Layout>
+    <Layout withGutter>
       <SEO title="contact" />
       <Helmet
         script={[
@@ -35,8 +36,8 @@ export default function Contact(props: ContactProps) {
           },
         ]}
       />
-      <div className={styles.centeredColumnLayout}>
-        <dl className={styles.details}>
+      <div className={styles.root}>
+        <dl className={classNames(styles.details, styles.smSecondColumn)}>
           <dd>contact:</dd>
           <dt>
             <a href={`mailto:${contact.email}`}>{contact.email}</a>
@@ -52,7 +53,10 @@ export default function Contact(props: ContactProps) {
             {contact.addressLine2}
           </dt>
         </dl>
-        <div className={styles.fbWrapper} ref={ref}>
+        <div
+          className={classNames(styles.fbWrapper, styles.smSecondColumn)}
+          ref={ref}
+        >
           <div className={styles.fbLikeWrapper}>
             <div
               className="fb-like"
@@ -77,11 +81,13 @@ export default function Contact(props: ContactProps) {
         </div>
         <Img
           fluid={contact.photo.fluid}
-          className={styles.fullWidth}
+          className={classNames(styles.fullWidth, styles.smFirstColumn)}
           alt="Contact me"
         />
-        <footer className={styles.copyrights}>
-          All rights reserved © {new Date().getFullYear()} Adi Segal
+        <footer
+          className={classNames(styles.copyrights, styles.smSecondColumn)}
+        >
+          All rights reserved © Adi Segal
         </footer>
       </div>
     </Layout>

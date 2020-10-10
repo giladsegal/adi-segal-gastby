@@ -2,10 +2,6 @@
 
 .root {
   font-size: 17px;
-
-  @include media-above-sm {
-    padding: 0 4.5rem;
-  }
 }
 
 .weddings-layout {
