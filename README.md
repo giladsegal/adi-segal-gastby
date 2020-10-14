@@ -9,6 +9,18 @@
 
 ## 🚀 Quick start
 
+1.  **Website URLs**
+
+    1.  Production
+
+    - Documentaries website https://adi-segal.com
+    - Weddings website https://weddings.adi-segal.com
+
+    1. Deploy preview
+
+    - Documentaries website https://adi-segal.netlify.app/
+    - Weddings website https://weddings-adi-segal.netlify.app/
+
 1.  **Clone the repository.**
 
     Use the Git CLI to clone the repository.

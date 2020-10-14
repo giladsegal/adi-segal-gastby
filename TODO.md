@@ -11,7 +11,6 @@
   -- make sure share is working as expected: https://developers.facebook.com/tools/debug/?q=https://adi-segal.com
   -- make sure share is working as expected: https://developers.facebook.com/tools/debug/?q=https://weddings.adi-segal.com
   -- missing appId
-- Upload all data to contentful using a script (https://www.contentful.com/developers/docs/references/content-management-api/#/reference/assets/asset)
 - AWS deploy command using `gatsby-plugin-s3` (weddings + documentaries)
 - make sure adi's account in contentful, can only add/edit specific content types
 - e2e tests before deployment
@@ -20,6 +19,8 @@
 
 - mobile menu doesn't have close animation on navigation
 - refactor menu mobile to use CSSTransition
+- font scraping should be done for both website types
+- refactor facebook hook to use context
 
 # Product
 

@@ -4,6 +4,8 @@ import { Link, PageProps, graphql } from 'gatsby';
 import { Topic, TopicPhoto } from '../types';
 import SEO from '../components/seo';
 import { capitalize } from '../utils';
+import styles from './gallery.module.scss';
+import Img from 'gatsby-image';
 
 export type GalleryContext = {
   slug: string;
@@ -25,12 +27,18 @@ export default function Gallery(props: GalleryProps) {
     topic: {
       nodes: [{ name: topicName }],
     },
+    topicPhotos: { nodes: photoNodes },
   } = props.data;
 
   return (
     <Layout>
       <SEO title={capitalize(topicName)} />
-      <Link to="./thumbs">Thumbs</Link>
+      <div className={styles.photosContainer}>
+        <Img fluid={photoNodes[0].photo.fluid} key={photoNodes[0].id} />
+      </div>
+      <div className={styles.controlsContainer}>
+        <Link to="./thumbs">Thumbs</Link>
+      </div>
     </Layout>
   );
 }
@@ -43,8 +51,8 @@ export const query = graphql`
     ) {
       nodes {
         photo {
-          fluid {
-            src
+          fluid(maxWidth: 800) {
+            ...GatsbyContentfulFluid_withWebp
           }
         }
         id

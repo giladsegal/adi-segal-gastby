@@ -1,4 +1,4 @@
-import { GatsbyNode, CreatePagesArgs } from 'gatsby';
+import { GatsbyNode, CreatePagesArgs, Actions } from 'gatsby';
 import { resolve } from 'path';
 import { SiteMetadata } from './src/types';
 
@@ -49,6 +49,32 @@ const getTopics = async (
   return result.data!.topics.nodes;
 };
 
+type CreateTopicPageOptions = {
+  basePath: string;
+  slug: string;
+};
+
+const createTopicPage = (
+  createPage: Actions['createPage'],
+  { basePath, slug }: CreateTopicPageOptions
+) => {
+  createPage({
+    path: `${basePath}/${slug}`,
+    context: {
+      slug: slug,
+    },
+    component: resolve(__dirname, './src/templates/gallery.tsx'),
+  });
+
+  createPage({
+    path: `${basePath}/${slug}/thumbs`,
+    context: {
+      slug: slug,
+    },
+    component: resolve(__dirname, './src/templates/thumbnails.tsx'),
+  });
+};
+
 export const createPages: GatsbyNode['createPages'] = async ({
   actions: { createPage },
   graphql,
@@ -74,23 +100,21 @@ export const createPages: GatsbyNode['createPages'] = async ({
 
   // TODO: home
 
-  // TODO: publications for documentaries
+  if (metadata.type === 'documentaries') {
+    const publications = topics.find(topic => topic.slug === 'publications');
+
+    publications &&
+      createTopicPage(createPage, { basePath: '', slug: publications.slug });
+  }
 
   topics.forEach(topic => {
-    createPage({
-      path: `${metadata.topicsSlug}/${topic.slug}`,
-      context: {
-        slug: topic.slug,
-      },
-      component: resolve(__dirname, './src/templates/gallery.tsx'),
-    });
+    if (metadata.type === 'documentaries' && topic.slug === 'publications') {
+      return;
+    }
 
-    createPage({
-      path: `${metadata.topicsSlug}/${topic.slug}/thumbs`,
-      context: {
-        slug: topic.slug,
-      },
-      component: resolve(__dirname, './src/templates/thumbnails.tsx'),
+    createTopicPage(createPage, {
+      basePath: metadata.topicsSlug,
+      slug: topic.slug,
     });
   });
 };

@@ -63,7 +63,7 @@ export const query = graphql`
         name
         slug
         thumb {
-          fluid {
+          fluid(maxWidth: 400) {
             ...GatsbyContentfulFluid_withWebp
           }
         }

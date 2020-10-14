@@ -107,7 +107,7 @@ export const query = graphql`
     ) {
       nodes {
         photo {
-          fluid {
+          fluid(maxWidth: 250) {
             ...GatsbyContentfulFluid_withWebp
           }
         }
