@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './header.module.scss';
-import { Link } from 'gatsby';
+import { Link, GatsbyLinkProps } from 'gatsby';
 import MenuButton from './menu-button';
 import Logo from './logo';
 import classNames from 'classnames';
@@ -86,13 +86,29 @@ const Header = ({ children, className }: HeaderProps) => {
 
 Header.displayName = 'Header';
 
+const getLinkClasses: GatsbyLinkProps<any>['getProps'] = ({
+  href,
+  isPartiallyCurrent,
+  isCurrent,
+}) => {
+  const classes = [styles.link, styles.linkMenu];
+
+  // root page is always partially current to all pages
+  // root is checked for exact match when calculating active links
+  if (href === '/' && isCurrent) {
+    classes.push(styles.linkActive);
+  } else if (href !== '/' && isPartiallyCurrent) {
+    classes.push(styles.linkActive);
+  }
+
+  return {
+    className: classNames(classes),
+  };
+};
+
 function HeaderLink({ to, children }: HeaderLinkProps) {
   return (
-    <Link
-      to={to}
-      className={classNames(styles.link, styles.linkMenu)}
-      activeClassName={styles.linkActive}
-    >
+    <Link to={to} getProps={getLinkClasses}>
       {children}
     </Link>
   );
