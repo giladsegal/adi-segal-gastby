@@ -1,9 +1,10 @@
 import React from 'react';
 
 export type SlideShowOptions<T> = {
+  slides: ReadonlyArray<T>; // shuffle outside
+  preloadNext?: (slide: T) => Promise<void>;
   initialSlideIndex?: number;
   autoplay?: boolean;
-  slides: ReadonlyArray<T>; // shuffle outside
   interval?: number;
 };
 
@@ -19,6 +20,8 @@ export type SlideShow<T> = {
 
 export type SlideshowStatus = 'playing' | 'paused' | 'loading';
 
+// promise that waits using Promise.all([4 seconds (then if image not loaded display spinner), preload next image]).then(hide spinner, schedule next)
+
 // set timeout to load next photo
 // when timeout is ellapsed check if image is in the cache
 // if it is, switch to it
@@ -28,8 +31,6 @@ export type SlideshowStatus = 'playing' | 'paused' | 'loading';
 // preload next photo
 // hide spinner
 // clear loading cache
-
-// pressing next/prev should reset current timeout?
 
 const _seek = ({
   position,
@@ -45,13 +46,23 @@ const _seek = ({
   return deltaToMove >= 0 ? deltaToMove % length : length + deltaToMove;
 };
 
+const delay = (ms: number) => {
+  return new Promise<void>(resolve => {
+    setTimeout(resolve, ms);
+  });
+};
+
+const withoutPreloading = () => Promise.resolve();
+
 export default function useSlideshow<T>({
   initialSlideIndex = 0,
   autoplay = true,
   slides,
   interval = 5000,
+  preloadNext = withoutPreloading,
 }: SlideShowOptions<T>): SlideShow<T> {
-  const nextSlideInterval = React.useRef<number | undefined>();
+  const lastExecution = React.useRef(0);
+
   const [slideIndex, setSlideIndex] = React.useState(initialSlideIndex);
   const [status, setStatus] = React.useState<SlideshowStatus>(
     autoplay ? 'playing' : 'paused'
@@ -101,14 +112,41 @@ export default function useSlideshow<T>({
   );
 
   React.useEffect(() => {
-    if (status === 'playing') {
-      nextSlideInterval.current = setTimeout(next, interval) as any;
+    if (status !== 'playing') {
+      return;
     }
 
-    return () => {
-      nextSlideInterval.current && clearTimeout(nextSlideInterval.current);
-    };
-  }, [interval, status, next]);
+    lastExecution.current++;
+    const currentExecution = lastExecution.current;
+
+    const nextId = _seek({
+      position: slideIndex,
+      length: slides.length,
+      offset: 1,
+    });
+
+    let wasNextLoaded = false;
+
+    Promise.all([
+      delay(interval).then(() => {
+        if (currentExecution === lastExecution.current && !wasNextLoaded) {
+          setStatus('loading');
+        }
+      }),
+      preloadNext(slides[nextId]).then(() => {
+        wasNextLoaded = true;
+      }),
+    ]).then(() => {
+      if (currentExecution === lastExecution.current) {
+        // casting to any because TS thinks that status can only be 'playing'
+        // this is true to the effect function but for the promise continuation
+        if (status !== ('loading' as any)) {
+          setStatus('playing');
+        }
+        next();
+      }
+    });
+  }, [interval, status, next, preloadNext, slideIndex, slides]);
 
   return {
     current: slides[slideIndex],
