@@ -21,7 +21,7 @@
 
 .photo-enter-active {
   opacity: 1;
-  transition: opacity 1200ms ease-in;
+  transition: opacity var(--photo-switch-duration) ease-in;
 }
 
 .photo-exit {
@@ -30,7 +30,7 @@
 
 .photo-exit-active {
   opacity: 0;
-  transition: opacity 1200ms ease-out;
+  transition: opacity var(--photo-switch-duration) ease-out;
 }
 
 .controls-container {
