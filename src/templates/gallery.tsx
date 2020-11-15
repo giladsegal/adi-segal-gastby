@@ -5,7 +5,6 @@ import { Topic, TopicPhoto } from '../types';
 import SEO from '../components/seo';
 import { capitalize } from '../utils';
 import styles from './gallery.module.scss';
-import Img from 'gatsby-image';
 import classNames from 'classnames';
 import useSlideshow from '../hooks/useSlideshow';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
@@ -87,12 +86,12 @@ export default function Gallery(props: GalleryProps) {
               exitActive: styles.photoExitActive,
             }}
           >
-            <Img
-              fluid={current.photo.fluid}
+            <img
+              src={current.photo.fluid.src}
               key={current.id}
               className={styles.photo}
-              fadeIn={false}
-              loading="eager"
+              alt=""
+              height="533"
             />
           </CSSTransition>
         </TransitionGroup>
@@ -133,7 +132,7 @@ export const query = graphql`
       nodes {
         photo {
           fluid(maxWidth: 800) {
-            ...GatsbyContentfulFluid_noBase64
+            src
           }
         }
         id
