@@ -52,7 +52,7 @@ const delay = (ms: number) => {
   });
 };
 
-const withoutPreloading = () => Promise.resolve();
+const withoutPreloading = () => delay(6000); // () => Promise.resolve();
 
 export default function useSlideshow<T>({
   initialSlideIndex = 0,
@@ -140,13 +140,8 @@ export default function useSlideshow<T>({
       }),
     ]).then(() => {
       if (currentExecution === lastExecution.current) {
-        // casting to any because TS thinks that status can only be 'playing'
-        // this is true to the effect function but for the promise continuation
-        if (status === ('loading' as any)) {
-          setStatus('playing');
-        } else if (status === 'playing') {
-          next();
-        }
+        setStatus('playing');
+        next();
       }
     });
   }, [interval, status, next, preloadNext, slideIndex, slides]);
