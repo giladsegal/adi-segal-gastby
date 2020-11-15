@@ -27,6 +27,24 @@ const memoize = <T extends (arg: any) => any>(fn: T): T => {
   }) as unknown) as T;
 };
 
+export const debounceCount = (
+  fn: (calls: number) => void,
+  wait: number
+): (() => void) => {
+  let timeout: any;
+  let calls = 0;
+
+  return function () {
+    clearTimeout(timeout);
+    calls++;
+
+    timeout = setTimeout(() => {
+      // @ts-ignore
+      fn.call(this, calls);
+    }, wait);
+  };
+};
+
 export const toFraction = memoize(
   (value: number): Fraction => {
     const accuracy = 0.01;

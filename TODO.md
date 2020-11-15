@@ -7,10 +7,12 @@
 
 - scrap fonts as part of the deploy using `npm run preload:fonts`
 - facebook:
+
   -- ask Adi for a picture for sharing weddings subdomain
   -- make sure share is working as expected: https://developers.facebook.com/tools/debug/?q=https://adi-segal.com
   -- make sure share is working as expected: https://developers.facebook.com/tools/debug/?q=https://weddings.adi-segal.com
   -- missing appId
+
 - AWS deploy command using `gatsby-plugin-s3` (weddings + documentaries)
 - make sure adi's account in contentful, can only add/edit specific content types
 - e2e tests before deployment
@@ -33,8 +35,9 @@
 - Gallery component
   - play/pause
   - next prev arrows
-  - debouncing
-  - animation
+  - debouncing - V
+  - animation - V
+  - animation - show only two last photos
   - link to thumbnails
   - use modal for topic description
   - update history on modal navigation
