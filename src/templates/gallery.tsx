@@ -5,7 +5,7 @@ import { Topic, TopicPhoto } from '../types';
 import SEO from '../components/seo';
 import { capitalize } from '../utils';
 import styles from './gallery.module.scss';
-// import Img from 'gatsby-image';
+import Img from 'gatsby-image';
 import classNames from 'classnames';
 import useSlideshow from '../hooks/useSlideshow';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
@@ -76,7 +76,7 @@ export default function Gallery(props: GalleryProps) {
           { '--photo-switch-duration': `${PHOTO_SWITCH_DURATION_MS}ms` } as any
         }
       >
-        <TransitionGroup>
+        <TransitionGroup component={null}>
           <CSSTransition
             key={current.id}
             timeout={PHOTO_SWITCH_DURATION_MS}
@@ -87,14 +87,15 @@ export default function Gallery(props: GalleryProps) {
               exitActive: styles.photoExitActive,
             }}
           >
-            <img
-              src={current.photo.fluid.src}
-              alt=""
+            <Img
+              fluid={current.photo.fluid}
+              key={current.id}
               className={styles.photo}
+              fadeIn={false}
+              loading="eager"
             />
           </CSSTransition>
         </TransitionGroup>
-        {/* <Img fluid={current.photo.fluid} key={current.id} /> */}
       </div>
       <div className={styles.controlsContainer}>
         <Link to="./thumbs">Thumbs</Link>
@@ -132,7 +133,7 @@ export const query = graphql`
       nodes {
         photo {
           fluid(maxWidth: 800) {
-            ...GatsbyContentfulFluid_withWebp
+            ...GatsbyContentfulFluid_noBase64
           }
         }
         id

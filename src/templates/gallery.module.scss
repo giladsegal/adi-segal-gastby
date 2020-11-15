@@ -15,7 +15,8 @@
 }
 
 .photo-enter {
-  position: absolute;
+  // override gatsby-image inline styles
+  position: absolute !important;
   opacity: 0;
 }
 
