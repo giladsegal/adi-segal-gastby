@@ -6,6 +6,33 @@
   margin-bottom: 1.2rem;
 }
 
+.photo {
+  position: relative;
+  top: 0;
+  width: 100%;
+  user-select: none;
+  max-height: 533px;
+}
+
+.photo-enter {
+  position: absolute;
+  opacity: 0;
+}
+
+.photo-enter-active {
+  opacity: 1;
+  transition: opacity 1200ms ease-in;
+}
+
+.photo-exit {
+  opacity: 1;
+}
+
+.photo-exit-active {
+  opacity: 0;
+  transition: opacity 1200ms ease-out;
+}
+
 .controls-container {
   display: flex;
   justify-content: center;

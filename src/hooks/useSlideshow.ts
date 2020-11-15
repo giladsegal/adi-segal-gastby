@@ -75,6 +75,8 @@ export default function useSlideshow<T>({
   }, []);
 
   const pause = React.useCallback(() => {
+    // ignore next scheduled
+    lastExecution.current++;
     setStatus('paused');
   }, []);
 
@@ -140,10 +142,11 @@ export default function useSlideshow<T>({
       if (currentExecution === lastExecution.current) {
         // casting to any because TS thinks that status can only be 'playing'
         // this is true to the effect function but for the promise continuation
-        if (status !== ('loading' as any)) {
+        if (status === ('loading' as any)) {
           setStatus('playing');
+        } else if (status === 'playing') {
+          next();
         }
-        next();
       }
     });
   }, [interval, status, next, preloadNext, slideIndex, slides]);

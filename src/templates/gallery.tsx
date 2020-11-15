@@ -5,9 +5,10 @@ import { Topic, TopicPhoto } from '../types';
 import SEO from '../components/seo';
 import { capitalize } from '../utils';
 import styles from './gallery.module.scss';
-import Img from 'gatsby-image';
+// import Img from 'gatsby-image';
 import classNames from 'classnames';
 import useSlideshow from '../hooks/useSlideshow';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 export type GalleryContext = {
   slug: string;
@@ -35,7 +36,7 @@ export default function Gallery(props: GalleryProps) {
   const { current, next, play, pause, previous, seek, status } = useSlideshow({
     autoplay: true,
     initialSlideIndex: 0,
-    interval: 4000,
+    interval: 4000 + 1200,
     slides: photoNodes,
   });
 
@@ -43,7 +44,26 @@ export default function Gallery(props: GalleryProps) {
     <Layout>
       <SEO title={capitalize(topicName)} />
       <div className={styles.photosContainer}>
-        <Img fluid={current.photo.fluid} key={current.id} />
+        <TransitionGroup>
+          <CSSTransition
+            key={current.id}
+            timeout={1200}
+            classNames={{
+              enter: styles.photoEnter,
+              enterActive: styles.photoEnterActive,
+              enterDone: styles.photoEnterDone,
+              exit: styles.photoExit,
+              exitActive: styles.photoExitActive,
+            }}
+          >
+            <img
+              src={current.photo.fluid.src}
+              alt=""
+              className={styles.photo}
+            />
+          </CSSTransition>
+        </TransitionGroup>
+        {/* <Img fluid={current.photo.fluid} key={current.id} /> */}
       </div>
       <div className={styles.controlsContainer}>
         <Link to="./thumbs">Thumbs</Link>
