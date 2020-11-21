@@ -37,14 +37,15 @@
   - next prev arrows
   - debouncing - V
   - animation - V
-  - animation - show only two last photos
   - link to thumbnails
   - use modal for topic description
   - update history on modal navigation
-  - swipe using hammerJS
+  - swipe using hammerJS - V
   - cache busting?
   - display loader when loading images
   - pause gallery when mobile menu is opened
+  - animation - show only two last photos
+  - next/prev - should trigger loader and transition when loaded
 - Home (Default category)
   - should receive data from server about type
   - random order

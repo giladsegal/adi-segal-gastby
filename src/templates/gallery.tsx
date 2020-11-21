@@ -8,6 +8,7 @@ import styles from './gallery.module.scss';
 import classNames from 'classnames';
 import useSlideshow from '../hooks/useSlideshow';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import Hammer from 'hammerjs';
 
 export type GalleryContext = {
   slug: string;
@@ -58,15 +59,7 @@ export default function Gallery(props: GalleryProps) {
     topicPhotos: { nodes: photoNodes },
   } = props.data;
 
-  const {
-    current,
-    // next,
-    play,
-    pause,
-    // previous,
-    seek,
-    status,
-  } = useSlideshow({
+  const { current, next, play, pause, previous, seek, status } = useSlideshow({
     autoplay: true,
     initialSlideIndex: 0,
     interval: 4000 + PHOTO_SWITCH_DURATION_MS,
@@ -82,10 +75,28 @@ export default function Gallery(props: GalleryProps) {
     seek({ offset: clicks * -1 });
   }, 200);
 
+  const photoContainerRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    if (!photoContainerRef.current) {
+      return;
+    }
+
+    const hammer = new Hammer(photoContainerRef.current);
+
+    hammer.on('swipeleft', previous);
+    hammer.on('swiperight', next);
+
+    return () => {
+      hammer.destroy();
+    };
+  }, [previous, next]);
+
   return (
     <Layout>
       <SEO title={capitalize(topicName)} />
       <div
+        ref={photoContainerRef}
         className={styles.photosContainer}
         style={
           { '--photo-switch-duration': `${PHOTO_SWITCH_DURATION_MS}ms` } as any
