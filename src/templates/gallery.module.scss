@@ -29,9 +29,24 @@
   opacity: 1;
 }
 
+/* 
+remove previous exiting photos while additional photos are exiting
+this happens when clicking twice on the next/back button
+*/
+.photo-exit:nth-child(n + 3) {
+  display: none;
+}
+
 .photo-exit-active {
   opacity: 0;
   transition: opacity var(--photo-switch-duration) ease-out;
+}
+
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .controls-container {

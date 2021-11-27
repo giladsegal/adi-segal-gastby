@@ -7,7 +7,6 @@
 
 - scrap fonts as part of the deploy using `npm run preload:fonts`
 - facebook:
-
   -- ask Adi for a picture for sharing weddings subdomain
   -- make sure share is working as expected: https://developers.facebook.com/tools/debug/?q=https://adi-segal.com
   -- make sure share is working as expected: https://developers.facebook.com/tools/debug/?q=https://weddings.adi-segal.com
@@ -47,10 +46,11 @@
   - animation - show only two last photos
   - next/prev - should trigger loader and transition when loaded
 - Home (Default category)
-  - should receive data from server about type
+  - should receive data from server about type (category type in contentful support)
   - random order
   - support first category
 - a11y
+- instagram
 
 # DONE:
 

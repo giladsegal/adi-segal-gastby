@@ -1,5 +1,6 @@
 import React from 'react';
 import Layout from '../components/layout';
+import Spinner from '../components/spinner';
 import { Link, PageProps, graphql } from 'gatsby';
 import { Topic, TopicPhoto } from '../types';
 import SEO from '../components/seo';
@@ -9,6 +10,12 @@ import classNames from 'classnames';
 import useSlideshow from '../hooks/useSlideshow';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import Hammer from 'hammerjs';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
+
+// using font-awesome v4 because v5 free addition contains
+// only bold icons
+import '../styles/font-awesome.css';
 
 export type GalleryContext = {
   slug: string;
@@ -31,23 +38,25 @@ const preloadTopicPhoto: (topicPhoto: TopicPhoto) => Promise<void> = (
   topicPhoto: TopicPhoto
 ) => {
   return new Promise(resolve => {
-    const nextPhotoCacheTest = document.createElement('img');
-    const resolveOnLoad = () => resolve();
+    setTimeout(() => {
+      const nextPhotoCacheTest = document.createElement('img');
+      const resolveOnLoad = () => resolve();
 
-    // resolve when next photo is loaded
-    nextPhotoCacheTest.addEventListener('load', resolveOnLoad);
-    nextPhotoCacheTest.src = topicPhoto.photo.fluid.src;
+      // resolve when next photo is loaded
+      nextPhotoCacheTest.addEventListener('load', resolveOnLoad);
+      nextPhotoCacheTest.src = topicPhoto.photo.fluid.src;
 
-    // if next photo is already in the browser cache
-    if (
-      nextPhotoCacheTest.complete ||
-      nextPhotoCacheTest.width + nextPhotoCacheTest.height > 0
-    ) {
-      // unsubscribe and resolve immediately
-      nextPhotoCacheTest.removeEventListener('load', resolveOnLoad);
-      delete nextPhotoCacheTest.src;
-      resolve();
-    }
+      // if next photo is already in the browser cache
+      if (
+        nextPhotoCacheTest.complete ||
+        nextPhotoCacheTest.width + nextPhotoCacheTest.height > 0
+      ) {
+        // unsubscribe and resolve immediately
+        nextPhotoCacheTest.removeEventListener('load', resolveOnLoad);
+        delete nextPhotoCacheTest.src;
+        resolve();
+      }
+    }, 15000);
   });
 };
 
@@ -122,6 +131,17 @@ export default function Gallery(props: GalleryProps) {
             />
           </CSSTransition>
         </TransitionGroup>
+        {status === 'loading' && <Spinner className={styles.spinner} />}
+      </div>
+      <div>
+        <FontAwesomeIcon icon={faAngleLeft} />
+        <i className="fa fa-angle-left" aria-hidden="true"></i>
+        <i className="fa fa-angle-right" aria-hidden="true"></i>
+        <i className="fa fa-play" aria-hidden="true"></i>
+        <i className="fa fa-pause" aria-hidden="true"></i>
+        <i className="fa fa-th" aria-hidden="true"></i>
+        <i className="fa fa-angle-double-up" aria-hidden="true"></i>
+        <i className="fa fa-info" aria-hidden="true"></i>
       </div>
       <div className={styles.controlsContainer}>
         <Link to="./thumbs">Thumbs</Link>
@@ -146,6 +166,7 @@ export default function Gallery(props: GalleryProps) {
       <div>{`${photoNodes.findIndex(p => p === current) + 1} out of ${
         photoNodes.length
       }`}</div>
+      <Spinner />
     </Layout>
   );
 }
