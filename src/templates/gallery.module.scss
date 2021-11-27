@@ -129,3 +129,32 @@ this happens when clicking twice on the next/back button
   text-decoration: none;
   margin-top: 1px;
 }
+
+.gallery-button-captions {
+  transition: transform 220ms ease-out;
+}
+
+.caption {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: (2/3) * 1em;
+  /* min-height: vertical padding + line height */
+  min-height: (2 * 2/3) * 1em + 1em * 1.42857143;
+  transform-origin: bottom;
+  transform: scaleY(0);
+  transition: transform 250ms ease-out;
+  color: #f7f7f7;
+  font-size: 15px;
+  letter-spacing: 1px;
+
+  &.active {
+    transform: scaleY(1);
+  }
+
+  @include media-above-md {
+    letter-spacing: initial;
+  }
+}

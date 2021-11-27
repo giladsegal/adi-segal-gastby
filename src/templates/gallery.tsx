@@ -77,6 +77,14 @@ export default function Gallery(props: GalleryProps) {
 
   const prevSlideshowStatus = usePrevious(status);
 
+  const [areCaptionsActive, setCaptionActive] = React.useState(false);
+  const captionAnimationCount = React.useRef(0);
+
+  const toggleCaptions = () => {
+    captionAnimationCount.current++;
+    setCaptionActive(!areCaptionsActive);
+  };
+
   const debouncedNext = debounceCount(clicks => {
     seek({ offset: clicks });
   }, 200);
@@ -134,6 +142,13 @@ export default function Gallery(props: GalleryProps) {
             />
           </CSSTransition>
         </TransitionGroup>
+        <div
+          className={classNames(styles.caption, {
+            [styles.active]: areCaptionsActive,
+          })}
+        >
+          {current.description.description || topicName}
+        </div>
         {status === 'loading' && <Spinner className={styles.galleryCenter} />}
         {prevSlideshowStatus === 'paused' && status === 'playing' && (
           <PlayAnimation
@@ -192,11 +207,16 @@ export default function Gallery(props: GalleryProps) {
           <i className={classNames('fa fa-th')}></i>
         </Link>
         <i
+          onClick={toggleCaptions}
           className={classNames(
             styles.galleryButton,
             styles.galleryButtonLarge,
+            styles.galleryButtonCaptions,
             'fa fa-angle-double-up'
           )}
+          style={{
+            transform: `rotate(${captionAnimationCount.current * 180}deg)`,
+          }}
         ></i>
         <i
           className={classNames(
@@ -246,6 +266,9 @@ export const query = graphql`
           fluid(maxWidth: 800) {
             src
           }
+        }
+        description {
+          description
         }
         id
       }

@@ -33,18 +33,11 @@
   - close button
   - pause slideshow
 - Gallery component
-  - play/pause - V
-  - next prev arrows - V
-  - debouncing - V
-  - animation - V
-  - link to thumbnails - V
+  - description per photo
   - use modal for topic description
   - update history on modal navigation
-  - swipe using hammerJS - V
   - cache busting?
-  - display loader when loading images - V
   - pause gallery when mobile menu is opened
-  - animation - show only two last photos - V
   - next/prev - should trigger loader and transition when loaded
 - Home (Default category)
   - should receive data from server about type (category type in contentful support)
@@ -55,6 +48,15 @@
 
 # DONE:
 
+- Gallery component
+  - play/pause
+  - next prev arrows
+  - debouncing
+  - animation
+  - link to thumbnails
+  - swipe using hammerJS
+  - display loader when loading images
+  - animation - show only two last photos
 - Layout component
   - render header component
   - render main node
