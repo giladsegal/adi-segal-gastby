@@ -19,6 +19,7 @@
 # Bugs
 
 - mobile menu doesn't have close animation on navigation
+- preserve image aspect ratio in mobile
 - refactor menu mobile to use CSSTransition
 - font scraping should be done for both website types
 - refactor facebook hook to use context
@@ -32,18 +33,18 @@
   - close button
   - pause slideshow
 - Gallery component
-  - play/pause
-  - next prev arrows
+  - play/pause - V
+  - next prev arrows - V
   - debouncing - V
   - animation - V
-  - link to thumbnails
+  - link to thumbnails - V
   - use modal for topic description
   - update history on modal navigation
   - swipe using hammerJS - V
   - cache busting?
-  - display loader when loading images
+  - display loader when loading images - V
   - pause gallery when mobile menu is opened
-  - animation - show only two last photos
+  - animation - show only two last photos - V
   - next/prev - should trigger loader and transition when loaded
 - Home (Default category)
   - should receive data from server about type (category type in contentful support)

@@ -8,10 +8,11 @@ import { capitalize, debounceCount } from '../utils';
 import styles from './gallery.module.scss';
 import classNames from 'classnames';
 import useSlideshow from '../hooks/useSlideshow';
+import usePrevious from '../hooks/usePrevious';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import Hammer from 'hammerjs';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
+import PlayAnimation from '../components/play-animation';
+import PauseAnimation from '../components/pause-animation';
 
 // using font-awesome v4 because v5 free addition contains
 // only bold icons
@@ -38,25 +39,23 @@ const preloadTopicPhoto: (topicPhoto: TopicPhoto) => Promise<void> = (
   topicPhoto: TopicPhoto
 ) => {
   return new Promise(resolve => {
-    setTimeout(() => {
-      const nextPhotoCacheTest = document.createElement('img');
-      const resolveOnLoad = () => resolve();
+    const nextPhotoCacheTest = document.createElement('img');
+    const resolveOnLoad = () => resolve();
 
-      // resolve when next photo is loaded
-      nextPhotoCacheTest.addEventListener('load', resolveOnLoad);
-      nextPhotoCacheTest.src = topicPhoto.photo.fluid.src;
+    // resolve when next photo is loaded
+    nextPhotoCacheTest.addEventListener('load', resolveOnLoad);
+    nextPhotoCacheTest.src = topicPhoto.photo.fluid.src;
 
-      // if next photo is already in the browser cache
-      if (
-        nextPhotoCacheTest.complete ||
-        nextPhotoCacheTest.width + nextPhotoCacheTest.height > 0
-      ) {
-        // unsubscribe and resolve immediately
-        nextPhotoCacheTest.removeEventListener('load', resolveOnLoad);
-        delete nextPhotoCacheTest.src;
-        resolve();
-      }
-    }, 15000);
+    // if next photo is already in the browser cache
+    if (
+      nextPhotoCacheTest.complete ||
+      nextPhotoCacheTest.width + nextPhotoCacheTest.height > 0
+    ) {
+      // unsubscribe and resolve immediately
+      nextPhotoCacheTest.removeEventListener('load', resolveOnLoad);
+      delete nextPhotoCacheTest.src;
+      resolve();
+    }
   });
 };
 
@@ -69,12 +68,14 @@ export default function Gallery(props: GalleryProps) {
   } = props.data;
 
   const { current, next, play, pause, previous, seek, status } = useSlideshow({
-    autoplay: true,
+    autoplay: process.env.NODE_ENV !== 'development',
     initialSlideIndex: 0,
     interval: 4000 + PHOTO_SWITCH_DURATION_MS,
     slides: photoNodes,
     preloadNext: preloadTopicPhoto,
   });
+
+  const prevSlideshowStatus = usePrevious(status);
 
   const debouncedNext = debounceCount(clicks => {
     seek({ offset: clicks });
@@ -108,7 +109,9 @@ export default function Gallery(props: GalleryProps) {
         ref={photoContainerRef}
         className={styles.photosContainer}
         style={
-          { '--photo-switch-duration': `${PHOTO_SWITCH_DURATION_MS}ms` } as any
+          {
+            '--photo-switch-duration': `${PHOTO_SWITCH_DURATION_MS}ms`,
+          } as React.CSSProperties
         }
       >
         <TransitionGroup component={null}>
@@ -131,42 +134,103 @@ export default function Gallery(props: GalleryProps) {
             />
           </CSSTransition>
         </TransitionGroup>
-        {status === 'loading' && <Spinner className={styles.spinner} />}
-      </div>
-      <div>
-        <FontAwesomeIcon icon={faAngleLeft} />
-        <i className="fa fa-angle-left" aria-hidden="true"></i>
-        <i className="fa fa-angle-right" aria-hidden="true"></i>
-        <i className="fa fa-play" aria-hidden="true"></i>
-        <i className="fa fa-pause" aria-hidden="true"></i>
-        <i className="fa fa-th" aria-hidden="true"></i>
-        <i className="fa fa-angle-double-up" aria-hidden="true"></i>
-        <i className="fa fa-info" aria-hidden="true"></i>
+        {status === 'loading' && <Spinner className={styles.galleryCenter} />}
+        {prevSlideshowStatus === 'paused' && status === 'playing' && (
+          <PlayAnimation
+            className={classNames(
+              styles.galleryCenter,
+              styles.playPauseAnimation
+            )}
+          />
+        )}
+        {prevSlideshowStatus === 'playing' && status === 'paused' && (
+          <PauseAnimation
+            className={classNames(
+              styles.galleryCenter,
+              styles.playPauseAnimation
+            )}
+          />
+        )}
       </div>
       <div className={styles.controlsContainer}>
-        <Link to="./thumbs">Thumbs</Link>
+        <i
+          onClick={debouncedPrevious}
+          className={classNames(
+            styles.galleryButton,
+            styles.galleryButtonArrows,
+            styles.galleryButtonLarge,
+            'fa fa-angle-left'
+          )}
+        ></i>
+        <span className={classNames(styles.photoNumber)}>{`${
+          photoNodes.findIndex(p => p === current) + 1
+        } of ${photoNodes.length}`}</span>
+        <i
+          onClick={debouncedNext}
+          className={classNames(
+            styles.galleryButton,
+            styles.galleryButtonArrows,
+            styles.galleryButtonLarge,
+            'fa fa-angle-right'
+          )}
+        ></i>
+        <i
+          onClick={status === 'playing' ? pause : play}
+          className={classNames(
+            styles.galleryButton,
+            'fa',
+            status === 'playing' ? 'fa-pause' : 'fa-play'
+          )}
+        ></i>
+        <Link
+          to="./thumbs"
+          className={classNames(
+            styles.galleryButton,
+            styles.galleryButtonThumbs
+          )}
+        >
+          <i className={classNames('fa fa-th')}></i>
+        </Link>
+        <i
+          className={classNames(
+            styles.galleryButton,
+            styles.galleryButtonLarge,
+            'fa fa-angle-double-up'
+          )}
+        ></i>
+        <i
+          className={classNames(
+            styles.galleryButton,
+            styles.galleryButtonInfo,
+            'fa fa-info'
+          )}
+        ></i>
       </div>
+      {process.env.NODE_ENV === 'development' && (
+        <div>
+          <div className={classNames(styles.playPauseLayout)}>
+            <div className={classNames(styles.pauseBar, styles.left)}></div>
+            <div className={classNames(styles.pauseBar, styles.right)}></div>
+          </div>
 
-      <div className={classNames(styles.playPauseLayout)}>
-        <div className={classNames(styles.pauseBar, styles.left)}></div>
-        <div className={classNames(styles.pauseBar, styles.right)}></div>
-      </div>
-
-      <div className={classNames(styles.playPauseLayout)}>
-        <div className={styles.playTriangleOutline}></div>
-        <div className={styles.playTriangle}></div>
-      </div>
-      <div>{status.toUpperCase()}</div>
-      <button onClick={pause}>pause</button>
-      <button onClick={play}>play</button>
-      <button onClick={debouncedNext}>next</button>
-      <button onClick={debouncedPrevious}>prev</button>
-      <button onClick={seek.bind(null, { offset: 3 })}>next by 3</button>
-      <button onClick={seek.bind(null, { offset: -3 })}>prev by 3</button>
-      <div>{`${photoNodes.findIndex(p => p === current) + 1} out of ${
-        photoNodes.length
-      }`}</div>
-      <Spinner />
+          <div className={classNames(styles.playPauseLayout)}>
+            <div className={styles.playTriangleOutline}></div>
+            <div className={styles.playTriangle}></div>
+          </div>
+          <div>{status.toUpperCase()}</div>
+          <button onClick={pause}>pause</button>
+          <button onClick={play}>play</button>
+          <button onClick={debouncedNext}>next</button>
+          <button onClick={debouncedPrevious}>prev</button>
+          <button onClick={seek.bind(null, { offset: 3 })}>next by 3</button>
+          <button onClick={seek.bind(null, { offset: -3 })}>prev by 3</button>
+          <div>{`${photoNodes.findIndex(p => p === current) + 1} out of ${
+            photoNodes.length
+          }`}</div>
+          <Spinner />
+          <Link to="./thumbs">Thumbs</Link>
+        </div>
+      )}
     </Layout>
   );
 }

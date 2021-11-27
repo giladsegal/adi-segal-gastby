@@ -1,3 +1,5 @@
+@import '../styles/mixins';
+
 .photos-container {
   position: relative;
   max-width: 800px;
@@ -42,66 +44,88 @@ this happens when clicking twice on the next/back button
   transition: opacity var(--photo-switch-duration) ease-out;
 }
 
-.spinner {
+.gallery-center {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.play-pause-animation {
+  animation: slideshow-controls-fadeOut 450ms ease-in-out forwards;
+}
+
+@keyframes slideshow-controls-fadeOut {
+  0% {
+    transform-origin: 50% 50%;
+    transform: translate(-50%, -50%) scale(1, 1);
+    filter: blur(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform-origin: 50% 50%;
+    transform: translate(-50%, -50%) scale(1.4, 1.4);
+    filter: blur(2px);
+  }
 }
 
 .controls-container {
   display: flex;
-  justify-content: center;
-}
+  justify-content: space-around;
+  align-items: center;
+  color: #a6a3a3;
 
-.play-pause-layout {
-  position: relative;
-  // position: absolute;
-  // top: 50%;
-  // left: 50%;
-  // transform: translate(-50%, -50%);
-  pointer-events: none;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.5);
-}
+  font-size: 16px;
 
-.pause-bar {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 10%;
-  height: 35%;
-  background: white;
-  border-radius: 3px;
-  border: 1px solid rgb(34, 34, 34);
-
-  &.left {
-    left: 33%;
-  }
-
-  &.right {
-    right: 33%;
+  @include media-above-sm {
+    justify-content: center;
+    font-size: 14px;
   }
 }
 
-.play-triangle,
-.play-triangle-outline {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  margin-left: 2px;
-  border-radius: 3px;
-  border-style: solid;
-  border-color: transparent transparent transparent white;
-  border-width: 10px 0 10px 10px;
+.gallery-button {
+  padding: 0 20px;
+  color: #a6a3a3;
+
+  @include media-above-sm {
+    padding: 0 30px;
+  }
+
+  cursor: pointer;
+  touch-action: manipulation;
+
+  &:hover {
+    color: #000;
+  }
 }
 
-.play-triangle-outline {
-  position: absolute;
-  align-self: center;
-  border-left-color: rgba(34, 34, 34, 0.5);
-  border-width: 14px 0 14px 14px;
+.gallery-button-large {
+  font-size: 23px !important;
+  line-height: 23px !important;
+}
+
+.gallery-button-arrows {
+  margin-top: -1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.photoNumber {
+  margin-top: 2px;
+  display: none;
+
+  @include media-above-xs {
+    display: initial;
+  }
+}
+
+.gallery-button-info {
+  margin-top: 1px;
+}
+
+.gallery-button-thumbs {
+  display: flex;
+  text-decoration: none;
+  margin-top: 1px;
 }
