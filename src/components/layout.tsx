@@ -2,7 +2,6 @@ import React from 'react';
 import Header from './header';
 import 'normalize.css';
 import styles from './layout.module.scss';
-import SEO from './seo';
 import classNames from 'classnames';
 import { graphql, useStaticQuery } from 'gatsby';
 import { SiteMetadata, SiteType } from '../types';
@@ -54,7 +53,6 @@ export default function Layout({ children, withGutter }: LayoutProps) {
 
   return (
     <div className={styles.root}>
-      <SEO title="Home" />
       <Header className={styles.header}>
         <Header.Link to="/">HOME</Header.Link>
         {topicTypeToLinks(type)}

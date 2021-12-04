@@ -12,6 +12,27 @@ export const splitToSubgroups = <T extends Array<any>>(
     .map<T>((_, i) => arr.slice(i * size, i * size + size) as T);
 };
 
+export const shuffle = <T extends Array<any>>(arr: T) => {
+  const clone = [...arr] as T;
+
+  let i = clone.length;
+
+  if (i === 0) {
+    return ([] as unknown) as T;
+  }
+
+  while (--i) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const tempi = clone[i];
+    const tempj = clone[j];
+
+    clone[i] = tempj;
+    clone[j] = tempi;
+  }
+
+  return clone;
+};
+
 export const capitalize = (str: string) => str[0].toUpperCase() + str.slice(1);
 
 const memoize = <T extends (arg: any) => any>(fn: T): T => {

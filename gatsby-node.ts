@@ -112,7 +112,13 @@ export const createPages: GatsbyNode['createPages'] = async ({
     },
   });
 
-  // TODO: home
+  createPage({
+    path: '/',
+    component: resolve(__dirname, './src/templates/home.tsx'),
+    context: {
+      siteType: metadata.type,
+    },
+  });
 
   if (metadata.type === 'documentaries') {
     const publications = topics.find(topic => topic.slug === 'publications');
