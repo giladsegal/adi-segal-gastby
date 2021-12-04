@@ -76,7 +76,8 @@ $header-height: 3rem;
   text-align: left;
   padding: 1em 2em;
 
-  &-active {
+  &-active,
+  &:hover {
     color: #000;
   }
 
