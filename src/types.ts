@@ -13,6 +13,9 @@ export type Topic = {
   name: string;
   slug: string;
   thumb: FluidImage;
+  description: {
+    description: string;
+  } | null;
 };
 
 export type TopicPhoto = {

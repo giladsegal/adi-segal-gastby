@@ -13,6 +13,7 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import Hammer from 'hammerjs';
 import PlayAnimation from '../components/play-animation';
 import PauseAnimation from '../components/pause-animation';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 // using font-awesome v4 because v5 free addition contains
 // only bold icons
@@ -27,7 +28,7 @@ export type GalleryData = {
     nodes: Array<TopicPhoto>;
   };
   topic: {
-    nodes: [Pick<Topic, 'name'>];
+    nodes: [Pick<Topic, 'name' | 'description'>];
   };
 };
 
@@ -62,7 +63,7 @@ const preloadTopicPhoto: (topicPhoto: TopicPhoto) => Promise<void> = (
 export default function Gallery(props: GalleryProps) {
   const {
     topic: {
-      nodes: [{ name: topicName }],
+      nodes: [{ name: topicName, description }],
     },
     topicPhotos: { nodes: photoNodes },
   } = props.data;
@@ -218,13 +219,21 @@ export default function Gallery(props: GalleryProps) {
             transform: `rotate(${captionAnimationCount.current * 180}deg)`,
           }}
         ></i>
-        <i
-          className={classNames(
-            styles.galleryButton,
-            styles.galleryButtonInfo,
-            'fa fa-info'
-          )}
-        ></i>
+        {description && (
+          <Link
+            to={`./description?p=${
+              photoNodes.findIndex(p => p === current) + 1
+            }`}
+          >
+            <i
+              className={classNames(
+                styles.galleryButton,
+                styles.galleryButtonInfo,
+                'fa fa-info'
+              )}
+            ></i>
+          </Link>
+        )}
       </div>
       {process.env.NODE_ENV === 'development' && (
         <div>
@@ -249,6 +258,11 @@ export default function Gallery(props: GalleryProps) {
           }`}</div>
           <Spinner />
           <Link to="./thumbs">Thumbs</Link>
+          {description && (
+            <div>
+              {documentToReactComponents(JSON.parse(description.description))}
+            </div>
+          )}
         </div>
       )}
     </Layout>
@@ -276,6 +290,9 @@ export const query = graphql`
     topic: allContentfulTopic(filter: { slug: { eq: $slug } }) {
       nodes {
         name
+        description {
+          description
+        }
       }
     }
   }

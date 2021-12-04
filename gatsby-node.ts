@@ -6,6 +6,7 @@ type TopicsQuery = {
   topics: {
     nodes: Array<{
       slug: string;
+      description: null | string;
     }>;
   };
 };
@@ -39,6 +40,9 @@ const getTopics = async (
         topics: allContentfulTopic(filter: { type: { eq: $siteType } }) {
           nodes {
             slug
+            description {
+              description
+            }
           }
         }
       }
@@ -52,11 +56,12 @@ const getTopics = async (
 type CreateTopicPageOptions = {
   basePath: string;
   slug: string;
+  description: string | null;
 };
 
 const createTopicPage = (
   createPage: Actions['createPage'],
-  { basePath, slug }: CreateTopicPageOptions
+  { basePath, slug, description }: CreateTopicPageOptions
 ) => {
   createPage({
     path: `${basePath}/${slug}`,
@@ -73,6 +78,15 @@ const createTopicPage = (
     },
     component: resolve(__dirname, './src/templates/thumbnails.tsx'),
   });
+
+  description &&
+    createPage({
+      path: `${basePath}/${slug}/description`,
+      context: {
+        slug: slug,
+      },
+      component: resolve(__dirname, './src/templates/topic-description.tsx'),
+    });
 };
 
 export const createPages: GatsbyNode['createPages'] = async ({
@@ -104,7 +118,11 @@ export const createPages: GatsbyNode['createPages'] = async ({
     const publications = topics.find(topic => topic.slug === 'publications');
 
     publications &&
-      createTopicPage(createPage, { basePath: '', slug: publications.slug });
+      createTopicPage(createPage, {
+        basePath: '',
+        slug: publications.slug,
+        description: publications.description,
+      });
   }
 
   topics.forEach(topic => {
@@ -115,6 +133,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
     createTopicPage(createPage, {
       basePath: metadata.topicsSlug,
       slug: topic.slug,
+      description: topic.description,
     });
   });
 };

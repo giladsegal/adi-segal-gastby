@@ -19,7 +19,7 @@
 # Bugs
 
 - mobile menu doesn't have close animation on navigation
-- preserve image aspect ratio in mobile
+- preserve image aspect ratio (+captions)
 - refactor menu mobile to use CSSTransition
 - font scraping should be done for both website types
 - refactor facebook hook to use context
@@ -27,18 +27,13 @@
 # Product
 
 - desktop layout
-- Modal component
-  - click outside for desktop
-  - mobile full page layout
-  - close button
-  - pause slideshow
 - Gallery component
-  - description per photo
+  - deep link to a picture using query param
   - use modal for topic description
   - update history on modal navigation
   - cache busting?
   - pause gallery when mobile menu is opened
-  - next/prev - should trigger loader and transition when loaded
+  - next/prev - should trigger loader, and transition only when loaded
 - Home (Default category)
   - should receive data from server about type (category type in contentful support)
   - random order
@@ -49,6 +44,7 @@
 # DONE:
 
 - Gallery component
+  - description per photo
   - play/pause
   - next prev arrows
   - debouncing
