@@ -1,6 +1,5 @@
 # Infra
 
-- Links with animations (`transition-links` branch OR https://medium.com/free-code-camp/how-to-animate-page-transitions-in-gatsby-js-b36e3ae14c29)
 - investigate `gatsby-default-starter` layout.scss
 
 # Before going live
@@ -28,21 +27,22 @@
 
 - desktop layout
 - Gallery component
+  - reexport gallery component and consume in home page (hide controls)
   - deep link to a picture using query param
   - use modal for topic description
   - update history on modal navigation
   - cache busting?
   - pause gallery when mobile menu is opened
   - next/prev - should trigger loader, and transition only when loaded
-- Home (Default category)
-  - should receive data from server about type (category type in contentful support)
-  - random order
-  - support first category
 - a11y
 - instagram
 
 # DONE:
 
+- Home (Default category)
+  - should receive data from server about type (category type in contentful support)
+  - random order
+  - support first category
 - Gallery component
   - description per photo
   - play/pause

@@ -38,8 +38,6 @@ export default function Home(props: HomeProps) {
     ...shuffle(photoNodes.map(p => p.photo)),
   ]);
 
-  console.log(photos);
-
   return (
     <Layout>
       <SEO title="Home" />

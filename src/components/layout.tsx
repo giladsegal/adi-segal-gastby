@@ -51,6 +51,22 @@ const topicTypeToLinks = (type: SiteType) => {
 export default function Layout({ children, withGutter }: LayoutProps) {
   const { type } = useStaticQuery<LayoutQuery>(query).site.siteMetadata;
 
+  const css = `
+  @keyframes route-fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(7px);
+    }
+  
+    70% {
+      transform: translateY(0);
+    }
+  
+    100% {
+      opacity: 1;
+    }
+  }`;
+
   return (
     <div className={styles.root}>
       <Header className={styles.header}>
@@ -59,7 +75,11 @@ export default function Layout({ children, withGutter }: LayoutProps) {
         <Header.Link to="/about/">ABOUT</Header.Link>
         <Header.Link to="/contact/">CONTACT</Header.Link>
       </Header>
-      <main className={classNames({ [styles.gutter]: withGutter })}>
+      <style>{css}</style>
+      <main
+        className={classNames({ [styles.gutter]: withGutter })}
+        style={{ animation: 'route-fadeIn 250ms ease-in forwards', opacity: 0 }}
+      >
         {children}
       </main>
     </div>
