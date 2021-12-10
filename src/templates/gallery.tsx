@@ -9,11 +9,10 @@ import styles from './gallery.module.scss';
 import classNames from 'classnames';
 import useSlideshow from '../hooks/useSlideshow';
 import usePrevious from '../hooks/usePrevious';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import Hammer from 'hammerjs';
 import PlayAnimation from '../components/play-animation';
 import PauseAnimation from '../components/pause-animation';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import Slideshow from '../components/slideshow';
 
 // using font-awesome v4 because v5 free addition contains
 // only bold icons
@@ -71,7 +70,7 @@ export default function Gallery(props: GalleryProps) {
   const firstPhoto =
     parseInt(new URLSearchParams(props.location.search).get('p') || '1') || 1;
 
-  const { current, next, play, pause, previous, seek, status } = useSlideshow({
+  const { current, play, pause, seek, status } = useSlideshow({
     autoplay: process.env.NODE_ENV !== 'development',
     initialSlideIndex: firstPhoto - 1,
     interval: 4000 + PHOTO_SWITCH_DURATION_MS,
@@ -108,55 +107,14 @@ export default function Gallery(props: GalleryProps) {
     seek({ offset: clicks * -1 });
   }, 200);
 
-  const photoContainerRef = React.useRef<HTMLDivElement>(null);
-
-  React.useEffect(() => {
-    if (!photoContainerRef.current) {
-      return;
-    }
-
-    const hammer = new Hammer(photoContainerRef.current);
-
-    hammer.on('swipeleft', previous);
-    hammer.on('swiperight', next);
-
-    return () => {
-      hammer.destroy();
-    };
-  }, [previous, next]);
-
   return (
     <Layout>
       <SEO title={capitalize(topicName)} />
-      <div
-        ref={photoContainerRef}
-        className={styles.photosContainer}
-        style={
-          {
-            '--photo-switch-duration': `${PHOTO_SWITCH_DURATION_MS}ms`,
-          } as React.CSSProperties
-        }
+      <Slideshow
+        current={current}
+        next={debouncedNext}
+        prev={debouncedPrevious}
       >
-        <TransitionGroup component={null}>
-          <CSSTransition
-            key={current.id}
-            timeout={PHOTO_SWITCH_DURATION_MS}
-            classNames={{
-              enter: styles.photoEnter,
-              enterActive: styles.photoEnterActive,
-              exit: styles.photoExit,
-              exitActive: styles.photoExitActive,
-            }}
-          >
-            <img
-              src={current.photo.fluid.src}
-              key={current.id}
-              className={styles.photo}
-              alt=""
-              height="533"
-            />
-          </CSSTransition>
-        </TransitionGroup>
         <div
           className={classNames(styles.caption, {
             [styles.active]: areCaptionsActive,
@@ -181,7 +139,7 @@ export default function Gallery(props: GalleryProps) {
             )}
           />
         )}
-      </div>
+      </Slideshow>
       <div className={styles.controlsContainer}>
         <i
           onClick={debouncedPrevious}

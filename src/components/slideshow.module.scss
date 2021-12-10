@@ -1,0 +1,43 @@
+.photos-container {
+  position: relative;
+  max-width: 800px;
+  max-height: 533px;
+
+  margin-bottom: 1.2rem;
+}
+
+.photo {
+  position: relative;
+  top: 0;
+  width: 100%;
+  user-select: none;
+  max-height: 533px;
+}
+
+.photo-enter {
+  // override gatsby-image inline styles
+  position: absolute !important;
+  opacity: 0;
+}
+
+.photo-enter-active {
+  opacity: 1;
+  transition: opacity var(--photo-switch-duration) ease-in;
+}
+
+.photo-exit {
+  opacity: 1;
+}
+
+/* 
+remove previous exiting photos while additional photos are exiting
+this happens when clicking twice on the next/back button
+*/
+.photo-exit:nth-child(n + 3) {
+  display: none;
+}
+
+.photo-exit-active {
+  opacity: 0;
+  transition: opacity var(--photo-switch-duration) ease-out;
+}
