@@ -1,14 +1,16 @@
 import React from 'react';
 import styles from './slideshow.module.scss';
 import { TopicPhoto } from '../types';
-import { SlideShow } from '../hooks/useSlideshow';
+import { SlideShow, SlideshowStatus } from '../hooks/useSlideshow';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import Hammer from 'hammerjs';
+import Spinner from './spinner';
 
 export type SlideshowProps = {
   next: () => void;
   prev: () => void;
   current: TopicPhoto;
+  status: SlideshowStatus;
   children?: React.ReactNode;
 };
 
@@ -20,7 +22,7 @@ const Slideshow: React.ForwardRefRenderFunction<
   HTMLDivElement,
   SlideshowProps
 > = (props, ref) => {
-  const { current, children, next, prev } = props;
+  const { current, children, next, prev, status } = props;
 
   const photoContainerRef = React.useRef<HTMLDivElement>(null);
 
@@ -69,6 +71,7 @@ const Slideshow: React.ForwardRefRenderFunction<
           />
         </CSSTransition>
       </TransitionGroup>
+      {status === 'loading' && <Spinner className={styles.galleryCenter} />}
       {children}
     </div>
   );

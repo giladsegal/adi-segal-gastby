@@ -1,6 +1,5 @@
 import React from 'react';
 import Layout from '../components/layout';
-import Spinner from '../components/spinner';
 import { Link, PageProps, graphql } from 'gatsby';
 import { Topic, TopicPhoto } from '../types';
 import SEO from '../components/seo';
@@ -111,6 +110,7 @@ export default function Gallery(props: GalleryProps) {
     <Layout>
       <SEO title={capitalize(topicName)} />
       <Slideshow
+        status={status}
         current={current}
         next={debouncedNext}
         prev={debouncedPrevious}
@@ -122,7 +122,6 @@ export default function Gallery(props: GalleryProps) {
         >
           {current.description.description || topicName}
         </div>
-        {status === 'loading' && <Spinner className={styles.galleryCenter} />}
         {prevSlideshowStatus === 'paused' && status === 'playing' && (
           <PlayAnimation
             className={classNames(
@@ -228,7 +227,6 @@ export default function Gallery(props: GalleryProps) {
           <div>{`${photoNodes.findIndex(p => p === current) + 1} out of ${
             photoNodes.length
           }`}</div>
-          <Spinner />
           <Link to="./thumbs">Thumbs</Link>
           {description && (
             <div>
