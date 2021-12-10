@@ -3,7 +3,7 @@ import Layout from '../components/layout';
 import { Link, PageProps, graphql } from 'gatsby';
 import { Topic, TopicPhoto } from '../types';
 import SEO from '../components/seo';
-import { capitalize, debounceCount } from '../utils';
+import { capitalize, debounceCount, preloadTopicPhoto } from '../utils';
 import styles from './gallery.module.scss';
 import classNames from 'classnames';
 import useSlideshow from '../hooks/useSlideshow';
@@ -33,30 +33,6 @@ export type GalleryData = {
 export type GalleryProps = PageProps<GalleryData, GalleryContext>;
 
 const PHOTO_SWITCH_DURATION_MS = 1200;
-
-const preloadTopicPhoto: (topicPhoto: TopicPhoto) => Promise<void> = (
-  topicPhoto: TopicPhoto
-) => {
-  return new Promise(resolve => {
-    const nextPhotoCacheTest = document.createElement('img');
-    const resolveOnLoad = () => resolve();
-
-    // resolve when next photo is loaded
-    nextPhotoCacheTest.addEventListener('load', resolveOnLoad);
-    nextPhotoCacheTest.src = topicPhoto.photo.fluid.src;
-
-    // if next photo is already in the browser cache
-    if (
-      nextPhotoCacheTest.complete ||
-      nextPhotoCacheTest.width + nextPhotoCacheTest.height > 0
-    ) {
-      // unsubscribe and resolve immediately
-      nextPhotoCacheTest.removeEventListener('load', resolveOnLoad);
-      delete nextPhotoCacheTest.src;
-      resolve();
-    }
-  });
-};
 
 export default function Gallery(props: GalleryProps) {
   const {
@@ -114,6 +90,7 @@ export default function Gallery(props: GalleryProps) {
         current={current}
         next={debouncedNext}
         prev={debouncedPrevious}
+        transitionDuration={PHOTO_SWITCH_DURATION_MS}
       >
         <div
           className={classNames(styles.caption, {

@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './slideshow.module.scss';
 import { TopicPhoto } from '../types';
-import { SlideShow, SlideshowStatus } from '../hooks/useSlideshow';
+import { SlideshowStatus } from '../hooks/useSlideshow';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import Hammer from 'hammerjs';
 import Spinner from './spinner';
@@ -11,18 +11,12 @@ export type SlideshowProps = {
   prev: () => void;
   current: TopicPhoto;
   status: SlideshowStatus;
+  transitionDuration: number;
   children?: React.ReactNode;
 };
 
-export type SlideshowImperativeApi = SlideShow<TopicPhoto>;
-
-const PHOTO_SWITCH_DURATION_MS = 1200;
-
-const Slideshow: React.ForwardRefRenderFunction<
-  HTMLDivElement,
-  SlideshowProps
-> = (props, ref) => {
-  const { current, children, next, prev, status } = props;
+const Slideshow = (props: SlideshowProps) => {
+  const { current, children, next, prev, status, transitionDuration } = props;
 
   const photoContainerRef = React.useRef<HTMLDivElement>(null);
 
@@ -47,14 +41,14 @@ const Slideshow: React.ForwardRefRenderFunction<
       className={styles.photosContainer}
       style={
         {
-          '--photo-switch-duration': `${PHOTO_SWITCH_DURATION_MS}ms`,
+          '--photo-switch-duration': `${transitionDuration}ms`,
         } as React.CSSProperties
       }
     >
       <TransitionGroup component={null}>
         <CSSTransition
           key={current.id}
-          timeout={PHOTO_SWITCH_DURATION_MS}
+          timeout={transitionDuration}
           classNames={{
             enter: styles.photoEnter,
             enterActive: styles.photoEnterActive,
@@ -77,4 +71,4 @@ const Slideshow: React.ForwardRefRenderFunction<
   );
 };
 
-export default React.forwardRef(Slideshow);
+export default Slideshow;

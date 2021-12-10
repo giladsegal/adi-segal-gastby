@@ -1,6 +1,32 @@
+import { TopicPhoto } from './types';
+
 type Fraction = {
   N: number;
   D: number;
+};
+
+export const preloadTopicPhoto: (topicPhoto: TopicPhoto) => Promise<void> = (
+  topicPhoto: TopicPhoto
+) => {
+  return new Promise(resolve => {
+    const nextPhotoCacheTest = document.createElement('img');
+    const resolveOnLoad = () => resolve();
+
+    // resolve when next photo is loaded
+    nextPhotoCacheTest.addEventListener('load', resolveOnLoad);
+    nextPhotoCacheTest.src = topicPhoto.photo.fluid.src;
+
+    // if next photo is already in the browser cache
+    if (
+      nextPhotoCacheTest.complete ||
+      nextPhotoCacheTest.width + nextPhotoCacheTest.height > 0
+    ) {
+      // unsubscribe and resolve immediately
+      nextPhotoCacheTest.removeEventListener('load', resolveOnLoad);
+      delete nextPhotoCacheTest.src;
+      resolve();
+    }
+  });
 };
 
 export const splitToSubgroups = <T extends Array<any>>(
