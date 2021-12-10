@@ -5,9 +5,9 @@ type Fraction = {
   D: number;
 };
 
-export const preloadTopicPhoto: (topicPhoto: TopicPhoto) => Promise<void> = (
-  topicPhoto: TopicPhoto
-) => {
+export const preloadTopicPhoto: (
+  topicPhoto: Pick<TopicPhoto, 'photo' | 'id'>
+) => Promise<void> = (topicPhoto: Pick<TopicPhoto, 'photo'>) => {
   return new Promise(resolve => {
     const nextPhotoCacheTest = document.createElement('img');
     const resolveOnLoad = () => resolve();

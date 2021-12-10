@@ -2,8 +2,10 @@ import React from 'react';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import { PageProps, graphql } from 'gatsby';
-import { FluidImage } from '../types';
-import { shuffle } from '../utils';
+import { FluidImage, TopicPhoto } from '../types';
+import { preloadTopicPhoto, shuffle } from '../utils';
+import Slideshow from '../components/slideshow';
+import useSlideshow from '../hooks/useSlideshow';
 
 export type DefaultPhoto = {
   id: string;
@@ -25,6 +27,8 @@ export type HomeContext = {
 
 export type HomeProps = PageProps<HomeData, HomeContext>;
 
+const PHOTO_SWITCH_DURATION_MS = 1200;
+
 export default function Home(props: HomeProps) {
   const {
     defaultPhoto: {
@@ -33,17 +37,39 @@ export default function Home(props: HomeProps) {
     topicPhotos: { nodes: photoNodes },
   } = props.data;
 
-  const [photos] = React.useState<Array<DefaultPhoto>>([
-    defaultPhoto,
-    ...shuffle(photoNodes.map(p => p.photo)),
+  const [photos] = React.useState<Array<Pick<TopicPhoto, 'id' | 'photo'>>>([
+    {
+      id: defaultPhoto.id,
+      photo: {
+        fluid: defaultPhoto.fluid,
+      },
+    },
+    ...shuffle(
+      photoNodes.map(p => ({
+        id: p.photo.id,
+        photo: {
+          fluid: p.photo.fluid,
+        },
+      }))
+    ),
   ]);
+
+  const { current, status } = useSlideshow({
+    autoplay: true,
+    initialSlideIndex: 0,
+    interval: 4000 + PHOTO_SWITCH_DURATION_MS,
+    slides: photos,
+    preloadNext: preloadTopicPhoto,
+  });
 
   return (
     <Layout>
       <SEO title="Home" />
-      {photos.map(p => {
-        return <img src={p.fluid.src} key={p.id} alt="" height="533" />;
-      })}
+      <Slideshow
+        status={status}
+        current={current}
+        transitionDuration={PHOTO_SWITCH_DURATION_MS}
+      ></Slideshow>
     </Layout>
   );
 }

@@ -7,9 +7,9 @@ import Hammer from 'hammerjs';
 import Spinner from './spinner';
 
 export type SlideshowProps = {
-  next: () => void;
-  prev: () => void;
-  current: TopicPhoto;
+  next?: () => void;
+  prev?: () => void;
+  current: Pick<TopicPhoto, 'photo' | 'id'>;
   status: SlideshowStatus;
   transitionDuration: number;
   children?: React.ReactNode;
@@ -25,10 +25,14 @@ const Slideshow = (props: SlideshowProps) => {
       return;
     }
 
+    if (!prev && !next) {
+      return;
+    }
+
     const hammer = new Hammer(photoContainerRef.current);
 
-    hammer.on('swipeleft', prev);
-    hammer.on('swiperight', next);
+    prev && hammer.on('swipeleft', prev);
+    next && hammer.on('swiperight', next);
 
     return () => {
       hammer.destroy();

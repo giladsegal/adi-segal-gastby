@@ -27,7 +27,6 @@
 
 - desktop layout
 - Gallery component
-  - reexport gallery component and consume in home page (hide controls)
   - next/prev - should trigger loader, and transition only when loaded
 - a11y
 - instagram
@@ -49,6 +48,7 @@
   - display loader when loading images
   - animation - show only two last photos
   - deep link to a picture using query param
+  - reexport gallery component and consume in home page (hide controls)
 - Layout component
   - render header component
   - render main node
