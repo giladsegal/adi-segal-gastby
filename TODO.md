@@ -1,6 +1,8 @@
 # Infra
 
+- refactor facebook hook to use context
 - investigate `gatsby-default-starter` layout.scss
+- cache busting for gallery?
 
 # Before going live
 
@@ -17,22 +19,15 @@
 
 # Bugs
 
-- mobile menu doesn't have close animation on navigation
+- mobile menu doesn't have close animation on navigation (consider https://janessagarrow.com/blog/gatsby-framer-motion-page-transitions/ or react-transition-group)
 - preserve image aspect ratio (+captions)
-- refactor menu mobile to use CSSTransition
 - font scraping should be done for both website types
-- refactor facebook hook to use context
 
 # Product
 
 - desktop layout
 - Gallery component
   - reexport gallery component and consume in home page (hide controls)
-  - deep link to a picture using query param
-  - use modal for topic description
-  - update history on modal navigation
-  - cache busting?
-  - pause gallery when mobile menu is opened
   - next/prev - should trigger loader, and transition only when loaded
 - a11y
 - instagram
@@ -53,6 +48,7 @@
   - swipe using hammerJS
   - display loader when loading images
   - animation - show only two last photos
+  - deep link to a picture using query param
 - Layout component
   - render header component
   - render main node

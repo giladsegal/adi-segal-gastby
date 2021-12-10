@@ -68,13 +68,27 @@ export default function Gallery(props: GalleryProps) {
     topicPhotos: { nodes: photoNodes },
   } = props.data;
 
+  const firstPhoto =
+    parseInt(new URLSearchParams(props.location.search).get('p') || '1') || 1;
+
   const { current, next, play, pause, previous, seek, status } = useSlideshow({
     autoplay: process.env.NODE_ENV !== 'development',
-    initialSlideIndex: 0,
+    initialSlideIndex: firstPhoto - 1,
     interval: 4000 + PHOTO_SWITCH_DURATION_MS,
     slides: photoNodes,
     preloadNext: preloadTopicPhoto,
   });
+
+  React.useEffect(() => {
+    const queryParams = new URLSearchParams(props.location.search);
+    queryParams.set(
+      'p',
+      (photoNodes.findIndex(p => p === current) + 1).toString()
+    );
+    const url = new URL(props.location.href);
+    url.search = queryParams.toString();
+    history.replaceState(undefined, '', url.toString());
+  }, [current, photoNodes, props.location.search, props.location.href]);
 
   const prevSlideshowStatus = usePrevious(status);
 
