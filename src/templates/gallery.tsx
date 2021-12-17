@@ -97,6 +97,7 @@ export default function Gallery(props: GalleryProps) {
         next={debouncedNext}
         prev={debouncedPrevious}
         transitionDuration={PHOTO_SWITCH_DURATION_MS}
+        onClick={status === 'playing' ? pause : play}
       >
         {prevSlideshowStatus === 'paused' && status === 'playing' && (
           <PlayAnimation

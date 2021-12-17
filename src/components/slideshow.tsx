@@ -5,6 +5,7 @@ import { SlideshowStatus } from '../hooks/useSlideshow';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import Hammer from 'hammerjs';
 import Spinner from './spinner';
+import classNames from 'classnames';
 
 export type SlideshowProps = {
   next?: () => void;
@@ -14,6 +15,7 @@ export type SlideshowProps = {
   transitionDuration: number;
   children?: React.ReactNode;
   captions?: { text: string; className: string };
+  onClick?: React.ReactEventHandler<HTMLElement>;
 };
 
 const Slideshow = (props: SlideshowProps) => {
@@ -25,6 +27,7 @@ const Slideshow = (props: SlideshowProps) => {
     status,
     transitionDuration,
     captions,
+    onClick,
   } = props;
 
   const photoContainerRef = React.useRef<HTMLDivElement>(null);
@@ -51,7 +54,10 @@ const Slideshow = (props: SlideshowProps) => {
   return (
     <div
       ref={photoContainerRef}
-      className={styles.photosContainer}
+      className={classNames(styles.photosContainer, {
+        [styles.clickable]: !!onClick,
+      })}
+      onClick={onClick}
       style={
         {
           '--photo-switch-duration': `${transitionDuration}ms`,

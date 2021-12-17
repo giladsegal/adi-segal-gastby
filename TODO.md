@@ -25,9 +25,8 @@
 
 # Product
 
-- Gallery click should play/pause
 - Gallery component
-  - next/prev - should trigger loader, and transition only when loaded
+  - next/prev/play - should trigger loader, and transition only when loaded
 - a11y
 - instagram
 
@@ -38,6 +37,7 @@
   - random order
   - support first category
 - Gallery component
+- - Gallery click should play/pause on img click
   - description per photo
   - play/pause
   - next prev arrows
