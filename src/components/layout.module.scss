@@ -1,5 +1,7 @@
 @import '../styles/mixins';
 
+$logoOffset: 30;
+
 html,
 body {
   box-sizing: border-box;
@@ -28,20 +30,51 @@ body {
 
 .root {
   padding: 0 1rem 1rem;
-  max-width: calc(800px + 1rem);
+  box-sizing: content-box;
+  max-width: 800px;
   margin: 0 auto;
 
   @include media-above-sm {
     padding-top: 2rem;
   }
+
+  @include media-above-md {
+    padding-top: 4rem;
+    padding-left: calc(14.71428rem + #{$logoOffset}* 2px);
+    padding-right: $logoOffset * 1px;
+  }
+
+  $num: $screen-md;
+  $offset: 10;
+
+  @while $num < $screen-lg + $offset {
+    @media (min-width: $num * 1px) and (max-width: $num + $offset*1px) {
+      margin-left: ($num * 1px - $screen-md) / 4;
+    }
+
+    $num: $num + $offset + 1;
+  }
+
+  @include media-above-lg {
+    padding-right: calc(14.71428rem + #{$logoOffset}* 2px);
+  }
 }
 
 .header {
+  box-sizing: border-box;
   margin: 0 -1rem 1rem;
 
   @include media-above-sm {
     margin: 0 0 1.2857rem;
   }
+
+  @include media-above-md {
+    margin-bottom: 2.285714rem;
+  }
+}
+
+.main {
+  box-sizing: border-box;
 }
 
 .gutter {

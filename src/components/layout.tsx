@@ -77,7 +77,7 @@ export default function Layout({ children, withGutter }: LayoutProps) {
       </Header>
       <style>{css}</style>
       <main
-        className={classNames({ [styles.gutter]: withGutter })}
+        className={classNames({ [styles.gutter]: withGutter }, styles.main)}
         style={{ animation: 'route-fadeIn 250ms ease-in forwards', opacity: 0 }}
       >
         {children}

@@ -1,6 +1,7 @@
 $screen-xs: 575;
 $screen-sm: 768;
 $screen-md: 1109;
+$screen-lg: 1359;
 
 @mixin media-above-xs {
   @media (min-width: $screen-xs * 1px) {
@@ -16,6 +17,12 @@ $screen-md: 1109;
 
 @mixin media-above-md {
   @media (min-width: $screen-md * 1px) {
+    @content;
+  }
+}
+
+@mixin media-above-lg {
+  @media (min-width: $screen-lg * 1px) {
     @content;
   }
 }

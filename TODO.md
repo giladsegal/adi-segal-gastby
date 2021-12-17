@@ -25,7 +25,6 @@
 
 # Product
 
-- desktop layout
 - Gallery component
   - next/prev - should trigger loader, and transition only when loaded
 - a11y
@@ -79,3 +78,4 @@
   - mobile menu
   - close menu upon navigation
   - highlight selected page
+- Desktop layout
