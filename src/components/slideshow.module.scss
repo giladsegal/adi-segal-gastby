@@ -2,14 +2,14 @@
   position: relative;
   max-width: 800px;
   max-height: 533px;
-
   margin-bottom: 1.2rem;
+  display: flex;
+  justify-content: center;
 }
 
 .photo {
   position: relative;
   top: 0;
-  width: 100%;
   user-select: none;
   max-height: 533px;
 }
