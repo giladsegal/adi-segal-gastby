@@ -21,7 +21,6 @@
 
 - mobile menu doesn't have close animation on navigation (consider https://janessagarrow.com/blog/gatsby-framer-motion-page-transitions/ or react-transition-group)
 - mobile menu should close when clicked outside
-- preserve image aspect ratio (+captions)
 - font scraping should be done for both website types
 
 # Product

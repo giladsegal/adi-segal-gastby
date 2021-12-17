@@ -88,17 +88,16 @@ export default function Gallery(props: GalleryProps) {
       <Slideshow
         status={status}
         current={current}
+        captions={{
+          className: classNames(styles.caption, {
+            [styles.active]: areCaptionsActive,
+          }),
+          text: current.description.description || topicName,
+        }}
         next={debouncedNext}
         prev={debouncedPrevious}
         transitionDuration={PHOTO_SWITCH_DURATION_MS}
       >
-        <div
-          className={classNames(styles.caption, {
-            [styles.active]: areCaptionsActive,
-          })}
-        >
-          {current.description.description || topicName}
-        </div>
         {prevSlideshowStatus === 'paused' && status === 'playing' && (
           <PlayAnimation
             className={classNames(

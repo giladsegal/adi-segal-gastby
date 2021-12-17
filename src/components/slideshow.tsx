@@ -13,10 +13,19 @@ export type SlideshowProps = {
   status: SlideshowStatus;
   transitionDuration: number;
   children?: React.ReactNode;
+  captions?: { text: string; className: string };
 };
 
 const Slideshow = (props: SlideshowProps) => {
-  const { current, children, next, prev, status, transitionDuration } = props;
+  const {
+    current,
+    children,
+    next,
+    prev,
+    status,
+    transitionDuration,
+    captions,
+  } = props;
 
   const photoContainerRef = React.useRef<HTMLDivElement>(null);
 
@@ -60,13 +69,18 @@ const Slideshow = (props: SlideshowProps) => {
             exitActive: styles.photoExitActive,
           }}
         >
-          <img
-            src={current.photo.fluid.src}
-            key={current.id}
-            className={styles.photo}
-            alt=""
-            height="533"
-          />
+          <div className={styles.photoContainer}>
+            <img
+              src={current.photo.fluid.src}
+              key={current.id}
+              className={styles.photo}
+              alt=""
+              height="533"
+            />
+            {captions && (
+              <div className={captions.className}>{captions.text}</div>
+            )}
+          </div>
         </CSSTransition>
       </TransitionGroup>
       {status === 'loading' && <Spinner className={styles.galleryCenter} />}
