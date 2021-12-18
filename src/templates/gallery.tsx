@@ -69,6 +69,8 @@ export default function Gallery(props: GalleryProps) {
   const [areCaptionsActive, setCaptionActive] = React.useState(false);
   const captionAnimationCount = React.useRef(0);
 
+  const hasCaptions = photoNodes.some(p => !!p.description);
+
   const toggleCaptions = () => {
     captionAnimationCount.current++;
     setCaptionActive(!areCaptionsActive);
@@ -88,12 +90,16 @@ export default function Gallery(props: GalleryProps) {
       <Slideshow
         status={status}
         current={current}
-        captions={{
-          className: classNames(styles.caption, {
-            [styles.active]: areCaptionsActive,
-          }),
-          text: current.description.description || topicName,
-        }}
+        captions={
+          !hasCaptions
+            ? undefined
+            : {
+                className: classNames(styles.caption, {
+                  [styles.active]: areCaptionsActive,
+                }),
+                text: current.description?.description || topicName,
+              }
+        }
         next={debouncedNext}
         prev={debouncedPrevious}
         transitionDuration={PHOTO_SWITCH_DURATION_MS}
@@ -155,18 +161,20 @@ export default function Gallery(props: GalleryProps) {
         >
           <i className={classNames('fa fa-th')}></i>
         </Link>
-        <i
-          onClick={toggleCaptions}
-          className={classNames(
-            styles.galleryButton,
-            styles.galleryButtonLarge,
-            styles.galleryButtonCaptions,
-            'fa fa-angle-double-up'
-          )}
-          style={{
-            transform: `rotate(${captionAnimationCount.current * 180}deg)`,
-          }}
-        ></i>
+        {hasCaptions && (
+          <i
+            onClick={toggleCaptions}
+            className={classNames(
+              styles.galleryButton,
+              styles.galleryButtonLarge,
+              styles.galleryButtonCaptions,
+              'fa fa-angle-double-up'
+            )}
+            style={{
+              transform: `rotate(${captionAnimationCount.current * 180}deg)`,
+            }}
+          />
+        )}
         {description && (
           <Link
             to={`./description?p=${

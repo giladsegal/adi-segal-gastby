@@ -21,7 +21,7 @@ export type Topic = {
 export type TopicPhoto = {
   id: string;
   photo: FluidImage;
-  description: {
+  description?: {
     description: string;
   };
 };
