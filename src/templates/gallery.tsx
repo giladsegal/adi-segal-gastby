@@ -64,7 +64,7 @@ export default function Gallery(props: GalleryProps) {
     history.replaceState(undefined, '', url.toString());
   }, [current, photoNodes, props.location.search, props.location.href]);
 
-  const prevSlideshowStatus = usePrevious(status);
+  const prevSlideshowStatus = usePrevious(status, undefined);
 
   const [areCaptionsActive, setCaptionActive] = React.useState(false);
   const captionAnimationCount = React.useRef(0);

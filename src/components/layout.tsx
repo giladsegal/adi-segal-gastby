@@ -5,6 +5,7 @@ import styles from './layout.module.scss';
 import classNames from 'classnames';
 import { graphql, useStaticQuery } from 'gatsby';
 import { SiteMetadata, SiteType } from '../types';
+import useLastLocation from '../hooks/useLastLocation';
 
 export type LayoutProps = {
   className?: string;
@@ -51,6 +52,8 @@ const topicTypeToLinks = (type: SiteType) => {
 export default function Layout({ children, withGutter }: LayoutProps) {
   const { type } = useStaticQuery<LayoutQuery>(query).site.siteMetadata;
 
+  const lastLocation = useLastLocation();
+
   const css = `
   @keyframes route-fadeIn {
     0% {
@@ -75,10 +78,14 @@ export default function Layout({ children, withGutter }: LayoutProps) {
         <Header.Link to="/about/">ABOUT</Header.Link>
         <Header.Link to="/contact/">CONTACT</Header.Link>
       </Header>
-      <style>{css}</style>
+      {lastLocation && <style>{css}</style>}
       <main
         className={classNames({ [styles.gutter]: withGutter }, styles.main)}
-        style={{ animation: 'route-fadeIn 250ms ease-in forwards', opacity: 0 }}
+        style={
+          lastLocation
+            ? { animation: 'route-fadeIn 250ms ease-in forwards', opacity: 0 }
+            : {}
+        }
       >
         {children}
       </main>
