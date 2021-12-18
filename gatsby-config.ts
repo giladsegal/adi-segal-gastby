@@ -13,8 +13,8 @@ const weddingsSiteMetadata: SiteMetadata = {
     title: 'Wedding photography - Adi Segal',
     image: {
       uri: `${weddingsSiteUrl}/images/facebook-share-weddings.jpg`,
-      width: '2097',
-      height: '1278',
+      width: '800',
+      height: '533',
     },
   },
 };

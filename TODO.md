@@ -6,14 +6,12 @@
 
 # Before going live
 
-- scrap fonts as part of the deploy using `npm run preload:fonts`
 - facebook:
-  -- ask Adi for a picture for sharing weddings subdomain
   -- make sure share is working as expected: https://developers.facebook.com/tools/debug/?q=https://adi-segal.com
-  -- make sure share is working as expected: https://developers.facebook.com/tools/debug/?q=https://weddings.adi-segal.com
+  -- make sure share is working as expected: https://developers.facebook.com/tools/debug/?q=https://weddings.adi-segal.com (first picture)
   -- missing appId
 
-- AWS deploy command using `gatsby-plugin-s3` (weddings + documentaries)
+- AWS deploy command using `gatsby-plugin-s3` for weddings / documentaries, make sure it scrap fonts as well
 - make sure adi's account in contentful, can only add/edit specific content types
 - e2e tests before deployment
 
