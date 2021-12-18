@@ -3,7 +3,6 @@ import styles from './slideshow.module.scss';
 import { TopicPhoto } from '../types';
 import { SlideshowStatus } from '../hooks/useSlideshow';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import Hammer from 'hammerjs';
 import Spinner from './spinner';
 import classNames from 'classnames';
 
@@ -41,13 +40,20 @@ const Slideshow = (props: SlideshowProps) => {
       return;
     }
 
-    const hammer = new Hammer(photoContainerRef.current);
+    let hammer: any;
 
-    prev && hammer.on('swipeleft', prev);
-    next && hammer.on('swiperight', next);
+    // Hammer accesses window on import so it breaks gatsby build
+    if (typeof window !== `undefined`) {
+      const Hammer: any = require('hammerjs');
+
+      hammer = new Hammer(photoContainerRef.current);
+
+      prev && hammer.on('swipeleft', prev);
+      next && hammer.on('swiperight', next);
+    }
 
     return () => {
-      hammer.destroy();
+      hammer?.destroy();
     };
   }, [prev, next]);
 
