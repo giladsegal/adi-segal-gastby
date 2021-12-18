@@ -19,8 +19,7 @@
 
 # Bugs
 
-- mobile menu doesn't have close animation on navigation (consider https://janessagarrow.com/blog/gatsby-framer-motion-page-transitions/ or react-transition-group)
-- mobile menu should close when clicked outside
+- mobile menu doesn't have close animation on navigation (consider https://janessagarrow.com/blog/gatsby-framer-motion-page-transitions/ or react-transition-group).
 - font scraping should be done for both website types
 
 # Product

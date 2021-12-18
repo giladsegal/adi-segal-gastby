@@ -6,6 +6,7 @@ import Logo from './logo';
 import classNames from 'classnames';
 import { Transition } from 'react-transition-group';
 import { TransitionStatus } from 'react-transition-group/Transition';
+import useClickOutside from '../hooks/useClickOutside';
 
 export type HeaderProps = {
   className?: string;
@@ -48,16 +49,25 @@ const transitions: Record<TransitionStatus, Record<string, string>> = {
 
 const Header = ({ children, className }: HeaderProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
+  const menuRef = React.createRef<HTMLUListElement>();
+  const menuButtonRef = React.createRef<HTMLButtonElement>();
 
-  const toggleOpen = () => {
+  const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
+  const closeMenu = React.useCallback(() => {
+    setIsOpen(false);
+  }, []);
+
+  useClickOutside(menuRef, closeMenu, menuButtonRef);
 
   return (
     <header className={classNames(styles.root, className)}>
       <nav className={styles.nav}>
         <MenuButton
-          onClick={toggleOpen}
+          ref={menuButtonRef}
+          onClick={toggleMenu}
           isPressed={isOpen}
           className={styles.menuButton}
         />
@@ -67,7 +77,11 @@ const Header = ({ children, className }: HeaderProps) => {
         <Transition in={isOpen} timeout={{ enter: 250, exit: 150 }}>
           {state => {
             return (
-              <ul className={styles.linksList} style={transitions[state]}>
+              <ul
+                className={styles.linksList}
+                style={transitions[state]}
+                ref={menuRef}
+              >
                 {React.Children.map(children, child => {
                   if (!React.isValidElement<HeaderLinkProps>(child)) {
                     return null;
