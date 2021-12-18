@@ -12,18 +12,15 @@
   -- missing appId
 
 - AWS deploy command using `gatsby-plugin-s3` for weddings / documentaries, make sure it scrap fonts as well
-- make sure adi's account in contentful, can only add/edit specific content types
-- e2e tests before deployment
 
 # Bugs
 
-- font scraping should be done for both website types
+- gallery doesn't play by default
 
 # Product
 
 - Gallery component
   - next/prev/play - should trigger loader, and transition only when loaded
-- a11y
 - instagram
 
 # DONE:

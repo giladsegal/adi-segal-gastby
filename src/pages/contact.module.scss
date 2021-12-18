@@ -59,7 +59,7 @@
 .fb-like-wrapper {
   // facebook buttons loads after a delay which cause content to reflow
   // setting the box dimensions in advances prevent this behavior
-  width: 157px;
+  min-width: 174px;
   height: 28px;
 }
 
