@@ -81,7 +81,6 @@ const Slideshow = (props: SlideshowProps) => {
               key={current.id}
               className={styles.photo}
               alt=""
-              height="533"
             />
             {captions && (
               <div className={captions.className}>{captions.text}</div>

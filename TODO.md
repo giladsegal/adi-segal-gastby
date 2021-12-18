@@ -19,7 +19,7 @@
 
 # Bugs
 
-- mobile menu doesn't have close animation on navigation (consider https://janessagarrow.com/blog/gatsby-framer-motion-page-transitions/ or react-transition-group).
+- Clear delay timeout on mount in useSlideshow component (causes a warning in the console)
 - font scraping should be done for both website types
 
 # Product
