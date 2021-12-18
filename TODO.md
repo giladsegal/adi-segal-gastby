@@ -15,8 +15,6 @@
 
 # Bugs
 
-- gallery doesn't play by default
-
 # Product
 
 - Gallery component

@@ -139,7 +139,7 @@ export default function useSlideshow<T>({
 
     Promise.all([
       delay(interval).then(() => {
-        if (isUnmounted) {
+        if (isUnmounted.current) {
           return;
         }
 
@@ -151,7 +151,7 @@ export default function useSlideshow<T>({
         wasNextLoaded = true;
       }),
     ]).then(() => {
-      if (isUnmounted) {
+      if (isUnmounted.current) {
         return;
       }
 
