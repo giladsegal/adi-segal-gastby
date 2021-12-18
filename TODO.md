@@ -19,7 +19,6 @@
 
 # Bugs
 
-- Clear delay timeout on mount in useSlideshow component (causes a warning in the console)
 - font scraping should be done for both website types
 
 # Product

@@ -113,6 +113,14 @@ export default function useSlideshow<T>({
     [slideIndex, slides]
   );
 
+  const isUnmounted = React.useRef(false);
+
+  React.useEffect(() => {
+    return () => {
+      isUnmounted.current = true;
+    };
+  }, []);
+
   React.useEffect(() => {
     if (status !== 'playing') {
       return;
@@ -131,6 +139,10 @@ export default function useSlideshow<T>({
 
     Promise.all([
       delay(interval).then(() => {
+        if (isUnmounted) {
+          return;
+        }
+
         if (currentExecution === lastExecution.current && !wasNextLoaded) {
           setStatus('loading');
         }
@@ -139,6 +151,10 @@ export default function useSlideshow<T>({
         wasNextLoaded = true;
       }),
     ]).then(() => {
+      if (isUnmounted) {
+        return;
+      }
+
       if (currentExecution === lastExecution.current) {
         setStatus('playing');
         next();
