@@ -83,7 +83,7 @@ export default function Thumbnails(props: ThumbnailsProps) {
               {row.map(({ id, photo }, colIdx) => {
                 return (
                   <Link
-                    to={`../?p=${rowIdx * colIdx + 1}`}
+                    to={`../?p=${rowIdx * rowLength + colIdx + 1}`}
                     key={id}
                     onContextMenu={preventRightClick}
                   >
