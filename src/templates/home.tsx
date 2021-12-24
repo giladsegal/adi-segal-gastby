@@ -6,6 +6,8 @@ import { FluidImage, TopicPhoto } from '../types';
 import { preloadTopicPhoto, shuffle } from '../utils';
 import Slideshow from '../components/slideshow';
 import useSlideshow from '../hooks/useSlideshow';
+import SocialIconsBar from '../components/social-icons-bar';
+import styles from './home.module.scss';
 
 export type DefaultPhoto = {
   id: string;
@@ -70,6 +72,7 @@ export default function Home(props: HomeProps) {
         current={current}
         transitionDuration={PHOTO_SWITCH_DURATION_MS}
       ></Slideshow>
+      <SocialIconsBar className={styles.socialBar} />
     </Layout>
   );
 }

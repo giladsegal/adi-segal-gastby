@@ -2,14 +2,11 @@ import React from 'react';
 import Layout from '../components/layout';
 import Img from 'gatsby-image';
 import styles from './contact.module.scss';
-import useFacebookLike from '../hooks/useFacebookLike';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebookSquare } from '@fortawesome/free-brands-svg-icons';
 import { graphql, PageProps } from 'gatsby';
 import { ContactDetails } from '../types';
-import { Helmet } from 'react-helmet';
 import SEO from '../components/seo';
 import classNames from 'classnames';
+import SocialIconsBar from '../components/social-icons-bar';
 
 export type ContactData = {
   contact: ContactDetails;
@@ -20,22 +17,9 @@ export type ContactProps = PageProps<ContactData>;
 export default function Contact(props: ContactProps) {
   const { contact } = props.data;
 
-  const ref = useFacebookLike();
-
   return (
     <Layout withGutter>
       <SEO title="contact" />
-      <Helmet
-        script={[
-          {
-            async: true,
-            defer: true,
-            crossorigin: 'anonymous',
-            src: 'https://connect.facebook.net/en_US/sdk.js',
-            nonce: '0NMFsjUW',
-          },
-        ]}
-      />
       <div className={styles.root}>
         <dl className={classNames(styles.details, styles.smSecondColumn)}>
           <dd>contact:</dd>
@@ -54,30 +38,12 @@ export default function Contact(props: ContactProps) {
           </dt>
         </dl>
         <div
-          className={classNames(styles.fbWrapper, styles.smSecondColumn)}
-          ref={ref}
+          className={classNames(
+            styles.socialLinksWrapper,
+            styles.smSecondColumn
+          )}
         >
-          <div className={styles.fbLikeWrapper}>
-            <div
-              className="fb-like"
-              data-href="https://www.facebook.com/AdisegalPhotographer"
-              data-layout="button_count"
-              data-action="like"
-              data-size="large"
-              data-share="true"
-            />
-          </div>
-          <a
-            href="https://www.facebook.com/AdisegalPhotographer/"
-            target="_blank"
-            aria-label="Adi Segal photography facbeook group"
-            rel="noopener noreferrer"
-          >
-            <FontAwesomeIcon
-              icon={faFacebookSquare}
-              className={styles.fbLink}
-            />
-          </a>
+          <SocialIconsBar />
         </div>
         <Img
           fluid={contact.photo.fluid}

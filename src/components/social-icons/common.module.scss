@@ -1,0 +1,16 @@
+.social-link {
+  /* override font-awesome specific sizes */
+  width: 30px !important;
+
+  height: 31px;
+  margin-top: -2px;
+  color: #2c2b2b;
+
+  &:hover {
+    color: darken(#2c2b2b, 10%);
+  }
+}
+
+.instragram-link {
+  position: relative;
+}

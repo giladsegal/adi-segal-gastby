@@ -44,7 +44,7 @@
   }
 }
 
-.fb-wrapper {
+.social-links-wrapper {
   display: flex;
   justify-content: center;
   padding: 10px 0;
@@ -53,26 +53,6 @@
 
   @include media-above-sm {
     margin-bottom: 0;
-  }
-}
-
-.fb-like-wrapper {
-  // facebook buttons loads after a delay which cause content to reflow
-  // setting the box dimensions in advances prevent this behavior
-  min-width: 174px;
-  height: 28px;
-}
-
-.fb-link {
-  margin-left: 3px;
-  /* override font-awesome specific sizes */
-  width: 30px !important;
-  height: 31px;
-  margin-top: -2px;
-  color: #4267b2;
-
-  &:hover {
-    color: #365899;
   }
 }
 

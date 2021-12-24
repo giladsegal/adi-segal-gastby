@@ -1,6 +1,5 @@
 # Infra
 
-- refactor facebook hook to use context
 - investigate `gatsby-default-starter` layout.scss
 - cache busting for gallery?
 
@@ -15,11 +14,12 @@
 
 # Bugs
 
+- gallery min-height
+
 # Product
 
 - Gallery component
   - next/prev/play - should trigger loader, and transition only when loaded
-- instagram
 
 # DONE:
 
