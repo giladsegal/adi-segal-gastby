@@ -5,24 +5,24 @@ version: 2.1
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
-  dependencies:
-    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
-    docker:
-      - image: cimg/node:12.13.0
-    # Add steps to the job
-    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
-    steps:
-      - checkout
-      - restore_cache:
-          key: dependency-cache-{{ checksum "package-lock.json" }}
-      - run:
-          name: Install Dependencies
-          command: npm install
-      - save_cache:
-          key: dependency-cache-{{ checksum "package-lock.json" }}
-          paths:
-            - ./node_modules
+  #dependencies:
+  #  # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
+  #  # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
+  #  docker:
+  #    - image: cimg/node:12.13.0
+  #  # Add steps to the job
+  #  # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+  #  steps:
+  #    - checkout
+  #    - restore_cache:
+  #        key: dependency-cache-{{ checksum "package-lock.json" }}
+  #    - run:
+  #        name: Install Dependencies
+  #        command: npm install
+  #    - save_cache:
+  #        key: dependency-cache-{{ checksum "package-lock.json" }}
+  #        paths:
+  #          - ./node_modules
 
   build_documentaries:
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
@@ -32,10 +32,14 @@ jobs:
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
-      - restore_cache:
-          key: dependency-cache-{{ checksum "package-lock.json" }}
+      # - restore_cache:
+      #    key: dependency-cache-{{ checksum "package-lock.json" }}
+      - checkout
       - run:
-          name: Build Documentaries
+          name: Install Dependencies
+          command: npm install
+      - run:
+          name: Build & Deploy Documentaries
           command: npm run deploy:documentaries
 
   build_weddings:
@@ -46,10 +50,14 @@ jobs:
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
-      - restore_cache:
-          key: dependency-cache-{{ checksum "package-lock.json" }}
+      #- restore_cache:
+      #    key: dependency-cache-{{ checksum "package-lock.json" }}
+      - checkout
       - run:
-          name: Build Weddings
+          name: Install Dependencies
+          command: npm install
+      - run:
+          name: Build & Deploy Weddings
           command: npm run deploy:weddings
 
 # Invoke jobs via workflows
@@ -57,10 +65,10 @@ jobs:
 workflows:
   build_and_deploy_workflow:
     jobs:
-      - dependencies
-      - build_documentaries:
-          requires:
-            - dependencies
-      - build_weddings:
-          requires:
-            - dependencies
+      # - dependencies
+      - build_documentaries
+        #requires:
+        #  - dependencies
+      - build_weddings
+        #requires:
+        #  - dependencies
