@@ -41,6 +41,7 @@ export type SiteTopicsSlug = 'weddings' | 'documentaries';
 export type SiteMetadata = {
   type: SiteType;
   siteUrl: string;
+  awsBucketName: string;
   topicsSlug: SiteTopicsSlug;
   title: string;
   description: string;

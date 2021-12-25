@@ -6,6 +6,7 @@ const weddingsSiteMetadata: SiteMetadata = {
   type: 'weddings',
   topicsSlug: 'weddings',
   siteUrl: weddingsSiteUrl,
+  awsBucketName: 'weddings.adi-segal.com',
   description: 'Wedding photography from a different point of view',
   keywords: ['weddings', 'photography'],
   facebook: {
@@ -25,6 +26,7 @@ const documentariesSiteMetadata: SiteMetadata = {
   type: 'documentaries',
   topicsSlug: 'documentaries',
   siteUrl: documentariesSiteUrl,
+  awsBucketName: 'adi-segal.com',
   description: 'Visual story telling and Documentary photography',
   keywords: ['documentaries', 'photography'],
   facebook: {
@@ -38,10 +40,11 @@ const documentariesSiteMetadata: SiteMetadata = {
   },
 };
 
-export const siteMetadata: SiteMetadata =
-  process.env.WEBSITE_TYPE === 'weddings'
-    ? weddingsSiteMetadata
-    : documentariesSiteMetadata;
+const isWeddings = process.env.WEBSITE_TYPE === 'weddings';
+
+export const siteMetadata: SiteMetadata = isWeddings
+  ? weddingsSiteMetadata
+  : documentariesSiteMetadata;
 
 export const plugins = [
   'gatsby-plugin-sass',
@@ -83,6 +86,14 @@ export const plugins = [
     options: {
       siteUrl: siteMetadata.siteUrl,
       stripQueryString: true,
+    },
+  },
+  {
+    resolve: `gatsby-plugin-s3`,
+    options: {
+      bucketName: siteMetadata.awsBucketName,
+      protocol: 'https',
+      hostname: siteMetadata.siteUrl,
     },
   },
 ];

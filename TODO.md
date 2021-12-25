@@ -10,11 +10,10 @@
   -- make sure share is working as expected: https://developers.facebook.com/tools/debug/?q=https://weddings.adi-segal.com (first picture)
   -- missing appId
 
-- AWS deploy command using `gatsby-plugin-s3` for weddings / documentaries, make sure it scrap fonts as well
-
 # Bugs
 
 - gallery min-height
+- scrap fonts as part of deploy
 
 # Product
 
