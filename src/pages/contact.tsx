@@ -6,7 +6,7 @@ import { graphql, PageProps } from 'gatsby';
 import { ContactDetails } from '../types';
 import SEO from '../components/seo';
 import classNames from 'classnames';
-import SocialIconsBar from '../components/social-icons-bar';
+import { FacebookIcon, InstragramIcon } from '../components/social-icons';
 
 export type ContactData = {
   contact: ContactDetails;
@@ -43,7 +43,10 @@ export default function Contact(props: ContactProps) {
             styles.smSecondColumn
           )}
         >
-          <SocialIconsBar />
+          <div>
+            <FacebookIcon />
+            <InstragramIcon className={styles.instagramLink} />
+          </div>
         </div>
         <Img
           fluid={contact.photo.fluid}

@@ -6,7 +6,7 @@ import { FluidImage, TopicPhoto } from '../types';
 import { preloadTopicPhoto, shuffle } from '../utils';
 import Slideshow from '../components/slideshow';
 import useSlideshow from '../hooks/useSlideshow';
-import SocialIconsBar from '../components/social-icons-bar';
+import { FacebookIcon, InstragramIcon } from '../components/social-icons';
 import styles from './home.module.scss';
 
 export type DefaultPhoto = {
@@ -72,7 +72,10 @@ export default function Home(props: HomeProps) {
         current={current}
         transitionDuration={PHOTO_SWITCH_DURATION_MS}
       ></Slideshow>
-      <SocialIconsBar className={styles.socialBar} />
+      <div className={styles.socialBar}>
+        <FacebookIcon className={styles.facebookLink} />
+        <InstragramIcon className={styles.instragramLink} />
+      </div>
     </Layout>
   );
 }

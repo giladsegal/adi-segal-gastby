@@ -12,19 +12,13 @@
 
 # Bugs
 
-- gallery min-height
-- scrap fonts as part of deploy
+- gallery image min-height - arrows appear ontop before image loads (take height from graphql)
+- scrap fonts as part of deploy for weddings
 
 # Product
 
 - Gallery component
   - next/prev/play - should trigger loader, and transition only when loaded
-  - debounce swipe
-
-homepage
-margin between icons 2px
-facebook height 26px
-instagram height 27px
 
 # DONE:
 
