@@ -18,7 +18,11 @@ export function FacebookIcon({ className }: FacebookIconProps) {
     >
       <FontAwesomeIcon
         icon={faFacebookSquare}
-        className={classNames(styles.socialLink, className)}
+        className={classNames(
+          styles.socialLink,
+          styles.facebookLink,
+          className
+        )}
       />
     </a>
   );

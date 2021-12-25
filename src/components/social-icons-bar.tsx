@@ -10,8 +10,8 @@ export type SocialIconsBarProps = {
 export default function SocialIconsBar({ className }: SocialIconsBarProps) {
   return (
     <div className={classNames(styles.socialBar, className)}>
-      <InstragramIcon className={styles.socialLink} />
       <FacebookIcon className={styles.socialLink} />
+      <InstragramIcon className={styles.socialLink} />
     </div>
   );
 }

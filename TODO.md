@@ -20,6 +20,12 @@
 
 - Gallery component
   - next/prev/play - should trigger loader, and transition only when loaded
+  - debounce swipe
+
+homepage
+margin between icons 2px
+facebook height 26px
+instagram height 27px
 
 # DONE:
 
