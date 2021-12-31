@@ -1,7 +1,7 @@
 import React from 'react';
 import Layout from '../components/layout';
 import { PageProps, graphql, Link } from 'gatsby';
-import { TopicPhoto, Topic } from '../types';
+import { FluidTopicPhoto, Topic } from '../types';
 import styles from './thumbnails.module.scss';
 import Img from 'gatsby-image';
 import { toFraction, splitToSubgroups, capitalize } from '../utils';
@@ -13,7 +13,7 @@ export type ThumbnailsContext = {
 
 export type ThumbnailsData = {
   topicPhotos: {
-    nodes: Array<TopicPhoto>;
+    nodes: Array<FluidTopicPhoto>;
   };
   topic: {
     nodes: [Pick<Topic, 'name'>];
@@ -22,7 +22,7 @@ export type ThumbnailsData = {
 
 export type ThumbnailsProps = PageProps<ThumbnailsData, ThumbnailsContext>;
 
-const rowToRatios = (row: Array<TopicPhoto>, length: number) => {
+const rowToRatios = (row: Array<FluidTopicPhoto>, length: number) => {
   const [{ photo: firstPhoto }, ...restPhotoNodes] = row;
   const { N: firstPhotoWidthRatio, D: firstPhotoHeightRatio } = toFraction(
     firstPhoto.fluid.aspectRatio

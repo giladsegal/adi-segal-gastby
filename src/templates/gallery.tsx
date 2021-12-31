@@ -232,8 +232,8 @@ export const query = graphql`
     ) {
       nodes {
         photo {
-          fluid(maxWidth: 800) {
-            src
+          file {
+            url
           }
         }
         description {

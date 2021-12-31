@@ -2,7 +2,7 @@ import React from 'react';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import { PageProps, graphql } from 'gatsby';
-import { FluidImage, TopicPhoto } from '../types';
+import { TopicPhoto } from '../types';
 import { preloadTopicPhoto, shuffle } from '../utils';
 import Slideshow from '../components/slideshow';
 import useSlideshow from '../hooks/useSlideshow';
@@ -11,7 +11,7 @@ import styles from './home.module.scss';
 
 export type DefaultPhoto = {
   id: string;
-  fluid: FluidImage['fluid'];
+  file: { url: string };
 };
 
 export type HomeData = {
@@ -43,14 +43,14 @@ export default function Home(props: HomeProps) {
     {
       id: defaultPhoto.id,
       photo: {
-        fluid: defaultPhoto.fluid,
+        file: defaultPhoto.file,
       },
     },
     ...shuffle(
       photoNodes.map(p => ({
         id: p.photo.id,
         photo: {
-          fluid: p.photo.fluid,
+          file: { url: p.photo.file.url },
         },
       }))
     ),
@@ -87,8 +87,8 @@ export const query = graphql`
     ) {
       nodes {
         photo {
-          fluid(maxWidth: 800) {
-            src
+          file {
+            url
           }
           id
         }
@@ -99,8 +99,8 @@ export const query = graphql`
     ) {
       nodes {
         defaultPhoto {
-          fluid {
-            src
+          file {
+            url
           }
           id
         }

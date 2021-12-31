@@ -14,7 +14,7 @@ export const preloadTopicPhoto: (
 
     // resolve when next photo is loaded
     nextPhotoCacheTest.addEventListener('load', resolveOnLoad);
-    nextPhotoCacheTest.src = topicPhoto.photo.fluid.src;
+    nextPhotoCacheTest.src = topicPhoto.photo.file.url;
 
     // if next photo is already in the browser cache
     if (

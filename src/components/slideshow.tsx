@@ -83,7 +83,7 @@ const Slideshow = (props: SlideshowProps) => {
         >
           <div className={styles.photoContainer}>
             <img
-              src={current.photo.fluid.src}
+              src={current.photo.file.url}
               key={current.id}
               className={styles.photo}
               alt=""
