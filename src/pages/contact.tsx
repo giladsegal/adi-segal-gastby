@@ -71,7 +71,7 @@ export const query = graphql`
       email
       mobileNumber
       photo {
-        fluid(maxWidth: 355) {
+        fluid(maxWidth: 355, quality: 100) {
           ...GatsbyContentfulFluid_withWebp
         }
       }

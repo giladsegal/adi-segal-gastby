@@ -153,7 +153,7 @@ export const query = graphql`
             }
           }
         }
-        fluid {
+        fluid(maxWidth: 135, quality: 100) {
           ...GatsbyContentfulFluid_withWebp
         }
       }
