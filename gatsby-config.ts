@@ -34,8 +34,8 @@ const documentariesSiteMetadata: SiteMetadata = {
     title: 'Documentary photography - Adi Segal Photography',
     image: {
       uri: `${documentariesSiteUrl}/images/facebook-share.jpg`,
-      width: '1419',
-      height: '946',
+      width: '800',
+      height: '533',
     },
   },
 };

@@ -1,10 +1,3 @@
-# Before going live
-
-- facebook:
-  -- make sure share is working as expected: https://developers.facebook.com/tools/debug/?q=https://adi-segal.com
-  -- make sure share is working as expected: https://developers.facebook.com/tools/debug/?q=https://weddings.adi-segal.com (first picture)
-  -- missing appId
-
 # Bugs
 
 - gallery image min-height - arrows appear ontop before image loads (take height from graphql)
