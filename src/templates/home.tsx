@@ -39,22 +39,25 @@ export default function Home(props: HomeProps) {
     topicPhotos: { nodes: photoNodes },
   } = props.data;
 
-  const [photos] = React.useState<Array<Pick<TopicPhoto, 'id' | 'photo'>>>([
-    {
-      id: defaultPhoto.id,
-      photo: {
-        file: defaultPhoto.file,
-      },
-    },
-    ...shuffle(
-      photoNodes.map(p => ({
-        id: p.photo.id,
+  const [photos] = React.useState<Array<Pick<TopicPhoto, 'id' | 'photo'>>>(
+    [
+      {
+        id: defaultPhoto.id,
         photo: {
-          file: { url: p.photo.file.url },
+          file: defaultPhoto.file,
         },
-      }))
-    ),
-  ]);
+      },
+      ...shuffle(
+        photoNodes.map(p => ({
+          id: p.photo.id,
+          photo: {
+            file: { url: p.photo.file.url },
+          },
+        }))
+      ),
+      // remove photos which are not published in contentful (status draft)
+    ].filter(p => p.photo !== null)
+  );
 
   const { current, status } = useSlideshow({
     autoplay: true,

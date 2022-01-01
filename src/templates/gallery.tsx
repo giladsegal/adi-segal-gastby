@@ -39,8 +39,11 @@ export default function Gallery(props: GalleryProps) {
     topic: {
       nodes: [{ name: topicName, description }],
     },
-    topicPhotos: { nodes: photoNodes },
+    topicPhotos: { nodes: photoNodesNullable },
   } = props.data;
+
+  // remove photos which are not published in contentful (status draft)
+  const photoNodes = photoNodesNullable.filter(p => p.photo !== null);
 
   const firstPhoto =
     parseInt(new URLSearchParams(props.location.search).get('p') || '1') || 1;

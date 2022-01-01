@@ -14,7 +14,7 @@
   - random order
   - support first category
 - Gallery component
-- - Gallery click should play/pause on img click
+  - Gallery click should play/pause on img click
   - description per photo
   - play/pause
   - next prev arrows

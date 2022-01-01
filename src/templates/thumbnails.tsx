@@ -61,7 +61,11 @@ export default function Thumbnails(props: ThumbnailsProps) {
   } = props.data;
 
   const rowLength = 4;
-  const rows = splitToSubgroups(nodes, rowLength);
+  const rows = splitToSubgroups(
+    // remove photos which are not published in contentful (status draft)
+    nodes.filter(n => n.photo !== null),
+    rowLength
+  );
   const preventRightClick: React.MouseEventHandler<HTMLAnchorElement> = e => {
     e.preventDefault();
   };
