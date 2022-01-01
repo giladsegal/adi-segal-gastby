@@ -1,8 +1,3 @@
-# Infra
-
-- investigate `gatsby-default-starter` layout.scss
-- cache busting for gallery?
-
 # Before going live
 
 - facebook:
@@ -13,7 +8,6 @@
 # Bugs
 
 - gallery image min-height - arrows appear ontop before image loads (take height from graphql)
-- scrap fonts as part of deploy for weddings
 
 # Product
 
