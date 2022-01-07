@@ -148,11 +148,11 @@ export default function Gallery(props: GalleryProps) {
           )}
         ></i>
         <i
-          onClick={status === 'playing' ? pause : play}
+          onClick={status === 'paused' ? play : pause}
           className={classNames(
             styles.galleryButton,
             'fa',
-            status === 'playing' ? 'fa-pause' : 'fa-play'
+            status === 'paused' ? 'fa-play' : 'fa-pause'
           )}
         ></i>
         <Link
