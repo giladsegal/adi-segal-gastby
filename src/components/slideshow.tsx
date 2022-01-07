@@ -63,8 +63,13 @@ const Slideshow = (props: SlideshowProps) => {
       return;
     }
 
+    if (!current.photo.file.details) {
+      return;
+    }
+
     // height and width are the actual sizes of the image
     const { height, width } = current.photo.file.details.image;
+
     const ratio = height / width;
 
     // imageHeight is the size according to the available space in the browser
@@ -73,7 +78,7 @@ const Slideshow = (props: SlideshowProps) => {
     // sets the image height to occupy the require browser height
     // prior to actually loading the image to prevent layotu shift
     photoRef.current.height = Math.round(imageHeight);
-  }, [current.photo.file.details.image]);
+  }, [current]);
 
   const removeHeightCallback = React.useCallback(
     (e: React.SyntheticEvent<HTMLImageElement, Event>) => {

@@ -23,7 +23,7 @@ export type TopicPhoto = {
   photo: {
     file: {
       url: string;
-      details: {
+      details?: {
         image: {
           height: number;
           width: number;
