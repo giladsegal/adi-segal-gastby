@@ -81,11 +81,11 @@ export default function Gallery(props: GalleryProps) {
 
   const debouncedNext = debounceCount(clicks => {
     seek({ offset: clicks });
-  }, 200);
+  }, 250);
 
   const debouncedPrevious = debounceCount(clicks => {
     seek({ offset: clicks * -1 });
-  }, 200);
+  }, 250);
 
   return (
     <Layout>

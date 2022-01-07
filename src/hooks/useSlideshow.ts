@@ -52,7 +52,7 @@ const delay = (ms: number) => {
   });
 };
 
-const withoutPreloading = () => delay(6000); // () => Promise.resolve();
+const withoutPreloading = () => Promise.resolve();
 
 export default function useSlideshow<T>({
   initialSlideIndex = 0,
@@ -68,8 +68,6 @@ export default function useSlideshow<T>({
     autoplay ? 'playing' : 'paused'
   );
 
-  // reset state when slides change?
-
   const play = React.useCallback(() => {
     setStatus('playing');
   }, []);
@@ -80,38 +78,55 @@ export default function useSlideshow<T>({
     setStatus('paused');
   }, []);
 
-  const next = React.useCallback(() => {
-    const nextSlide = _seek({
-      position: slideIndex,
-      length: slides.length,
-      offset: 1,
-    });
-
-    setSlideIndex(nextSlide);
-  }, [slideIndex, slides]);
-
-  const previous = React.useCallback(() => {
-    const previousSlide = _seek({
-      position: slideIndex,
-      length: slides.length,
-      offset: -1,
-    });
-
-    setSlideIndex(previousSlide);
-  }, [slideIndex, slides]);
-
   const seek = React.useCallback(
     ({ offset }: { offset: number }) => {
-      const nextSlide = _seek({
+      lastExecution.current++;
+      const currentExecution = lastExecution.current;
+      const statusBeforeSeek = status;
+      let wasNextLoaded = false;
+
+      const nextId = _seek({
         position: slideIndex,
         length: slides.length,
         offset,
       });
 
-      setSlideIndex(nextSlide);
+      Promise.all([
+        // shortly after changing the image if next image
+        // wasn't loaded, move to loading state
+        delay(300).then(() => {
+          if (isUnmounted.current) {
+            return;
+          }
+
+          if (currentExecution === lastExecution.current && !wasNextLoaded) {
+            setStatus('loading');
+          }
+        }),
+        preloadNext(slides[nextId]).then(() => {
+          wasNextLoaded = true;
+        }),
+      ]).then(() => {
+        if (isUnmounted.current) {
+          return;
+        }
+
+        if (currentExecution === lastExecution.current) {
+          setStatus(statusBeforeSeek);
+          setSlideIndex(nextId);
+        }
+      });
     },
-    [slideIndex, slides]
+    [slideIndex, slides, preloadNext, status]
   );
+
+  const next = React.useCallback(() => {
+    seek({ offset: 1 });
+  }, [seek]);
+
+  const previous = React.useCallback(() => {
+    seek({ offset: -1 });
+  }, [seek]);
 
   const isUnmounted = React.useRef(false);
 
@@ -157,10 +172,10 @@ export default function useSlideshow<T>({
 
       if (currentExecution === lastExecution.current) {
         setStatus('playing');
-        next();
+        setSlideIndex(nextId);
       }
     });
-  }, [interval, status, next, preloadNext, slideIndex, slides]);
+  }, [interval, status, preloadNext, slideIndex, slides]);
 
   return {
     current: slides[slideIndex],

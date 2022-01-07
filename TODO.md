@@ -3,7 +3,7 @@
 # Product
 
 - Gallery component
-  - next/prev/play - should trigger loader, and transition only when loaded
+  - play - should trigger loader, and transition only when loaded
 
 # DONE:
 
