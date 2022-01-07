@@ -237,6 +237,12 @@ export const query = graphql`
         photo {
           file {
             url
+            details {
+              image {
+                height
+                width
+              }
+            }
           }
         }
         description {

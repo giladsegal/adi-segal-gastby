@@ -1,7 +1,5 @@
 # Bugs
 
-- gallery image min-height - arrows appear ontop before image loads (take height from graphql)
-
 # Product
 
 - Gallery component

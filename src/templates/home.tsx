@@ -11,7 +11,7 @@ import styles from './home.module.scss';
 
 export type DefaultPhoto = {
   id: string;
-  file: { url: string };
+  file: TopicPhoto['photo']['file'];
 };
 
 export type HomeData = {
@@ -51,7 +51,7 @@ export default function Home(props: HomeProps) {
         photoNodes.map(p => ({
           id: p.photo.id,
           photo: {
-            file: { url: p.photo.file.url },
+            file: p.photo.file,
           },
         }))
       ),
@@ -92,6 +92,12 @@ export const query = graphql`
         photo {
           file {
             url
+            details {
+              image {
+                height
+                width
+              }
+            }
           }
           id
         }

@@ -23,6 +23,12 @@ export type TopicPhoto = {
   photo: {
     file: {
       url: string;
+      details: {
+        image: {
+          height: number;
+          width: number;
+        };
+      };
     };
   };
   description?: {
