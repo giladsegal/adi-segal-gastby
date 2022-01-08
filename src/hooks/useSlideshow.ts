@@ -21,6 +21,15 @@ export type SlideShow<T> = {
 
 export type SlideshowStatus = 'playing' | 'paused' | 'loading';
 
+type _SlideshowStatus =
+  | {
+      value: 'paused' | 'loading';
+    }
+  | {
+      value: 'playing';
+      showLoaderDelay?: number;
+    };
+
 // promise that waits using Promise.all([4 seconds (then if image not loaded display spinner), preload next image]).then(hide spinner, schedule next)
 
 // set timeout to load next photo
@@ -65,27 +74,17 @@ export default function useSlideshow<T>({
   const lastExecution = React.useRef(0);
 
   const [slideIndex, setSlideIndex] = React.useState(initialSlideIndex);
-  const [status, setStatus] = React.useState<SlideshowStatus>(
-    autoplay ? 'playing' : 'paused'
-  );
+  const [status, setStatus] = React.useState<_SlideshowStatus>({
+    value: autoplay ? 'playing' : 'paused',
+  });
   const prevSlideshowStatus = usePrevious(status, status);
-
-  const play = React.useCallback(() => {
-    setStatus('playing');
-  }, []);
-
-  const pause = React.useCallback(() => {
-    // ignore next scheduled
-    lastExecution.current++;
-    setStatus('paused');
-  }, []);
 
   const seek = React.useCallback(
     ({ offset }: { offset: number }) => {
       lastExecution.current++;
       const currentExecution = lastExecution.current;
       const statusBeforeSeek =
-        status === 'loading' ? prevSlideshowStatus : status;
+        status.value === 'loading' ? prevSlideshowStatus : status;
 
       let wasNextLoaded = false;
 
@@ -104,7 +103,7 @@ export default function useSlideshow<T>({
           }
 
           if (currentExecution === lastExecution.current && !wasNextLoaded) {
-            setStatus('loading');
+            setStatus({ value: 'loading' });
           }
         }),
         preloadNext(slides[nextId]).then(() => {
@@ -132,6 +131,17 @@ export default function useSlideshow<T>({
     seek({ offset: -1 });
   }, [seek]);
 
+  const play = React.useCallback(() => {
+    // show spinner after play animation fades out
+    setStatus({ value: 'playing', showLoaderDelay: 500 });
+  }, []);
+
+  const pause = React.useCallback(() => {
+    // ignore next scheduled
+    lastExecution.current++;
+    setStatus({ value: 'paused' });
+  }, []);
+
   const isUnmounted = React.useRef(false);
 
   React.useEffect(() => {
@@ -141,7 +151,7 @@ export default function useSlideshow<T>({
   }, []);
 
   React.useEffect(() => {
-    if (status !== 'playing') {
+    if (status.value !== 'playing') {
       return;
     }
 
@@ -156,14 +166,17 @@ export default function useSlideshow<T>({
 
     let wasNextLoaded = false;
 
+    const showSpinnerDelay =
+      status.showLoaderDelay !== undefined ? status.showLoaderDelay : interval;
+
     Promise.all([
-      delay(interval).then(() => {
+      delay(showSpinnerDelay).then(() => {
         if (isUnmounted.current) {
           return;
         }
 
         if (currentExecution === lastExecution.current && !wasNextLoaded) {
-          setStatus('loading');
+          setStatus({ value: 'loading' });
         }
       }),
       preloadNext(slides[nextId]).then(() => {
@@ -175,7 +188,7 @@ export default function useSlideshow<T>({
       }
 
       if (currentExecution === lastExecution.current) {
-        setStatus('playing');
+        setStatus({ value: 'playing' });
         setSlideIndex(nextId);
       }
     });
@@ -183,7 +196,7 @@ export default function useSlideshow<T>({
 
   return {
     current: slides[slideIndex],
-    status,
+    status: status.value,
     play,
     pause,
     next,

@@ -2,9 +2,6 @@
 
 # Product
 
-- Gallery component
-  - play - should trigger loader, and transition only when loaded
-
 # DONE:
 
 - Home (Default category)
@@ -24,6 +21,7 @@
   - animation - show only two last photos
   - deep link to a picture using query param
   - reexport gallery component and consume in home page (hide controls)
+  - play/pause/next/seek - should trigger loader, and transition only when loaded
 - Layout component
   - render header component
   - render main node
