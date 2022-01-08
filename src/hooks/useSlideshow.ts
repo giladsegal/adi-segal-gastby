@@ -1,4 +1,5 @@
 import React from 'react';
+import usePrevious from './usePrevious';
 
 export type SlideShowOptions<T> = {
   slides: ReadonlyArray<T>; // shuffle outside
@@ -67,6 +68,7 @@ export default function useSlideshow<T>({
   const [status, setStatus] = React.useState<SlideshowStatus>(
     autoplay ? 'playing' : 'paused'
   );
+  const prevSlideshowStatus = usePrevious(status, status);
 
   const play = React.useCallback(() => {
     setStatus('playing');
@@ -82,7 +84,9 @@ export default function useSlideshow<T>({
     ({ offset }: { offset: number }) => {
       lastExecution.current++;
       const currentExecution = lastExecution.current;
-      const statusBeforeSeek = status;
+      const statusBeforeSeek =
+        status === 'loading' ? prevSlideshowStatus : status;
+
       let wasNextLoaded = false;
 
       const nextId = _seek({
@@ -117,7 +121,7 @@ export default function useSlideshow<T>({
         }
       });
     },
-    [slideIndex, slides, preloadNext, status]
+    [slideIndex, slides, preloadNext, status, prevSlideshowStatus]
   );
 
   const next = React.useCallback(() => {
