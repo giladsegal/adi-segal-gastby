@@ -110,6 +110,12 @@ export const query = graphql`
         defaultPhoto {
           file {
             url
+            details {
+              image {
+                height
+                width
+              }
+            }
           }
           id
         }
