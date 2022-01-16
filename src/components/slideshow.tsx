@@ -58,28 +58,6 @@ const Slideshow = (props: SlideshowProps) => {
     };
   }, [prev, next]);
 
-  React.useLayoutEffect(() => {
-    if (!photoRef.current || !photoContainerRef.current) {
-      return;
-    }
-
-    if (!current.photo.file.details) {
-      return;
-    }
-
-    // height and width are the actual sizes of the image
-    const { height, width } = current.photo.file.details.image;
-
-    const ratio = height / width;
-
-    // imageHeight is the size according to the available space in the browser
-    const imageHeight = photoContainerRef.current.clientWidth * ratio;
-
-    // sets the image height to occupy the require browser height
-    // prior to actually loading the image to prevent layotu shift
-    photoRef.current.height = Math.round(imageHeight);
-  }, [current]);
-
   const removeHeightCallback = React.useCallback(
     (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
       // after load remove the height to allow responsive resizing of the image
@@ -118,6 +96,7 @@ const Slideshow = (props: SlideshowProps) => {
               ref={photoRef}
               src={current.photo.file.url}
               key={current.id}
+              height={current.photo.file.details?.image.height}
               onLoad={removeHeightCallback}
               className={styles.photo}
               alt=""
