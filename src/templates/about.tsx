@@ -36,6 +36,7 @@ export default function About(props: AboutProps) {
     <Layout withGutter>
       <SEO title="About" />
       <div
+        onContextMenu={e => e.preventDefault()}
         className={classNames(styles.root, {
           [styles.weddingsLayout]: isWeddingsPage,
         })}

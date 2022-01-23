@@ -13,6 +13,7 @@
 
 .image {
   float: left;
+  user-select: none;
   margin-right: 1rem;
   height: var(--height);
   width: var(--width);

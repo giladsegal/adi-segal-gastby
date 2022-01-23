@@ -67,6 +67,13 @@ const Slideshow = (props: SlideshowProps) => {
     []
   );
 
+  const preventContextMenuCallback = React.useCallback(
+    (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+      e.preventDefault();
+    },
+    []
+  );
+
   return (
     <div
       ref={photoContainerRef}
@@ -98,6 +105,7 @@ const Slideshow = (props: SlideshowProps) => {
               key={current.id}
               height={current.photo.file.details?.image.height}
               onLoad={removeHeightCallback}
+              onContextMenu={preventContextMenuCallback}
               className={styles.photo}
               alt=""
             />
