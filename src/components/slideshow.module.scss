@@ -20,11 +20,24 @@
   position: relative;
 }
 
+.photo-container-first-render {
+  width: 100%;
+  // fill needed height according to first image height ratio
+  // padding top sets the height, in % according to width
+  padding-top: calc(var(--image-ratio) * 100%);
+}
+
 .photo {
   position: relative;
   top: 0;
   user-select: none;
   max-width: 100%;
+}
+
+.photo-first-render {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .photo-enter {
