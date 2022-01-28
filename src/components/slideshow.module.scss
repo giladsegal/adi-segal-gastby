@@ -24,7 +24,8 @@
   width: 100%;
   // fill needed height according to first image height ratio
   // padding top sets the height, in % according to width
-  padding-top: calc(var(--image-ratio) * 100%);
+  // 6px is added to include the added height coming the line-height
+  padding-top: calc(var(--image-ratio) * 100% + 6px);
 }
 
 .photo {
